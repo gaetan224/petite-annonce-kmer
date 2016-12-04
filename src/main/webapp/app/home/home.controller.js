@@ -88,6 +88,10 @@
                     text: 'pour trouvez un objet'
                 },
 
+                chart:{
+                        backgroundColor:'#f5f5f5'
+                },
+
                 plotOptions: {
                     series: {
                         point: {
@@ -138,6 +142,9 @@
                 },
                 exporting: {
                     enabled: false
+                },
+                credits: {
+                enabled:false
                 }
 
 
