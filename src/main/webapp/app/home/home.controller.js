@@ -5,9 +5,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Declaration'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, Principal, LoginService, $state,Declaration) {
         var vm = this;
 
         vm.account = null;
@@ -74,9 +74,6 @@
                     "value": 9
                 }
             ];
-
-
-
             // Initiate the chart
             $('#camerounmap').highcharts('Map', {
 
@@ -97,8 +94,10 @@
                         point: {
                             events: {
                                 click: function (e) {
-                                    console.log(e.point.name)
-
+                                    $state.go('region-declaration',
+                                        {regionId: e.point['hc-key'],
+                                         regionName: e.point.name}
+                                    );
                                 }
                             }
                         }
@@ -150,8 +149,6 @@
 
             });
         };
-
-
         vm.initMap();
 
     }

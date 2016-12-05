@@ -19,13 +19,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "declaration")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Declaration implements Serializable {
+public class Declaration extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @NotNull
     @Size(min = 5)
@@ -65,14 +61,6 @@ public class Declaration implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Image> images = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -217,36 +205,17 @@ public class Declaration implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Declaration declaration = (Declaration) o;
-        if (declaration.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, declaration.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
     public String toString() {
         return "Declaration{" +
-            "id=" + id +
-            ", title='" + title + "'" +
-            ", description='" + description + "'" +
-            ", creationDate='" + creationDate + "'" +
-            ", lastModifiedDate='" + lastModifiedDate + "'" +
-            ", isPublished='" + isPublished + "'" +
-            ", price='" + price + "'" +
-            ", publishedDate='" + publishedDate + "'" +
+            "title='" + title + '\'' +
+            ", description='" + description + '\'' +
+            ", creationDate=" + creationDate +
+            ", lastModifiedDate=" + lastModifiedDate +
+            ", isPublished=" + isPublished +
+            ", price=" + price +
+            ", publishedDate=" + publishedDate +
+            ", owner=" + owner +
+            ", localisation=" + localisation +
             '}';
     }
 }

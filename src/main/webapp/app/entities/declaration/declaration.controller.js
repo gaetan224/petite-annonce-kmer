@@ -22,8 +22,10 @@
             Declaration.query({
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
-                sort: sort()
-            }, onSuccess, onError);
+                sort: sort(),
+                IdRegion:"cm-es"
+            }
+            , onSuccess, onError);
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {

@@ -14,21 +14,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "localisation")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Localisation implements Serializable {
+public class Localisation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NotNull
-    @Column(name = "country", nullable = false)
-    private String country;
-
-    @NotNull
-    @Column(name = "region", nullable = false)
-    private String region;
 
     @NotNull
     @Column(name = "city", nullable = false)
@@ -55,38 +43,21 @@ public class Localisation implements Serializable {
     @ManyToOne
     private User user;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Country country;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public Localisation country(String country) {
+    public Localisation country(Country country) {
         this.country = country;
         return this;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public Localisation region(String region) {
-        this.region = region;
-        return this;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
     }
 
     public String getCity() {
@@ -194,31 +165,8 @@ public class Localisation implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Localisation localisation = (Localisation) o;
-        if (localisation.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, localisation.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
     public String toString() {
         return "Localisation{" +
-            "id=" + id +
-            ", country='" + country + "'" +
-            ", region='" + region + "'" +
             ", city='" + city + "'" +
             ", village='" + village + "'" +
             ", area='" + area + "'" +

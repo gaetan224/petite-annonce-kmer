@@ -14,13 +14,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "image")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Image implements Serializable {
+public class Image  extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @NotNull
     @Column(name = "file_name", nullable = false)
@@ -47,14 +43,6 @@ public class Image implements Serializable {
 
     @ManyToOne
     private Declaration declaration;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFileName() {
         return fileName;
@@ -148,29 +136,8 @@ public class Image implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Image image = (Image) o;
-        if (image.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, image.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
     public String toString() {
         return "Image{" +
-            "id=" + id +
             ", fileName='" + fileName + "'" +
             ", title='" + title + "'" +
             ", extention='" + extention + "'" +

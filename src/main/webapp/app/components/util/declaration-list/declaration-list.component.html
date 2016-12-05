@@ -1,0 +1,8 @@
+<div class="list-group">
+    <a href="#" class="list-group-item active"
+       ng-repeat="declaration in vm.declarations track by declaration.id">
+        <h4 class="list-group-item-heading">First List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+</div>
