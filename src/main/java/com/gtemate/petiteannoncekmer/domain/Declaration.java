@@ -54,7 +54,7 @@ public class Declaration extends BaseEntity{
     private User owner;
 
     @ManyToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(name="localisation_id")
     private Localisation localisation;
 
     @OneToMany(mappedBy = "declaration")
