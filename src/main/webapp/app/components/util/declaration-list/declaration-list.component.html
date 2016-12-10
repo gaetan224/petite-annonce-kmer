@@ -1,13 +1,14 @@
 <div class="list-group">
         <div class="row" ng-repeat="declaration in vm.declarations track by declaration.id">
             <div class="col-sm-4">
-                <a ng-if="declaration.images[0].content" ng-click="vm.openFile(declaration.images[0].contentContentType, declaration.images[0].content)">
-                    <img data-ng-src="{{'data:' + declaration.images[0].contentContentType + ';base64,' + declaration.images[0].content}}" style="max-height: 30px;"/>
+                <!-- <img src="http://placehold.it/1280X720" class="img-responsive"> -->
+                <a class="thumbnail" ng-if="declaration.images[0].content" ng-click="vm.openFile(declaration.images[0].contentContentType, declaration.images[0].content)">
+                    <img data-ng-src="{{'data:' + declaration.images[0].contentContentType + ';base64,' + declaration.images[0].content}}"/>
                 </a>
             </div>
 
-            <div class="col-sm-8">w
-                <h3 class="title">declaration.title</h3>
+            <div class="col-sm-8">
+                <h3 class="title">{{declaration.title}}</h3>
                 <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
                 <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
 

@@ -15,9 +15,15 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="petiteAnnonceKmerApp.localisation.country" for="field_country">Country</label>
-            <input type="text" class="form-control" name="country" id="field_country"
+            <select class="form-control"
+                    id="field_country"
+                    name="country"
                     ng-model="vm.localisation.country"
-                    required />
+                    ng-options="country as country.name for country in vm.countries track by country.id"
+                    ng-change="vm.loadRegion()">
+
+                <option value=""></option>
+            </select>
             <div ng-show="editForm.country.$invalid">
                 <p class="help-block"
                     ng-show="editForm.country.$error.required" data-translate="entity.validation.required">
@@ -27,9 +33,13 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="petiteAnnonceKmerApp.localisation.region" for="field_region">Region</label>
-            <input type="text" class="form-control" name="region" id="field_region"
+            <select class="form-control"
+                    id="field_region"
+                    name="region"
                     ng-model="vm.localisation.region"
-                    required />
+                    ng-options="region as region.name for region in vm.countryRegion track by region.id">
+                <option value=""></option>
+            </select>
             <div ng-show="editForm.region.$invalid">
                 <p class="help-block"
                     ng-show="editForm.region.$error.required" data-translate="entity.validation.required">

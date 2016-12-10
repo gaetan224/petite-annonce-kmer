@@ -46,6 +46,9 @@ public class Localisation extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Country country;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Region region;
+
 
     public Country getCountry() {
         return country;
@@ -164,16 +167,27 @@ public class Localisation extends BaseEntity {
         this.user = user;
     }
 
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
     @Override
     public String toString() {
         return "Localisation{" +
-            ", city='" + city + "'" +
-            ", village='" + village + "'" +
-            ", area='" + area + "'" +
-            ", streetName='" + streetName + "'" +
-            ", streetNumber='" + streetNumber + "'" +
-            ", postalCode='" + postalCode + "'" +
-            ", specialAdress='" + specialAdress + "'" +
+            "city='" + city + '\'' +
+            ", village='" + village + '\'' +
+            ", area='" + area + '\'' +
+            ", streetName='" + streetName + '\'' +
+            ", streetNumber='" + streetNumber + '\'' +
+            ", postalCode='" + postalCode + '\'' +
+            ", specialAdress='" + specialAdress + '\'' +
+            ", user=" + user +
+            ", country=" + country +
+            ", region=" + region +
             '}';
     }
 }

@@ -59,4 +59,10 @@ public class DeclarationService extends BaseEntityService<Declaration> {
         return result;
     }
 
+    @Transactional(readOnly = true)
+    public Page<Declaration> getAllDeclarationsByRegion(Pageable pageable,String IdRegion) {
+        log.debug("Request to get all Declarations");
+        Page<Declaration> result = declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion);
+        return result;
+    }
 }

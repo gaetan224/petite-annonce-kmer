@@ -55,7 +55,7 @@
          * Init data in controller.
          */
         function initDataController() {
-                Declaration.query({
+                Declaration.getAllDeclarationsByRegion({
                         IdRegion:vm.regionId
                     }
                     , onSuccess, onError);

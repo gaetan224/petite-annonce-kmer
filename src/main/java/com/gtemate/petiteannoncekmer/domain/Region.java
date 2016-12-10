@@ -22,7 +22,12 @@ public class Region extends BaseEntity {
     @Column(name = "name", length = 255)
     private String name;
 
-    @ManyToOne
+    @Size(max = 255)
+    @Column(name = "code", length = 255)
+    private String code;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Country country;
 
     public String getName() {
@@ -41,11 +46,19 @@ public class Region extends BaseEntity {
         this.country = country;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "Region{" +
             "name='" + name + '\'' +
-            ", country=" + country +
+            ", code='" + code + '\'' +
             '}';
     }
 }

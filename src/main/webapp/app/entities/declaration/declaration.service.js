@@ -23,6 +23,11 @@
                     return data;
                 }
             },
+            'getAllDeclarationsByRegion': {
+                url:'api/declarations-byregion',
+                method: 'GET',
+                isArray: true
+            },
             'update': { method:'PUT' }
         });
     }

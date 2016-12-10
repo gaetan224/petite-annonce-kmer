@@ -28,7 +28,7 @@ import java.util.Stack;
  */
 @RestController
 @RequestMapping("/api")
-public class DeclarationResource {
+public class DeclarationResource  {
 
     private final Logger log = LoggerFactory.getLogger(DeclarationResource.class);
 
@@ -99,6 +99,26 @@ public class DeclarationResource {
             page = declarationService.findByUserIsCurrentUser(pageable);
         }
 
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+
+    /**
+     * GET  /declarations : get all the declarations.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of declarations in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/declarations-byregion")
+    @Timed
+    public ResponseEntity<List<Declaration>> getAllDeclarationsByRegion(Pageable pageable,@RequestParam("IdRegion") String IdRegion )
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Declarations {} ", IdRegion);
+        Page<Declaration> page = declarationService.getAllDeclarationsByRegion(pageable,IdRegion);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

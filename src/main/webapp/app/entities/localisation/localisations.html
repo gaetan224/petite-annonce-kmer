@@ -35,8 +35,8 @@
             <tbody>
                 <tr ng-repeat="localisation in vm.localisations track by localisation.id">
                     <td><a ui-sref="localisation-detail({id:localisation.id})">{{localisation.id}}</a></td>
-                    <td>{{localisation.country}}</td>
-                    <td>{{localisation.region}}</td>
+                    <td>{{localisation.country.name}}</td>
+                    <td>{{localisation.region.name}}</td>
                     <td>{{localisation.city}}</td>
                     <td>{{localisation.village}}</td>
                     <td>{{localisation.area}}</td>

@@ -5,15 +5,22 @@
         .module('petiteAnnonceKmerApp')
         .controller('LocalisationDialogController', LocalisationDialogController);
 
-    LocalisationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Localisation', 'User'];
+    LocalisationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Localisation', 'User','Country','Region'];
 
-    function LocalisationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Localisation, User) {
+    function LocalisationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Localisation, User,Country,Region) {
         var vm = this;
 
         vm.localisation = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.loadRegion = loadRegion;
         vm.users = User.query();
+        vm.countries = Country.query();
+
+        vm.countryRegion = {};
+
+        vm.loadRegion();
+
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -42,6 +49,13 @@
             vm.isSaving = false;
         }
 
+        function loadRegion() {
+            if(vm.localisation.country) {
+                vm.countryRegion = Region.getByCountry(
+                    {countryId: vm.localisation.country.id}
+                )
+            }
+        }
 
     }
 })();

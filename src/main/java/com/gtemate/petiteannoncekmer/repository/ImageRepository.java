@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Spring Data JPA repository for the Image entity.
  */
-@SuppressWarnings("unused")
+
 public interface ImageRepository extends JpaRepository<Image,Long>,JpaSpecificationExecutor<Image> {
 
     @Query("from Image as img "

@@ -63,8 +63,6 @@ public class Country extends BaseEntity{
     public String toString() {
         return "Country{" +
             "name='" + name + '\'' +
-            ", localisation=" + localisation +
-            ", region=" + region +
             '}';
     }
 }
