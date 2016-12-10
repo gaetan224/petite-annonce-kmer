@@ -1,12 +1,15 @@
 package com.gtemate.petiteannoncekmer.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Localisation.
@@ -48,6 +51,11 @@ public class Localisation extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Region region;
+
+    @OneToMany(mappedBy = "localisation")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Declaration> declaration = new HashSet<>();
 
 
     public Country getCountry() {
@@ -173,6 +181,14 @@ public class Localisation extends BaseEntity {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public Set<Declaration> getDeclaration() {
+        return declaration;
+    }
+
+    public void setDeclaration(Set<Declaration> declaration) {
+        this.declaration = declaration;
     }
 
     @Override

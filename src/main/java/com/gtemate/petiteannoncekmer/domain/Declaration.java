@@ -53,7 +53,7 @@ public class Declaration extends BaseEntity{
     @ManyToOne
     private User owner;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(unique = true)
     private Localisation localisation;
 
