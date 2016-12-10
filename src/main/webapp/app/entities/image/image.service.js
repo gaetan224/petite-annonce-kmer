@@ -20,7 +20,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getByDeclaration': {
+                                  method:'GET',
+                                  url:'api/declaration-images/:id',
+                                  isArray: true
+                                }
         });
     }
 })();

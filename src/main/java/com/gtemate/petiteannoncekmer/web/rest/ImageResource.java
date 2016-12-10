@@ -26,7 +26,7 @@ import java.util.Optional;
 public class ImageResource {
 
     private final Logger log = LoggerFactory.getLogger(ImageResource.class);
-        
+
     @Inject
     private ImageService imageService;
 
@@ -77,12 +77,26 @@ public class ImageResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of images in body
      */
+    @GetMapping("/declaration-images/{id}")
+    @Timed
+    public List<Image> getByDeclaration(@PathVariable Long id) {
+        log.debug("REST request to get Declaration");
+        return imageService.getByDeclaration(id);
+    }
+
+
+    /**
+     * GET  /images : get all the images.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of images in body
+     */
     @GetMapping("/images")
     @Timed
     public List<Image> getAllImages() {
         log.debug("REST request to get all Images");
         return imageService.findAll();
     }
+
 
     /**
      * GET  /images/:id : get the "id" image.

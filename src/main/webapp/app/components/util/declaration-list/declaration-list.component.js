@@ -21,8 +21,9 @@
         .module('petiteAnnonceKmerApp')
         .component('declarationList', DeclarationList);
 
+
     // injection in controller
-    DeclarationListController.$inject = ['Declaration','AlertService','$uibModal'];
+    DeclarationListController.$inject = ['Declaration','AlertService','$uibModal','Image','DataUtils'];
 
 
     /**
@@ -32,29 +33,40 @@
      *
      * @constructor
      */
-    function DeclarationListController(Declaration,AlertService,$uibModal) {
+    function DeclarationListController(Declaration,AlertService,$uibModal,Image,DataUtils) {
         var vm = this;
 
         /** Initialisation data controller. */
         vm.initDataController = initDataController;
 
+        vm.openFile = DataUtils.openFile;
+        vm.byteSize = DataUtils.byteSize;
+
         /** onChanges bindings. */
         vm.$onChanges = onChanges;
+
+        vm.settings = {
+            width: 50,
+            height: 50
+        };
 
 
         /**
          * Init data in controller.
          */
         function initDataController() {
-            console.log("DeclarationListController");
-            console.log(vm.regionId);
-            console.log(vm.regionName);
                 Declaration.query({
                         IdRegion:vm.regionId
                     }
                     , onSuccess, onError);
                 function onSuccess(data, headers) {
                     vm.declarations = data;
+                    console.log(vm.declarations);
+                    angular.forEach(vm.declarations, function (declaration) {
+                        console.log(declaration);
+                        declaration.images = Image.getByDeclaration(declaration);
+                    });
+
                 }
                 function onError(error) {
                     AlertService.error(error.data.message);
