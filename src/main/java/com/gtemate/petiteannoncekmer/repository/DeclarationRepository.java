@@ -18,6 +18,8 @@ public interface DeclarationRepository extends JpaRepository<Declaration,Long>,J
     @Query("select declaration from Declaration declaration where declaration.owner.login = ?#{principal.username}")
     Page<Declaration> findByOwnerIsCurrentUser(Pageable pageable);
 
-    @Query("select declaration from Declaration declaration where declaration.localisation.region.code = :idRegion")
+    @Query("select declaration from Declaration declaration where " +
+        "declaration.localisation.region.code = :idRegion and " +
+        "declaration.isPublished = true")
     Page<Declaration> findAllDeclarationsByRegion(Pageable pageable,@Param("idRegion") String idRegion);
 }
