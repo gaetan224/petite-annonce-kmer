@@ -330,5 +330,143 @@ ui bootstrap tweaks
 }
 
 
+/* custom gaetan */
 
+.btn-custom-primary {
+    background-color: hsl(293, 40%, 32%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#9f49ab", endColorstr="#6a3072");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#9f49ab), to(#6a3072));
+    background-image: -moz-linear-gradient(top, #9f49ab, #6a3072);
+    background-image: -ms-linear-gradient(top, #9f49ab, #6a3072);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9f49ab), color-stop(100%, #6a3072));
+    background-image: -webkit-linear-gradient(top, #9f49ab, #6a3072);
+    background-image: -o-linear-gradient(top, #9f49ab, #6a3072);
+    background-image: linear-gradient(#9f49ab, #6a3072);
+    border-color: #6a3072 #6a3072 hsl(293, 40%, 28%);
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.26);
+    -webkit-font-smoothing: antialiased;
+}
+
+.btn-custom-secondary {
+    background-color: hsl(35, 38%, 40%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b38c56", endColorstr="#8c6c3f");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#b38c56), to(#8c6c3f));
+    background-image: -moz-linear-gradient(top, #b38c56, #8c6c3f);
+    background-image: -ms-linear-gradient(top, #b38c56, #8c6c3f);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b38c56), color-stop(100%, #8c6c3f));
+    background-image: -webkit-linear-gradient(top, #b38c56, #8c6c3f);
+    background-image: -o-linear-gradient(top, #b38c56, #8c6c3f);
+    background-image: linear-gradient(#b38c56, #8c6c3f);
+    border-color: #8c6c3f #8c6c3f hsl(35, 38%, 37%);
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.19);
+    -webkit-font-smoothing: antialiased;
+}
+
+.btn-custom-cancel{
+    background-color: hsl(14, 4%, 67%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bcb8b7", endColorstr="#aea9a7");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#bcb8b7), to(#aea9a7));
+    background-image: -moz-linear-gradient(top, #bcb8b7, #aea9a7);
+    background-image: -ms-linear-gradient(top, #bcb8b7, #aea9a7);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bcb8b7), color-stop(100%, #aea9a7));
+    background-image: -webkit-linear-gradient(top, #bcb8b7, #aea9a7);
+    background-image: -o-linear-gradient(top, #bcb8b7, #aea9a7);
+    background-image: linear-gradient(#bcb8b7, #aea9a7);
+    border-color: #aea9a7 #aea9a7 hsl(14, 4%, 65.5%);
+    color: #333 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.09);
+    -webkit-font-smoothing: antialiased;
+}
+
+.btn-custom-delete {
+    background-color: hsl(0, 62%, 31%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cf3434", endColorstr="#801e1e");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#cf3434), to(#801e1e));
+    background-image: -moz-linear-gradient(top, #cf3434, #801e1e);
+    background-image: -ms-linear-gradient(top, #cf3434, #801e1e);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cf3434), color-stop(100%, #801e1e));
+    background-image: -webkit-linear-gradient(top, #cf3434, #801e1e);
+    background-image: -o-linear-gradient(top, #cf3434, #801e1e);
+    background-image: linear-gradient(#cf3434, #801e1e);
+    border-color: #801e1e #801e1e hsl(0, 62%, 26%);
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+    -webkit-font-smoothing: antialiased;
+}
+
+.navbar-default {
+    background-color: #9b59b6;
+    border-color: #8e44ad;
+}
+.navbar-default .navbar-brand {
+    color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #ecdbff;
+}
+.navbar-default .navbar-text {
+    color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #ecdbff;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #ecdbff;
+    background-color: #8e44ad;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #ecdbff;
+    background-color: #8e44ad;
+}
+.navbar-default .navbar-toggle {
+    border-color: #8e44ad;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #8e44ad;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+    border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+    color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+    color: #ecdbff;
+}
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ecf0f1;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #ecdbff;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #ecdbff;
+        background-color: #8e44ad;
+    }
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */

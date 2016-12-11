@@ -48,11 +48,11 @@
 
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
+            class="btn btn-custom-cancel">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" ui-sref="localisation-detail.edit({id:vm.localisation.id})" class="btn btn-primary">
+    <button type="button" ui-sref="localisation-detail.edit({id:vm.localisation.id})" class="btn btn-custom-secondary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
     </button>
