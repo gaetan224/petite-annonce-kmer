@@ -1,0 +1,17 @@
+{
+    "declarationUser":{
+        "createOrEditLabel":"Déposer une annonce",
+
+        "title":"Titre de l'annonce",
+        "description":"Description",
+        "price":"Prix",
+        "image1":"Photo 1",
+        "image2":"Photo 2",
+        "image3":"Photo 3",
+        "region":"Region"
+
+
+
+    }
+
+}

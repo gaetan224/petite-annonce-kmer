@@ -63,6 +63,10 @@ public class Declaration extends BaseEntity{
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Image> images = new HashSet<>();
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private Image miniature;
+
+
     public String getTitle() {
         return title;
     }

@@ -469,4 +469,49 @@ ui bootstrap tweaks
         background-color: #8e44ad;
     }
 }
+
+.glyphicon { margin-right:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+
+
+
+.checkbox{width:50px}
+.inline {
+    display: inline-block;
+}
+label {
+    min-width: 120px;
+}
+.titleprghp {
+    background:#555;
+    height: 46px;
+    color: #000;
+    font-size: 23px;
+    height: 46px;
+    line-height: 40px;
+    padding: 0 0 0 20px;
+    margin: 20px 0 20px;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+
+
+#camerounmap{
+    height: 650px;
+    min-width: 310px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}

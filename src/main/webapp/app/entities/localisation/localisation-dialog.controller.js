@@ -17,6 +17,7 @@
         vm.users = User.query();
         vm.countries = Country.query();
 
+
         vm.countryRegion = {};
 
         vm.loadRegion();

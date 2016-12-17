@@ -14,6 +14,7 @@
         vm.save = save;
         vm.settingsAccount = null;
         vm.success = null;
+        vm.status = false;
 
         /**
          * Store the "settings account" in a separate variable, and not in the shared "account" variable.

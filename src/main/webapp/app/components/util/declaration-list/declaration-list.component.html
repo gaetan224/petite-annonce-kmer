@@ -1,7 +1,8 @@
 <div class="list-group">
-        <div class="row" ng-repeat="declaration in vm.declarations track by declaration.id">
+
+      <!--  <div class="row" ng-repeat="declaration in vm.declarations track by declaration.id">
             <div class="col-sm-4">
-                <!-- <img src="http://placehold.it/1280X720" class="img-responsive"> -->
+
                 <a class="thumbnail" ng-if="declaration.images[0].content" ng-click="vm.openFile(declaration.images[0].contentContentType, declaration.images[0].content)">
                     <img data-ng-src="{{'data:' + declaration.images[0].contentContentType + ';base64,' + declaration.images[0].content}}"/>
                 </a>
@@ -16,7 +17,22 @@
 
             </div>
             <hr>
+        </div> -->
+
+    <a class="list-group-item media"
+       ng-repeat="declaration in vm.declarations track by declaration.id">
+
+        <div class="thumbnail media-left" ng-if="declaration.images[0].content" ng-click="vm.openFile(declaration.images[0].contentContentType, declaration.images[0].content)">
+            <img width="400px" class="media-object" data-ng-src="{{'data:' + declaration.images[0].contentContentType + ';base64,' + declaration.images[0].content}}"/>
         </div>
+        <div class="media-body">
+            <h3 class="media-heading">{{declaration.title}}</h3>
+            <p class="text-left">Yaounde / mendong</p>
+            <p class="text-left">2000 FCFA</p>
+            <p class="text-right">hier, 08:24</p>
+        </div>
+    </a>
+
 
     <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
 </div>

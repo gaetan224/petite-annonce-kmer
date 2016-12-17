@@ -1,0 +1,162 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDeclarationLabel" data-translate="declarationUser.createOrEditLabel">Create or edit a Declaration</h4>
+    </div>
+
+    <div class="modal-body">
+
+
+
+        <jhi-alert-error></jhi-alert-error>
+        <div class="well">
+        <div class="row">
+        <div class="form-group col-md-7">
+            <label class="control-label" data-translate="declarationUser.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                   ng-model="vm.declaration.title"
+                   required ng-minlength="5" />
+            <div ng-show="editForm.title.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.title.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
+                    This field is required to be at least 5 characters.
+                </p>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group col-md-7">
+            <label class="control-label" data-translate="declarationUser.description" for="field_description">Description</label>
+            <textarea class="form-control"
+                      name="description"
+                      id="field_description"
+                      ng-model="vm.declaration.description">
+
+            </textarea>
+        </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="control-label" data-translate="declarationUser.price" for="field_price">price</label>
+                <input type="tel" class="form-control" name="title" id="field_price"
+                       ng-model="vm.declaration.price"
+                       required ng-minlength="2" />
+                <div ng-show="editForm.title.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.title.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
+                        This field is required to be at least 5 characters.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+        <div ngf-select="vm.select1($file)"
+             ngf-drop=""
+             ng-model="vm.images.principal"
+             ngf-model-invalid="invalidFiles"
+             ngf-model-options="modelOptionsObj" ngf-multiple="false"
+             ngf-pattern="pattern"
+             ngf-accept="'image/*'"
+             ngf-resize="{width: 100, height: 100}"
+             ng-hide="vm.hideUpload1"
+             class="drop-box col-md-4" ngf-drop-available="true">
+            <span data-translate="declarationUser.image1">Select image 1</span>
+        </div>
+            <img class="drop-box col-md-4" ngf-src="!vm.images.principal.$error && vm.images.principal">
+
+            <div ngf-select="vm.select2($file)"
+                 ngf-drop=""
+                 ng-model="vm.images.image2"
+                 ngf-model-invalid="invalidFiles"
+                 ngf-model-options="modelOptionsObj" ngf-multiple="false"
+                 ngf-pattern="pattern"
+                 ngf-accept="'image/*'"
+                 ngf-resize="{width: 100, height: 100}"
+                 ng-hide="vm.hideUpload2"
+                 class="drop-box col-md-4" ngf-drop-available="true">
+                <span data-translate="declarationUser.image2">Select image 1</span>
+
+            </div>
+            <img class="drop-box col-md-4" ngf-src="!vm.images.image2.$error && vm.images.image2">
+
+            <div ngf-select="vm.select3($file)"
+                 ngf-drop=""
+                 ng-model="vm.images.image3"
+                 ngf-model-invalid="invalidFiles"
+                 ngf-model-options="modelOptionsObj" ngf-multiple="false"
+                 ngf-pattern="pattern"
+                 ngf-accept="'image/*'"
+                 ngf-resize="{width: 100, height: 100}"
+                 ng-hide="vm.hideUpload3"
+                 class="drop-box col-md-4" ngf-drop-available="true">
+                <span data-translate="declarationUser.image3">Select image 1</span>
+
+            </div>
+            <img class="drop-box col-md-4" ngf-src="!vm.images.image3.$error && vm.images.image3">
+        </div>
+        </div>
+
+        <div class="well">
+            <div class="row">
+            <div class="form-group col-md-4" ng-show="false">
+                <label class="control-label" data-translate="petiteAnnonceKmerApp.localisation.country" for="field_country">Country</label>
+                <select class="form-control"
+                        id="field_country"
+                        name="country"
+                        ng-model="vm.localisation.country"
+                        ng-options="country as country.name for country in vm.countries track by country.id"
+                        ng-change="vm.loadRegion()">
+
+                    <option value=""></option>
+                </select>
+                <div ng-show="editForm.country.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.country.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group col-md-4">
+                <label class="control-label" data-translate="declarationUser.region" for="field_region">Region</label>
+                <select class="form-control"
+                        id="field_region"
+                        name="region"
+                        ng-model="vm.localisation.region"
+                        ng-options="region as region.name for region in vm.countryRegion track by region.id">
+                    <option value=""></option>
+                </select>
+                <div ng-show="editForm.region.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.region.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-custom-cancel" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-custom-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
