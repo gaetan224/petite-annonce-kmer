@@ -11,9 +11,6 @@
         $stateProvider
         .state('declaration-user-edit', {
             url: '/declaration-user-edit/{id}',
-            data: {
-                authorities: ['ROLE_USER']
-            },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/declaration-user/declaration-user-dialog.html',
@@ -42,9 +39,6 @@
         .state('declaration-user-new', {
             parent: 'home',
             url: '/declaration-user-new',
-            data: {
-                authorities: ['ROLE_USER']
-            },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/declaration-user/declaration-user-dialog.html',
@@ -75,6 +69,7 @@
                 {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('declaration-user');
+                        $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
                 }

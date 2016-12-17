@@ -10,9 +10,6 @@
 
     <div class="modal-body">
 
-
-
-        <jhi-alert-error></jhi-alert-error>
         <div class="well">
         <div class="row">
         <div class="form-group col-md-7">
@@ -149,6 +146,63 @@
                 </div>
             </div>
             </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label" data-translate="declarationUser.city" for="field_city">City
+                    </label>
+                    <!-- help button-->
+                    <button type="button"
+                            class="help-btn"
+                            data-popover-placement="right"
+                            data-uib-popover="{{ 'declarationUser.cityHelp' | translate }}"
+                            data-popover-title="{{ 'global.form.help' | translate }}"
+                            popover-class="pophelp">
+                        <i class="fa fa-question-circle"></i>
+                    </button>
+
+                    <input type="text" class="form-control" name="city" id="field_city"
+                           ng-autocomplete="vm.localisation.city" details="vm.citiesOptionsDetail" options="vm.citiesOptions"
+                           ng-model="vm.localisation.city"
+                           required />
+                    <div ng-show="editForm.city.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.city.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label" data-translate="declarationUser.streetName" for="field_streetName">street Name
+                    </label>
+                    <!-- help button-->
+                    <button type="button"
+                            class="help-btn"
+                            data-popover-placement="right"
+                            data-uib-popover="{{ 'declarationUser.streetNameHelp' | translate }}"
+                            data-popover-title="{{ 'global.form.help' | translate }}"
+                            popover-class="pophelp">
+                        <i class="fa fa-question-circle"></i>
+                    </button>
+
+                    <input type="text" class="form-control" name="streetName" id="field_streetName"
+                           ng-model="vm.localisation.streetName"
+                           required />
+                    <div ng-show="editForm.streetName.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.streetName.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
         </div>
 
     <div class="modal-footer">

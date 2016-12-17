@@ -515,3 +515,20 @@ label {
     padding-top: 25px;
     margin: 10px;
 }
+
+.pac-container {
+    z-index: 9999;
+}
+
+.help-btn {
+    background: transparent;
+    border: 0; }
+.help-btn .fa {
+    color:hsl(293, 40%, 32%) !important;
+    font-size: 1.5em; }
+.help-btn:hover .fa {
+    color: #465291; }
+
+.pophelp {
+   width:300px;
+}

@@ -59,12 +59,22 @@
             vm.hideUpload3 = true;
         }
 
+        vm.citiesOptions = {
+            country: 'cm',
+            types: '(cities)'
+        };
+        vm.citiesOptionsDetail ='';
+
+
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
 
         function save () {
+        console.log("SAVE")
+            console.log(vm.citiesOptionsDetail);
+            console.log(vm.localisation.city);
 
         }
 
