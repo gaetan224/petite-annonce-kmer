@@ -223,6 +223,17 @@ public class UserService extends BaseEntityService<User>{
          return user;
     }
 
+    @Transactional(readOnly = true)
+    public User getByLogin(String login) {
+        Optional<User> optionalUser = userRepository.findOneByLogin(login);
+        User user = null;
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+            user.getAuthorities().size(); // eagerly load the association
+        }
+        return user;
+    }
+
     /**
      * Persistent Token are used for providing automatic authentication, they should be automatically deleted after
      * 30 days.

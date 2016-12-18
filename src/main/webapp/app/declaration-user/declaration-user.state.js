@@ -69,6 +69,7 @@
                 {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('declaration-user');
+                        $translatePartialLoader.addPart('register');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]

@@ -8,44 +8,20 @@
         <h4 class="modal-title" id="myDeclarationLabel" data-translate="declarationUser.createOrEditLabel">Create or edit a Declaration</h4>
     </div>
 
+    <div class="alert alert-success" ng-hide="!vm.isSave" data-translate="declarationUser.success">
+        <strong>Registration saved!</strong> Please check your email for confirmation.
+    </div>
+
     <div class="modal-body">
 
-        <div class="well">
-        <div class="row">
-        <div class="form-group col-md-7">
-            <label class="control-label" data-translate="declarationUser.title" for="field_title">Title</label>
-            <input type="text" class="form-control" name="title" id="field_title"
-                   ng-model="vm.declaration.title"
-                   required ng-minlength="5" />
-            <div ng-show="editForm.title.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.title.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
-                    This field is required to be at least 5 characters.
-                </p>
-            </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="form-group col-md-7">
-            <label class="control-label" data-translate="declarationUser.description" for="field_description">Description</label>
-            <textarea class="form-control"
-                      name="description"
-                      id="field_description"
-                      ng-model="vm.declaration.description">
+        <div class="well" ng-hide="vm.isSave">
 
-            </textarea>
-        </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label class="control-label" data-translate="declarationUser.price" for="field_price">price</label>
-                <input type="tel" class="form-control" name="title" id="field_price"
-                       ng-model="vm.declaration.price"
-                       required ng-minlength="2" />
+            <div class="row">
+            <div class="form-group col-md-7">
+                <label class="control-label" data-translate="declarationUser.title" for="field_title">Title</label>
+                <input type="text" class="form-control" name="title" id="field_title"
+                       ng-model="vm.declaration.title"
+                       required ng-minlength="5" />
                 <div ng-show="editForm.title.$invalid">
                     <p class="help-block"
                        ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
@@ -57,56 +33,95 @@
                     </p>
                 </div>
             </div>
-        </div>
+            </div>
 
-        <div class="row">
-        <div ngf-select="vm.select1($file)"
-             ngf-drop=""
-             ng-model="vm.images.principal"
-             ngf-model-invalid="invalidFiles"
-             ngf-model-options="modelOptionsObj" ngf-multiple="false"
-             ngf-pattern="pattern"
-             ngf-accept="'image/*'"
-             ngf-resize="{width: 100, height: 100}"
-             ng-hide="vm.hideUpload1"
-             class="drop-box col-md-4" ngf-drop-available="true">
-            <span data-translate="declarationUser.image1">Select image 1</span>
-        </div>
-            <img class="drop-box col-md-4" ngf-src="!vm.images.principal.$error && vm.images.principal">
+            <div class="row">
+            <div class="form-group col-md-7">
+                <label class="control-label" data-translate="declarationUser.description" for="field_description">Description</label>
+                <textarea class="form-control"
+                          name="description"
+                          id="field_description"
+                          ng-model="vm.declaration.description">
 
-            <div ngf-select="vm.select2($file)"
+                </textarea>
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label" data-translate="declarationUser.price" for="field_price">price</label>
+                    <input type="tel"
+                           class="form-control"
+                           name="price"
+                           id="field_price"
+                           ng-pattern="/^[0-9]*$/"
+                           ng-model="vm.declaration.price"
+                           required ng-minlength="2" />
+                    <div ng-show="editForm.title.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.price.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
+                            This field is required to be at least 5 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.price.$error.pattern" data-translate="register.messages.validate.phoneNumber.pattern">
+                            Your username can only contain lower-case letters and digits.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+            <div ngf-select="vm.select1($file)"
                  ngf-drop=""
-                 ng-model="vm.images.image2"
+                 ng-model="vm.images.principal"
                  ngf-model-invalid="invalidFiles"
                  ngf-model-options="modelOptionsObj" ngf-multiple="false"
                  ngf-pattern="pattern"
                  ngf-accept="'image/*'"
                  ngf-resize="{width: 100, height: 100}"
-                 ng-hide="vm.hideUpload2"
+                 ng-hide="vm.hideUpload1"
                  class="drop-box col-md-4" ngf-drop-available="true">
-                <span data-translate="declarationUser.image2">Select image 1</span>
-
+                <span data-translate="declarationUser.image1">Select image 1</span>
             </div>
-            <img class="drop-box col-md-4" ngf-src="!vm.images.image2.$error && vm.images.image2">
+                <img class="drop-box col-md-4" ngf-src="!vm.images.principal.$error && vm.images.principal">
 
-            <div ngf-select="vm.select3($file)"
-                 ngf-drop=""
-                 ng-model="vm.images.image3"
-                 ngf-model-invalid="invalidFiles"
-                 ngf-model-options="modelOptionsObj" ngf-multiple="false"
-                 ngf-pattern="pattern"
-                 ngf-accept="'image/*'"
-                 ngf-resize="{width: 100, height: 100}"
-                 ng-hide="vm.hideUpload3"
-                 class="drop-box col-md-4" ngf-drop-available="true">
-                <span data-translate="declarationUser.image3">Select image 1</span>
+                <div ngf-select="vm.select2($file)"
+                     ngf-drop=""
+                     ng-model="vm.images.image2"
+                     ngf-model-invalid="invalidFiles"
+                     ngf-model-options="modelOptionsObj" ngf-multiple="false"
+                     ngf-pattern="pattern"
+                     ngf-accept="'image/*'"
+                     ngf-resize="{width: 100, height: 100}"
+                     ng-hide="vm.hideUpload2"
+                     class="drop-box col-md-4" ngf-drop-available="true">
+                    <span data-translate="declarationUser.image2">Select image 1</span>
 
+                </div>
+                <img class="drop-box col-md-4" ngf-src="!vm.images.image2.$error && vm.images.image2">
+
+                <div ngf-select="vm.select3($file)"
+                     ngf-drop=""
+                     ng-model="vm.images.image3"
+                     ngf-model-invalid="invalidFiles"
+                     ngf-model-options="modelOptionsObj" ngf-multiple="false"
+                     ngf-pattern="pattern"
+                     ngf-accept="'image/*'"
+                     ngf-resize="{width: 100, height: 100}"
+                     ng-hide="vm.hideUpload3"
+                     class="drop-box col-md-4" ngf-drop-available="true">
+                    <span data-translate="declarationUser.image3">Select image 1</span>
+
+                </div>
+                <img class="drop-box col-md-4" ngf-src="!vm.images.image3.$error && vm.images.image3">
             </div>
-            <img class="drop-box col-md-4" ngf-src="!vm.images.image3.$error && vm.images.image3">
-        </div>
         </div>
 
-        <div class="well">
+        <div class="well" ng-hide="vm.isSave">
             <div class="row">
             <div class="form-group col-md-4" ng-show="false">
                 <label class="control-label" data-translate="petiteAnnonceKmerApp.localisation.country" for="field_country">Country</label>
@@ -202,14 +217,162 @@
         </div>
 
 
+        <div class="well">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+
+                    <div class="alert alert-danger" ng-show="vm.error" data-translate="register.messages.error.fail">
+                        <strong>Registration failed!</strong> Please try again later.
+                    </div>
+
+                    <div class="alert alert-danger" ng-show="vm.errorUserExists" data-translate="register.messages.error.userexists">
+                        <strong>Login name already registered!</strong> Please choose another one.
+                    </div>
+
+                    <div class="alert alert-danger" ng-show="vm.errorEmailExists" data-translate="register.messages.error.emailexists">
+                        <strong>E-mail is already in use!</strong> Please choose another one.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-hide="vm.isSave">
+                <div class="form-group col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="email" data-translate="global.form.email">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
+                               ng-model="vm.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
+                        <div ng-show="form.email.$dirty && form.email.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.email.$error.required" data-translate="global.messages.validate.email.required">
+                                Your e-mail is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.email.$error.email" data-translate="global.messages.validate.email.invalid">
+                                Your e-mail is invalid.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.email.$error.minlength" data-translate="global.messages.validate.email.minlength">
+                                Your e-mail is required to be at least 5 characters.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.email.$error.maxlength" data-translate="global.messages.validate.email.maxlength">
+                                Your e-mail cannot be longer than 100 characters.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-hide="vm.isSave">
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="login" data-translate="global.form.username">Username</label>
+                    <input type="text" class="form-control" id="login" name="login" placeholder="{{'global.form.username.placeholder' | translate}}"
+                           ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
+                    <div ng-show="form.login.$dirty && form.login.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.login.$error.required" data-translate="register.messages.validate.login.required">
+                            Your username is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.login.$error.minlength" data-translate="register.messages.validate.login.minlength">
+                            Your username is required to be at least 1 character.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.login.$error.maxlength" data-translate="register.messages.validate.login.maxlength">
+                            Your username cannot be longer than 50 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.login.$error.pattern" data-translate="register.messages.validate.login.pattern">
+                            Your username can only contain lower-case letters and digits.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-hide="vm.isSave">
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="phoneNumber" data-translate="global.form.phoneNumber">phoneNumber</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="{{'global.form.phoneNumber.placeholder' | translate}}"
+                           ng-model="vm.registerAccount.phoneNumber" ng-minlength=6 ng-maxlength=30 ng-pattern="/^[0-9]*$/" required>
+                    <div ng-show="form.phoneNumber.$dirty && form.phoneNumber.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.phoneNumber.$error.required" data-translate="register.messages.validate.phoneNumber.required">
+                            Your username is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.phoneNumber.$error.minlength" data-translate="register.messages.validate.phoneNumber.minlength">
+                            Your username is required to be at least 1 character.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.phoneNumber.$error.maxlength" data-translate="register.messages.validate.phoneNumber.maxlength">
+                            Your username cannot be longer than 50 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.phoneNumber.$error.pattern" data-translate="register.messages.validate.phoneNumber.pattern">
+                            Your username can only contain lower-case letters and digits.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-hide="!vm.isSave">
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="password" data-translate="global.form.newpassword">New password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
+                           ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50>
+                    <div ng-show="form.password.$dirty && form.password.$invalid">
+                        <p class="help-block"
+                           ng-show="form.password.$error.required" data-translate="global.messages.validate.newpassword.required">
+                            Your password is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.password.$error.minlength" data-translate="global.messages.validate.newpassword.minlength">
+                            Your password is required to be at least 4 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.password.$error.maxlength" data-translate="global.messages.validate.newpassword.maxlength">
+                            Your password cannot be longer than 50 characters.
+                        </p>
+                    </div>
+                    <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
+                    </div>
+                </div>
+
+            <div class="row" ng-hide="!vm.isSave">
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="confirmPassword" data-translate="global.form.confirmpassword">New password confirmation</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
+                           ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 >
+                    <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
+                        <p class="help-block"
+                           ng-show="form.confirmPassword.$error.required" data-translate="global.messages.validate.confirmpassword.required">
+                            Your confirmation password is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.confirmPassword.$error.minlength" data-translate="global.messages.validate.confirmpassword.minlength">
+                            Your confirmation password is required to be at least 4 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.confirmPassword.$error.maxlength" data-translate="global.messages.validate.confirmpassword.maxlength">
+                            Your confirmation password cannot be longer than 50 characters.
+                        </p>
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+
     </div>
         </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-custom-cancel" data-dismiss="modal" ng-click="vm.clear()">
+        <button ng-hide="!vm.isSave" type="button" ng-click="vm.register()" ng-disabled="form.$invalid" class="btn btn-custom-primary" data-translate="register.form.button">Register</button>
+
+        <button ng-hide="vm.isSave" type="button" class="btn btn-custom-cancel" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-custom-primary">
+        <button ng-hide="vm.isSave" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-custom-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>

@@ -1,6 +1,8 @@
 package com.gtemate.petiteannoncekmer.service;
 
 import com.gtemate.petiteannoncekmer.domain.Declaration;
+import com.gtemate.petiteannoncekmer.domain.Localisation;
+import com.gtemate.petiteannoncekmer.domain.User;
 import com.gtemate.petiteannoncekmer.repository.DeclarationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -25,6 +29,12 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
     @Inject
     private DeclarationRepository declarationRepository;
+
+    @Inject
+    private UserService userService;
+
+    @Inject
+    private LocalisationService localisationService;
 
     @Override
     public DeclarationRepository getRepository() {
@@ -64,5 +74,23 @@ public class DeclarationService extends BaseEntityService<Declaration> {
         log.debug("Request to get all Declarations");
         Page<Declaration> result = declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion);
         return result;
+    }
+
+    @Transactional
+    public Declaration saveDeclarationUser(Declaration declaration,
+                                    User user,
+                                    Localisation localisation,
+                                    MultipartFile[] images) {
+        User newUser = userService.getByLogin(user.getLogin());
+        declaration.setOwner(newUser);
+        declaration.setLocalisation(localisation);
+        declaration.setLastModifiedDate(ZonedDateTime.now());
+        declaration.setIsPublished(false);
+        declaration.setCreationDate(ZonedDateTime.now());
+
+        localisationService.save(localisation);
+        declarationRepository.save(declaration);
+
+        return declaration;
     }
 }

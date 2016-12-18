@@ -45,7 +45,9 @@
             "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
             "email": "Email",
             "email.placeholder": "Votre email",
-            "help":"Aide"
+            "help":"Aide",
+            "phoneNumber":"Téléphone",
+            "phoneNumber.placeholder":"numéro de téléphone"
         },
         "messages": {
             "info": {

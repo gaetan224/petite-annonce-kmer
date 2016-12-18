@@ -2,18 +2,24 @@ package com.gtemate.petiteannoncekmer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.gtemate.petiteannoncekmer.domain.Declaration;
+import com.gtemate.petiteannoncekmer.domain.Localisation;
+import com.gtemate.petiteannoncekmer.domain.User;
 import com.gtemate.petiteannoncekmer.service.DeclarationService;
 import com.gtemate.petiteannoncekmer.service.UserService;
 import com.gtemate.petiteannoncekmer.web.rest.util.HeaderUtil;
 import com.gtemate.petiteannoncekmer.web.rest.util.PaginationUtil;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -155,5 +161,29 @@ public class DeclarationResource  {
         declarationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("declaration", id.toString())).build();
     }
+
+
+    /**
+     * REST methods to save declarations-user with uploaded files.
+     * @param declaration
+     * @param localisation
+     * @param images
+     * @return
+     */
+    @PostMapping(value = "/save-declarations-user", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Declaration> saveDeclarationUser(@RequestPart("declaration") Declaration declaration,
+                                                           @RequestPart(name = "localisation", required = false) Localisation localisation,
+                                                           @RequestPart(name = "user", required = false) User user,
+                                                           @RequestPart(name = "images", required = false) MultipartFile[] images
+    ) throws URISyntaxException {
+
+        // call service to save Admission Request
+        Declaration result = declarationService.saveDeclarationUser(declaration, user, localisation,images);
+
+        // return JSON response
+        return ResponseEntity.created(new URI("/api/entities/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("entity", result.getId().toString())).body(result);
+    }
+
 
 }

@@ -12,7 +12,8 @@
         "city":"Ville/village",
         "streetName":"Rue/Quatier",
         "cityHelp":"Veuillez commencer a saisir le nom de la(le) Ville/village pour activer l'auto completion",
-        "streetNameHelp":"Veuillez indiquez un quatier ou une rue"
+        "streetNameHelp":"Veuillez indiquez un quatier ou une rue",
+        "success":"<strong> Valider votre annonce en creant un mot de passe, celui-ci sera utilisé pour vous connecter ultérieurement</strong> "
 
     }
 

@@ -9,9 +9,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationUserDialogController', DeclarationUserDialogController);
 
-    DeclarationUserDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Declaration', 'User', 'Localisation', 'Image','Country','Region'];
+    DeclarationUserDialogController.$inject = ['$translate','$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DeclarationUser', 'User', 'Localisation', 'Image','Country','Region', 'Auth', 'LoginService'];
 
-    function DeclarationUserDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Declaration, User, Localisation, Image,Country,Region) {
+    function DeclarationUserDialogController ($translate,$timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DeclarationUser, User, Localisation, Image,Country,Region, Auth, LoginService) {
         var vm = this;
 
         vm.declaration = entity;
@@ -19,6 +19,20 @@
         vm.save = save;
         vm.onSaveSuccess = onSaveSuccess;
         vm.onSaveError = onSaveError;
+
+        // register field
+        vm.doNotMatch = null;
+        vm.error = null;
+        vm.errorUserExists = null;
+        vm.login = LoginService.open;
+        vm.register = register;
+        vm.registerAccount = {};
+        vm.success = null;
+        vm.isSave = false;
+
+
+
+
         vm.select1 = select1;
         vm.select2 = select2;
         vm.select3 = select3;
@@ -72,14 +86,23 @@
         }
 
         function save () {
-        console.log("SAVE")
-            console.log(vm.citiesOptionsDetail);
-            console.log(vm.localisation.city);
+
+            console.log(vm.declaration);
+            console.log(vm.localisation);
+            /*DeclarationUser.saveDeclarationUser(
+                vm.declaration,
+                vm.localisation,
+                [vm.images.principal,vm.images.image2,vm.images.image3]
+            ).then(onSaveSuccess)
+             .catch(onSaveError);*/
+            vm.isSave= true;
+
 
         }
 
-        function onSaveSuccess (result) {
-
+        function onSaveSuccess (data) {
+          console.log("saved ok");
+          console.log(data);
         }
 
         function onSaveError () {
@@ -91,6 +114,42 @@
                 vm.countryRegion = Region.getByCountry(
                     {countryId: vm.localisation.country.id}
                 )
+            }
+        }
+
+        function register () {
+            console.log("SAVE register")
+
+            if (vm.registerAccount.password !== vm.confirmPassword) {
+                vm.doNotMatch = 'ERROR';
+            } else {
+                vm.registerAccount.langKey = $translate.use();
+                vm.doNotMatch = null;
+                vm.error = null;
+                vm.errorUserExists = null;
+                vm.errorEmailExists = null;
+
+                Auth.createAccount(vm.registerAccount).then(function () {
+                    vm.success = 'OK';
+
+                    DeclarationUser.saveDeclarationUser(
+                        vm.declaration,
+                        vm.localisation,
+                        vm.registerAccount,
+                        [vm.images.principal,vm.images.image2,vm.images.image3]
+                    ).then(onSaveSuccess)
+                        .catch(onSaveError)
+
+                }).catch(function (response) {
+                    vm.success = null;
+                    if (response.status === 400 && response.data === 'login already in use') {
+                        vm.errorUserExists = 'ERROR';
+                    } else if (response.status === 400 && response.data === 'e-mail address already in use') {
+                        vm.errorEmailExists = 'ERROR';
+                    } else {
+                        vm.error = 'ERROR';
+                    }
+                });
             }
         }
     }

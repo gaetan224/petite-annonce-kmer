@@ -66,6 +66,14 @@ public class Declaration extends BaseEntity{
     @OneToOne(fetch = FetchType.EAGER)
     private Image miniature;
 
+    @PreUpdate
+    public void updatePublishDate(){
+        if(isPublished){
+            lastModifiedDate = ZonedDateTime.now();
+            publishedDate = ZonedDateTime.now();
+        }
+    }
+
 
     public String getTitle() {
         return title;
