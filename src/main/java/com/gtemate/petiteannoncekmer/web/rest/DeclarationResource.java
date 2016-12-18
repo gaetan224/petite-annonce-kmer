@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.gtemate.petiteannoncekmer.domain.Declaration;
 import com.gtemate.petiteannoncekmer.domain.Localisation;
 import com.gtemate.petiteannoncekmer.domain.User;
+import com.gtemate.petiteannoncekmer.security.AuthoritiesConstants;
 import com.gtemate.petiteannoncekmer.service.DeclarationService;
 import com.gtemate.petiteannoncekmer.service.UserService;
 import com.gtemate.petiteannoncekmer.web.rest.util.HeaderUtil;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -170,6 +172,7 @@ public class DeclarationResource  {
      * @param images
      * @return
      */
+    @Secured(AuthoritiesConstants.ANONYMOUS)
     @PostMapping(value = "/save-declarations-user", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Declaration> saveDeclarationUser(@RequestPart("declaration") Declaration declaration,
                                                            @RequestPart(name = "localisation", required = false) Localisation localisation,

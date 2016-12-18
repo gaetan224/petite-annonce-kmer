@@ -8,12 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing Image.
@@ -49,30 +53,58 @@ public class ImageService extends BaseEntityService<Image> {
     }
 
     /**
-     *  Get all the images.
-     *  @return the list of entities
+     *  convert image to thumbnail
+     *  @return the converted image
      */
     @Transactional(readOnly = true)
-    public Image getThumbNail(Long id) {
-        Image image = imageRepository.findOne(id);
+    public Image getThumbNail(MultipartFile multipartFile) {
+        Optional<Image> image = createImageFromMultipartFile(multipartFile);
         File tempFile = null;
         Image res = null;
         try {
-            tempFile = File.createTempFile("", "", null);
+            tempFile = File.createTempFile("img_", "."+multipartFile.getContentType().split("/")[1]);
             FileOutputStream fos = new FileOutputStream(tempFile);
-            fos.write(image.getContent());
+            fos.write(image.get().getContent());
 
-            Thumbnails.of(tempFile).size(100,100).toFile(tempFile);
+            Thumbnails.of(tempFile).size(150,150).toFile(tempFile);
             res = new Image();
             byte[] array = Files.readAllBytes(tempFile.toPath());
-            res.setContent(array);
+            image.get().setContent(array);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-        return res;
+        return image.get();
     }
+
+
+    public Optional<Image> createImageFromMultipartFile(MultipartFile multipartFile){
+
+        if (multipartFile == null) {
+            return Optional.empty();
+        }
+
+        // create Image
+        Image image = new Image();
+
+        // set fields
+        image.setFileName(multipartFile.getOriginalFilename());
+        image.setContentType(multipartFile.getContentType());
+        image.setContentContentType(multipartFile.getContentType());
+        image.setTitle(image.getFileName());
+        image.extention(multipartFile.getContentType());
+        try {
+
+            image.setContent(multipartFile.getBytes());
+        } catch (IOException e) {
+            log.warn("Error when get content for file: {}: {}", image.getFileName(), e);
+        }
+
+        // save Image
+        Image newImage = imageRepository.save(image);
+        log.info("Save file into database: {} - {}", newImage.getId(), newImage.getFileName());
+
+        return Optional.of(newImage);
+    }
+
 }

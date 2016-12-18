@@ -8,10 +8,6 @@
         <h4 class="modal-title" id="myDeclarationLabel" data-translate="declarationUser.createOrEditLabel">Create or edit a Declaration</h4>
     </div>
 
-    <div class="alert alert-success" ng-hide="!vm.isSave" data-translate="declarationUser.success">
-        <strong>Registration saved!</strong> Please check your email for confirmation.
-    </div>
-
     <div class="modal-body">
 
         <div class="well" ng-hide="vm.isSave">
@@ -82,12 +78,14 @@
                  ngf-model-options="modelOptionsObj" ngf-multiple="false"
                  ngf-pattern="pattern"
                  ngf-accept="'image/*'"
-                 ngf-resize="{width: 100, height: 100}"
                  ng-hide="vm.hideUpload1"
                  class="drop-box col-md-4" ngf-drop-available="true">
                 <span data-translate="declarationUser.image1">Select image 1</span>
             </div>
-                <img class="drop-box col-md-4" ngf-src="!vm.images.principal.$error && vm.images.principal">
+                <img class="drop-box col-md-4"
+                     ngf-src="!vm.images.principal.$error && vm.images.principal"
+                     ngf-resize="{width: 150, height: 150, quality: 0.9}"
+                >
 
                 <div ngf-select="vm.select2($file)"
                      ngf-drop=""
@@ -96,13 +94,15 @@
                      ngf-model-options="modelOptionsObj" ngf-multiple="false"
                      ngf-pattern="pattern"
                      ngf-accept="'image/*'"
-                     ngf-resize="{width: 100, height: 100}"
                      ng-hide="vm.hideUpload2"
                      class="drop-box col-md-4" ngf-drop-available="true">
                     <span data-translate="declarationUser.image2">Select image 1</span>
 
                 </div>
-                <img class="drop-box col-md-4" ngf-src="!vm.images.image2.$error && vm.images.image2">
+                <img class="drop-box col-md-4"
+                     ngf-src="!vm.images.image2.$error && vm.images.image2"
+                     ngf-resize="{width: 150, height: 150, quality: 0.9}"
+                >
 
                 <div ngf-select="vm.select3($file)"
                      ngf-drop=""
@@ -111,13 +111,14 @@
                      ngf-model-options="modelOptionsObj" ngf-multiple="false"
                      ngf-pattern="pattern"
                      ngf-accept="'image/*'"
-                     ngf-resize="{width: 100, height: 100}"
                      ng-hide="vm.hideUpload3"
                      class="drop-box col-md-4" ngf-drop-available="true">
                     <span data-translate="declarationUser.image3">Select image 1</span>
 
                 </div>
-                <img class="drop-box col-md-4" ngf-src="!vm.images.image3.$error && vm.images.image3">
+                <img class="drop-box col-md-4"
+                     ngf-src="!vm.images.image3.$error && vm.images.image3"
+                     ngf-resize="{width: 150, height: 150, quality: 0.9}">
             </div>
         </div>
 
@@ -232,6 +233,9 @@
                     <div class="alert alert-danger" ng-show="vm.errorEmailExists" data-translate="register.messages.error.emailexists">
                         <strong>E-mail is already in use!</strong> Please choose another one.
                     </div>
+
+                    <div class="alert alert-info" ng-hide="!vm.isSave" data-translate="declarationUser.success">
+                    </div>
                 </div>
             </div>
 
@@ -315,52 +319,57 @@
                 </div>
             </div>
 
-            <div class="row" ng-hide="!vm.isSave">
-                <div class="form-group col-md-4">
-                    <label class="control-label" for="password" data-translate="global.form.newpassword">New password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
-                           ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50>
-                    <div ng-show="form.password.$dirty && form.password.$invalid">
-                        <p class="help-block"
-                           ng-show="form.password.$error.required" data-translate="global.messages.validate.newpassword.required">
-                            Your password is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.password.$error.minlength" data-translate="global.messages.validate.newpassword.minlength">
-                            Your password is required to be at least 4 characters.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.password.$error.maxlength" data-translate="global.messages.validate.newpassword.maxlength">
-                            Your password cannot be longer than 50 characters.
-                        </p>
+            <div ng-hide="vm.isAuthenticated && vm.isSave">
+                <div class="row" ng-hide="!vm.isSave">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="password" data-translate="declarationUser.password">New password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
+                               ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50>
+                        <div ng-show="form.password.$dirty && form.password.$invalid">
+                            <p class="help-block"
+                               ng-show="form.password.$error.required" data-translate="global.messages.validate.newpassword.required">
+                                Your password is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="form.password.$error.minlength" data-translate="global.messages.validate.newpassword.minlength">
+                                Your password is required to be at least 4 characters.
+                            </p>
+                            <p class="help-block"
+                               ng-show="form.password.$error.maxlength" data-translate="global.messages.validate.newpassword.maxlength">
+                                Your password cannot be longer than 50 characters.
+                            </p>
+                        </div>
+                        <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
+                        </div>
                     </div>
-                    <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
+
+                <div class="row" ng-hide="!vm.isSave">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="confirmPassword" data-translate="declarationUser.confirmpassword">New password confirmation</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
+                               ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 >
+                        <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
+                            <p class="help-block"
+                               ng-show="form.confirmPassword.$error.required" data-translate="global.messages.validate.confirmpassword.required">
+                                Your confirmation password is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="form.confirmPassword.$error.minlength" data-translate="global.messages.validate.confirmpassword.minlength">
+                                Your confirmation password is required to be at least 4 characters.
+                            </p>
+                            <p class="help-block"
+                               ng-show="form.confirmPassword.$error.maxlength" data-translate="global.messages.validate.confirmpassword.maxlength">
+                                Your confirmation password cannot be longer than 50 characters.
+                            </p>
                     </div>
                 </div>
-
-            <div class="row" ng-hide="!vm.isSave">
-                <div class="form-group col-md-4">
-                    <label class="control-label" for="confirmPassword" data-translate="global.form.confirmpassword">New password confirmation</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
-                           ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 >
-                    <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
-                        <p class="help-block"
-                           ng-show="form.confirmPassword.$error.required" data-translate="global.messages.validate.confirmpassword.required">
-                            Your confirmation password is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.confirmPassword.$error.minlength" data-translate="global.messages.validate.confirmpassword.minlength">
-                            Your confirmation password is required to be at least 4 characters.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.confirmPassword.$error.maxlength" data-translate="global.messages.validate.confirmpassword.maxlength">
-                            Your confirmation password cannot be longer than 50 characters.
-                        </p>
                 </div>
             </div>
 
+            <div ng-hide="vm.isAuthenticated && !vm.isSave">
 
             </div>
+
         </div>
 
     </div>

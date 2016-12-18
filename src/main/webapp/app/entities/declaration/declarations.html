@@ -36,11 +36,11 @@
                     <td><a ui-sref="declaration-detail({id:declaration.id})">{{declaration.id}}</a></td>
                     <td>{{declaration.title}}</td>
                     <td>{{declaration.description}}</td>
-                    <td>{{declaration.creationDate | date:'medium'}}</td>
-                    <td>{{declaration.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{declaration.creationDate |pakDate}}</td>
+                    <td>{{declaration.lastModifiedDate |pakDate}}</td>
                     <td>{{declaration.isPublished}}</td>
                     <td>{{declaration.price}}</td>
-                    <td>{{declaration.publishedDate | date:'medium'}}</td>
+                    <td>{{declaration.publishedDate |pakDate}}</td>
                     <td>
                         {{declaration.owner.firstName}}
                     </td>

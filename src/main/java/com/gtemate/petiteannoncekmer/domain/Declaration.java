@@ -58,7 +58,7 @@ public class Declaration extends BaseEntity{
     @JoinColumn(name="localisation_id")
     private Localisation localisation;
 
-    @OneToMany(mappedBy = "declaration")
+    @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Image> images = new HashSet<>();
@@ -211,6 +211,14 @@ public class Declaration extends BaseEntity{
         images.remove(image);
         image.setDeclaration(null);
         return this;
+    }
+
+    public Image getMiniature() {
+        return miniature;
+    }
+
+    public void setMiniature(Image miniature) {
+        this.miniature = miniature;
     }
 
     public void setImages(Set<Image> images) {

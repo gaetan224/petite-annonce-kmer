@@ -1,6 +1,7 @@
 package com.gtemate.petiteannoncekmer.service;
 
 import com.gtemate.petiteannoncekmer.domain.Declaration;
+import com.gtemate.petiteannoncekmer.domain.Image;
 import com.gtemate.petiteannoncekmer.domain.Localisation;
 import com.gtemate.petiteannoncekmer.domain.User;
 import com.gtemate.petiteannoncekmer.repository.DeclarationRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing Declaration.
@@ -35,6 +37,9 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
     @Inject
     private LocalisationService localisationService;
+
+    @Inject
+    private ImageService imageService;
 
     @Override
     public DeclarationRepository getRepository() {
@@ -81,12 +86,24 @@ public class DeclarationService extends BaseEntityService<Declaration> {
                                     User user,
                                     Localisation localisation,
                                     MultipartFile[] images) {
+
         User newUser = userService.getByLogin(user.getLogin());
         declaration.setOwner(newUser);
         declaration.setLocalisation(localisation);
         declaration.setLastModifiedDate(ZonedDateTime.now());
         declaration.setIsPublished(false);
         declaration.setCreationDate(ZonedDateTime.now());
+
+        Optional<Image> image = null;
+        Image min = imageService.getThumbNail(images[0]);
+        declaration.setMiniature(min);
+
+        for (MultipartFile multipartFile : images) {
+            // save  image
+            image = imageService.createImageFromMultipartFile(multipartFile);
+            // attach image to declaration
+            image.ifPresent(im -> declaration.addImages(im));
+        }
 
         localisationService.save(localisation);
         declarationRepository.save(declaration);

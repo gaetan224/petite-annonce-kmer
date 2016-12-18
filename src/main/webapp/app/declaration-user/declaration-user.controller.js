@@ -9,9 +9,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationUserDialogController', DeclarationUserDialogController);
 
-    DeclarationUserDialogController.$inject = ['$translate','$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DeclarationUser', 'User', 'Localisation', 'Image','Country','Region', 'Auth', 'LoginService'];
+    DeclarationUserDialogController.$inject = ['$translate','$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DeclarationUser', 'User', 'Localisation', 'Image','Country','Region', 'Auth', 'LoginService', 'Principal'];
 
-    function DeclarationUserDialogController ($translate,$timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DeclarationUser, User, Localisation, Image,Country,Region, Auth, LoginService) {
+    function DeclarationUserDialogController ($translate,$timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DeclarationUser, User, Localisation, Image,Country,Region, Auth, LoginService,Principal) {
         var vm = this;
 
         vm.declaration = entity;
@@ -30,7 +30,8 @@
         vm.success = null;
         vm.isSave = false;
 
-
+       vm.isAuthenticated = Principal.isAuthenticated();
+        console.log(vm.isAuthenticated);
 
 
         vm.select1 = select1;
@@ -61,6 +62,7 @@
 
         function select1(file) {
             console.log(file);
+            console.log(vm.images.principal);
             vm.hideUpload1 = true;
         }
         function select2(file) {

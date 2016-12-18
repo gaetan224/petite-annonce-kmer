@@ -32,7 +32,8 @@
 
         vm.initMap = function() {
             // Prepare demo data
-            var data = [
+            var data =
+                [
                 {
                     "hc-key": "cm-es",
                     "value": 0
@@ -75,7 +76,8 @@
                 }
             ];
             // Initiate the chart
-            $('#camerounmap').highcharts('Map', {
+            $('#camerounmap').highcharts('Map',
+                {
 
                 title: {
                     text: 'Choisissez votre region'
