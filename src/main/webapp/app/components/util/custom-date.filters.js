@@ -52,8 +52,6 @@ function convertDate($translate,$filter) {
         date = new Date(date);
         if(date.getFullYear() == 1969)
             return $translate.instant('NOTMENTIONNE');
-
-        console.log(date);
         date.isYesterDay();
         var hour = n(date.getHours()) + ":"
             + n(date.getMinutes());

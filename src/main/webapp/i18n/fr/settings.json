@@ -1,5 +1,18 @@
 {
     "settings": {
+        "menu":{
+            "account":"Mon compte",
+            "profile":"Profile",
+            "changePassword":"Mot de Passe",
+            "messages":"Messages",
+            "sessions":"Sessions Actives",
+            "effacer":"Supprimer le compte",
+            "logout":"Déconnexion",
+            "":"",
+            "":"",
+            "":""
+        },
+
         "title": "Profil de l'utilisateur [{{username}}]",
         "form": {
             "firstname": "Prénom",

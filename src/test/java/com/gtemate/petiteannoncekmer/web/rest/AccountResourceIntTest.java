@@ -145,6 +145,7 @@ public class AccountResourceIntTest {
             "password",             // password
             "Joe",                  // firstName
             "Shmoe",                // lastName
+            "33333",
             "joe@example.com",      // e-mail
             true,                   // activated
             "fr",                   // langKey
@@ -174,6 +175,7 @@ public class AccountResourceIntTest {
             "password",             // password
             "Funky",                // firstName
             "One",                  // lastName
+            "22222",
             "funky@example.com",    // e-mail
             true,                   // activated
             "fr",                   // langKey
@@ -203,6 +205,7 @@ public class AccountResourceIntTest {
             "password",         // password
             "Bob",              // firstName
             "Green",            // lastName
+            "2323",
             "invalid",          // e-mail <-- invalid
             true,               // activated
             "fr",               // langKey
@@ -232,6 +235,7 @@ public class AccountResourceIntTest {
             "123",              // password with only 3 digits
             "Bob",              // firstName
             "Green",            // lastName
+            "3333",
             "bob@example.com",  // e-mail
             true,               // activated
             "fr",               // langKey
@@ -262,6 +266,7 @@ public class AccountResourceIntTest {
             "password",             // password
             "Alice",                // firstName
             "Something",            // lastName
+            "3333",
             "alice@example.com",    // e-mail
             true,                   // activated
             "fr",                   // langKey
@@ -273,7 +278,7 @@ public class AccountResourceIntTest {
         );
 
         // Duplicate login, different e-mail
-        ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), validUser.getLogin(), validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
+        ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), validUser.getLogin(), validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),validUser.getPhoneNumber(),
             "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
 
         // Good user
@@ -304,6 +309,7 @@ public class AccountResourceIntTest {
             "password",             // password
             "John",                 // firstName
             "Doe",                  // lastName
+            "3333",
             "john@example.com",     // e-mail
             true,                   // activated
             "fr",                   // langKey
@@ -315,7 +321,7 @@ public class AccountResourceIntTest {
         );
 
         // Duplicate e-mail, different login
-        ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), "johnjr", validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
+        ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), "johnjr", validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),validUser.getPhoneNumber(),
             validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
 
         // Good user
@@ -345,6 +351,7 @@ public class AccountResourceIntTest {
             "password",             // password
             "Bad",                  // firstName
             "Guy",                  // lastName
+            "4444444",
             "badguy@example.com",   // e-mail
             true,                   // activated
             "fr",                   // langKey
@@ -374,6 +381,7 @@ public class AccountResourceIntTest {
             "funky-log!n",          // login <-- invalid
             "Funky",                // firstName
             "One",                  // lastName
+            "2323233",
             "funky@example.com",    // e-mail
             true,                   // activated
             "fr",                   // langKey

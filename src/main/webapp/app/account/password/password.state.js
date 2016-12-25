@@ -8,15 +8,15 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-        $stateProvider.state('password', {
-            parent: 'account',
+        $stateProvider.state('settings.password', {
+            parent: 'settings',
             url: '/password',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'global.menu.account.password'
             },
             views: {
-                'content@': {
+                'settingcontent@settings': {
                     templateUrl: 'app/account/password/password.html',
                     controller: 'PasswordController',
                     controllerAs: 'vm'

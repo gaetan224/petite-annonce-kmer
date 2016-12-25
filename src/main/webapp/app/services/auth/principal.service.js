@@ -17,7 +17,8 @@
             hasAuthority: hasAuthority,
             identity: identity,
             isAuthenticated: isAuthenticated,
-            isIdentityResolved: isIdentityResolved
+            isIdentityResolved: isIdentityResolved,
+            loginExist:loginExist
         };
 
         return service;
@@ -25,6 +26,10 @@
         function authenticate (identity) {
             _identity = identity;
             _authenticated = identity !== null;
+        }
+
+        function loginExist(login) {
+
         }
 
         function hasAnyAuthority (authorities) {

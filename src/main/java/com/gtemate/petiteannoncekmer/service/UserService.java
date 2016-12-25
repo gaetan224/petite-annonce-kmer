@@ -82,7 +82,7 @@ public class UserService extends BaseEntityService<User>{
             });
     }
 
-    public User createUser(String login, String password, String firstName, String lastName, String email,
+    public User createUser(String login, String password, String firstName, String lastName,String phoneNumber, String email,
         String langKey) {
 
         User newUser = new User();
@@ -94,6 +94,7 @@ public class UserService extends BaseEntityService<User>{
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
+        newUser.setPhoneNumber(phoneNumber);
         newUser.setEmail(email);
         newUser.setLangKey(langKey);
         // new user is not active

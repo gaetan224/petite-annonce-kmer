@@ -26,6 +26,9 @@ public class UserDTO {
     @Size(max = 50)
     private String lastName;
 
+    @Size(min = 5, max = 30)
+    private String phoneNumber;
+
     @Email
     @Size(min = 5, max = 100)
     private String email;
@@ -41,18 +44,19 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this(user.getLogin(), user.getFirstName(), user.getLastName(),
+        this(user.getLogin(), user.getFirstName(), user.getLastName(),user.getPhoneNumber(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
     }
 
-    public UserDTO(String login, String firstName, String lastName,
+    public UserDTO(String login, String firstName, String lastName,String phoneNumber,
         String email, boolean activated, String langKey, Set<String> authorities) {
 
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.activated = activated;
         this.langKey = langKey;
@@ -81,6 +85,10 @@ public class UserDTO {
 
     public String getLangKey() {
         return langKey;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public Set<String> getAuthorities() {

@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<form name="editForm" role="form" novalidate ng-submit="vm.generalSave()" show-validation>
 
 
     <div class="modal-header">
@@ -243,7 +243,11 @@
                 <div class="form-group col-md-4">
                     <div class="form-group">
                         <label class="control-label" for="email" data-translate="global.form.email">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
+                        <input type="email"
+                               class="form-control"
+                               id="email" name="email"
+                               ng-disabled="vm.isAuthenticated"
+                               placeholder="{{'global.form.email.placeholder' | translate}}"
                                ng-model="vm.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
                         <div ng-show="form.email.$dirty && form.email.$invalid">
                             <p class="help-block"
@@ -270,7 +274,11 @@
             <div class="row" ng-hide="vm.isSave">
                 <div class="form-group col-md-4">
                     <label class="control-label" for="login" data-translate="global.form.username">Username</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="{{'global.form.username.placeholder' | translate}}"
+                    <input type="text"
+                           class="form-control"
+                           id="login" name="login"
+                           ng-disabled="vm.isAuthenticated"
+                           placeholder="{{'global.form.username.placeholder' | translate}}"
                            ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
                     <div ng-show="form.login.$dirty && form.login.$invalid">
                         <p class="help-block"
@@ -296,7 +304,12 @@
             <div class="row" ng-hide="vm.isSave">
                 <div class="form-group col-md-4">
                     <label class="control-label" for="phoneNumber" data-translate="global.form.phoneNumber">phoneNumber</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="{{'global.form.phoneNumber.placeholder' | translate}}"
+                    <input type="text"
+                           class="form-control"
+                           id="phoneNumber"
+                           name="phoneNumber"
+                           ng-disabled="vm.isAuthenticated"
+                           placeholder="{{'global.form.phoneNumber.placeholder' | translate}}"
                            ng-model="vm.registerAccount.phoneNumber" ng-minlength=6 ng-maxlength=30 ng-pattern="/^[0-9]*$/" required>
                     <div ng-show="form.phoneNumber.$dirty && form.phoneNumber.$invalid">
                         <p class="help-block"

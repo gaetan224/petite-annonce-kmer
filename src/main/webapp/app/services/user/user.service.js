@@ -19,6 +19,15 @@
             },
             'save': { method:'POST' },
             'update': { method:'PUT' },
+            'loginExist': { url:'/api/account/loginExist', method:'GET',
+                transformResponse: function(data, headers,statusCode) {
+                    var finalRsponse = {
+                        data: data,
+                        responseStatusCode: statusCode
+                    };
+                    return statusCode;
+                }
+            },
             'delete':{ method:'DELETE'}
         });
 

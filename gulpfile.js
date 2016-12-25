@@ -79,12 +79,6 @@ gulp.task('inject:test', inject.test);
 
 gulp.task('inject:troubleshoot', inject.troubleshoot);
 
-gulp.task('inject-highmap-other-files', function () {
-return gulp.src(config.app + 'index.html')
-        .pipe(inject(gulp.src(config.app+'bower_components/highcharts/modules/exporting.js', {read: false})))
-        .pipe(inject(gulp.src(config.app+'bower_components/highcharts/mapdata/cm-all.js', {read: false})))
-});
-
 gulp.task('assets:prod', ['images', 'styles', 'html', 'copy:swagger', 'copy:images'], build);
 
 gulp.task('html', function () {
@@ -164,7 +158,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('install', function () {
-    runSequence(['inject:dep', 'ngconstant:dev'], 'copy:languages', 'inject:app', 'inject:troubleshoot','inject-highmap-other-files');
+    runSequence(['inject:dep', 'ngconstant:dev'], 'copy:languages', 'inject:app', 'inject:troubleshoot');
 });
 
 gulp.task('serve', ['install'], serve);

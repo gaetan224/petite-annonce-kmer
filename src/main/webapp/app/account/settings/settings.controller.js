@@ -5,9 +5,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate'];
+    SettingsController.$inject = ['$state','Principal', 'Auth', 'JhiLanguageService', '$translate'];
 
-    function SettingsController (Principal, Auth, JhiLanguageService, $translate) {
+    function SettingsController ($state,Principal, Auth, JhiLanguageService, $translate) {
         var vm = this;
 
         vm.error = null;
@@ -15,6 +15,7 @@
         vm.settingsAccount = null;
         vm.success = null;
         vm.status = false;
+        vm.logout = logout;
 
         /**
          * Store the "settings account" in a separate variable, and not in the shared "account" variable.
@@ -51,5 +52,11 @@
                 vm.error = 'ERROR';
             });
         }
+
+        function logout() {
+            Auth.logout();
+            $state.go('home');
+        }
+
     }
 })();

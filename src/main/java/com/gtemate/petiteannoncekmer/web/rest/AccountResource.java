@@ -72,7 +72,7 @@ public class AccountResource {
                 .orElseGet(() -> {
                     User user = userService
                         .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
-                            managedUserVM.getFirstName(), managedUserVM.getLastName(),
+                            managedUserVM.getFirstName(), managedUserVM.getLastName(),managedUserVM.getPhoneNumber(),
                             managedUserVM.getEmail().toLowerCase(), managedUserVM.getLangKey());
 
                     mailService.sendActivationEmail(user);
@@ -176,6 +176,24 @@ public class AccountResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
+
+
+    /**
+     * GET  /account/sessions : get the current open sessions.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the current open sessions in body,
+     *  or status 500 (Internal Server Error) if the current open sessions couldn't be retrieved
+     */
+    @GetMapping("/account/loginExist")
+    @Timed
+    public ResponseEntity<User> loginExist(@RequestParam(value = "login") String login) {
+        return userRepository.findOneByLogin(login)
+        .map(user1 -> new ResponseEntity<>(user1,HttpStatus.OK))
+        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+    }
+
+
 
     /**
      * DELETE  /account/sessions?series={series} : invalidate an existing session.
