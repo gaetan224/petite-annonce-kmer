@@ -87,17 +87,21 @@ public class DeclarationService extends BaseEntityService<Declaration> {
                                     Localisation localisation,
                                     MultipartFile[] images) {
 
-        User newUser = userService.getByLogin(user.getLogin());
-        declaration.setOwner(newUser);
-        declaration.setLocalisation(localisation);
+        User newUser = userService.getByLogin(user.getLogin()); // get declaration user
+        declaration.setOwner(newUser); // define declaration user
+        declaration.setLocalisation(localisation);  // set localisation
         declaration.setLastModifiedDate(ZonedDateTime.now());
         declaration.setIsPublished(false);
         declaration.setCreationDate(ZonedDateTime.now());
-
         Optional<Image> image = null;
-        Image min = imageService.getThumbNail(images[0]);
-        declaration.setMiniature(min);
 
+        if(images.length > 0) {
+              //generate thumbnail from first image
+            Image min = imageService.getThumbNail(images[0]);
+            declaration.setMiniature(min);
+        }
+
+        // add every images to the declaration
         for (MultipartFile multipartFile : images) {
             // save  image
             image = imageService.createImageFromMultipartFile(multipartFile);

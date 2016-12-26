@@ -172,7 +172,6 @@ public class DeclarationResource  {
      * @param images
      * @return
      */
-    @Secured(AuthoritiesConstants.ANONYMOUS)
     @PostMapping(value = "/save-declarations-user", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Declaration> saveDeclarationUser(@RequestPart("declaration") Declaration declaration,
                                                            @RequestPart(name = "localisation", required = false) Localisation localisation,

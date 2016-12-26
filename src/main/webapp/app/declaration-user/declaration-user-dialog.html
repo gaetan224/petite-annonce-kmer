@@ -10,6 +10,11 @@
 
     <div class="modal-body">
 
+        <div class="alert alert-success" ng-show="vm.generaleSave" data-translate="declarationUser.declarationSaved">
+            <strong>Settings saved!</strong>
+        </div>
+
+
         <div class="well" ng-hide="vm.isSave">
 
             <div class="row">
@@ -217,7 +222,6 @@
             </div>
         </div>
 
-
         <div class="well">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -234,7 +238,7 @@
                         <strong>E-mail is already in use!</strong> Please choose another one.
                     </div>
 
-                    <div class="alert alert-info" ng-hide="!vm.isSave" data-translate="declarationUser.success">
+                    <div class="alert alert-info" ng-show="!vm.generaleSave && vm.isSave" data-translate="declarationUser.success">
                     </div>
                 </div>
             </div>
@@ -330,57 +334,6 @@
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <div ng-hide="vm.isAuthenticated && vm.isSave">
-                <div class="row" ng-hide="!vm.isSave">
-                    <div class="form-group col-md-6">
-                        <label class="control-label" for="password" data-translate="declarationUser.password">New password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
-                               ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50>
-                        <div ng-show="form.password.$dirty && form.password.$invalid">
-                            <p class="help-block"
-                               ng-show="form.password.$error.required" data-translate="global.messages.validate.newpassword.required">
-                                Your password is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.password.$error.minlength" data-translate="global.messages.validate.newpassword.minlength">
-                                Your password is required to be at least 4 characters.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.password.$error.maxlength" data-translate="global.messages.validate.newpassword.maxlength">
-                                Your password cannot be longer than 50 characters.
-                            </p>
-                        </div>
-                        <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
-                        </div>
-                    </div>
-
-                <div class="row" ng-hide="!vm.isSave">
-                    <div class="form-group col-md-6">
-                        <label class="control-label" for="confirmPassword" data-translate="declarationUser.confirmpassword">New password confirmation</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
-                               ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 >
-                        <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
-                            <p class="help-block"
-                               ng-show="form.confirmPassword.$error.required" data-translate="global.messages.validate.confirmpassword.required">
-                                Your confirmation password is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.confirmPassword.$error.minlength" data-translate="global.messages.validate.confirmpassword.minlength">
-                                Your confirmation password is required to be at least 4 characters.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.confirmPassword.$error.maxlength" data-translate="global.messages.validate.confirmpassword.maxlength">
-                                Your confirmation password cannot be longer than 50 characters.
-                            </p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div ng-hide="vm.isAuthenticated && !vm.isSave">
-
             </div>
 
         </div>

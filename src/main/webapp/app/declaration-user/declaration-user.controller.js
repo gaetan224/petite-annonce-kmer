@@ -33,6 +33,7 @@
         vm.registerAccount = {};
         vm.success = null;
         vm.isSave = false;
+        vm.generaleSave = false;
         vm.currentAccount = null;
         vm.loginExist = false;
 
@@ -42,12 +43,19 @@
            Principal.identity().then(function(account) {
                vm.registerAccount = account;
            });
+       }else {
+           // verify that the typed login exist
+           $scope.$watch('vm.registerAccount.login', function (typedLogin) {
+               if (typedLogin) {
+                   vm.loginExists(typedLogin);
+               }
+           });
        }
 
-        vm.loginExists('admin');
-
-
-
+        /**
+         * verify if login exists
+          * @param login
+         */
        function loginExists(login) {
 
            User.loginExist({
@@ -57,7 +65,6 @@
            },function (error) {
                vm.loginExist = false;
            });
-
        }
 
 
@@ -118,16 +125,20 @@
         }
 
         function save () {
-            vm.isSave= true;
+
         }
 
         function onSaveSuccess (data) {
-          console.log("saved ok");
-          console.log(data);
+            vm.generaleSave = true;
+            if(vm.loginExist) {
+                LoginService.open();
+            }
         }
 
         function onSaveError () {
-            vm.isSaving = false;
+            console.log("saved Error");
+            vm.isSave = false;
+            vm.generaleSave = false;
         }
 
         function loadRegion() {
@@ -140,53 +151,56 @@
 
         function register () {
             console.log("SAVE register")
+            if(!vm.isAuthenticated || !vm.loginExist) {
+                if (vm.registerAccount.password !== vm.confirmPassword) {
+                    vm.doNotMatch = 'ERROR';
+                }
+                else {
+                    vm.registerAccount.langKey = $translate.use();
+                    vm.doNotMatch = null;
+                    vm.error = null;
+                    vm.errorUserExists = null;
+                    vm.errorEmailExists = null;
 
-            if (vm.registerAccount.password !== vm.confirmPassword) {
-                vm.doNotMatch = 'ERROR';
-            } else {
-                vm.registerAccount.langKey = $translate.use();
-                vm.doNotMatch = null;
-                vm.error = null;
-                vm.errorUserExists = null;
-                vm.errorEmailExists = null;
+                    Auth.createAccount(vm.registerAccount).then(function () {
+                        vm.success = 'OK';
 
-                Auth.createAccount(vm.registerAccount).then(function () {
-                    vm.success = 'OK';
+                        DeclarationUser.saveDeclarationUser(
+                            vm.declaration,
+                            vm.localisation,
+                            vm.registerAccount,
+                            [vm.images.principal, vm.images.image2, vm.images.image3]
+                        ).then(onSaveSuccess)
+                            .catch(onSaveError)
 
-                    DeclarationUser.saveDeclarationUser(
-                        vm.declaration,
-                        vm.localisation,
-                        vm.registerAccount,
-                        [vm.images.principal,vm.images.image2,vm.images.image3]
-                    ).then(onSaveSuccess)
-                        .catch(onSaveError)
-
-                }).catch(function (response) {
-                    vm.success = null;
-                    if (response.status === 400 && response.data === 'login already in use') {
-                        vm.errorUserExists = 'ERROR';
-                    } else if (response.status === 400 && response.data === 'e-mail address already in use') {
-                        vm.errorEmailExists = 'ERROR';
-                    } else {
-                        vm.error = 'ERROR';
-                    }
-                });
+                    }).catch(function (response) {
+                        vm.success = null;
+                        if (response.status === 400 && response.data === 'login already in use') {
+                            vm.errorUserExists = 'ERROR';
+                        } else if (response.status === 400 && response.data === 'e-mail address already in use') {
+                            vm.errorEmailExists = 'ERROR';
+                        } else {
+                            vm.error = 'ERROR';
+                        }
+                    });
+                }
             }
         }
 
         function generalSave() {
+            vm.isSave = true;
+            if(vm.isAuthenticated || vm.loginExist){
+                console.log("save auth")
 
-            if(!vm.isAuthenticated){
-
-            }else if(vm.loginExist){
-
-
-            }else{
-
-                vm.register();
+                DeclarationUser.saveDeclarationUser(
+                    vm.declaration,
+                    vm.localisation,
+                    vm.registerAccount,
+                    [vm.images.principal,vm.images.image2,vm.images.image3]
+                ).then(onSaveSuccess)
+                    .catch(onSaveError)
 
             }
-
         }
     }
 })();
