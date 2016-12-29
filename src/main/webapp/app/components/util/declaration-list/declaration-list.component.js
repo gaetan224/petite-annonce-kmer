@@ -11,8 +11,7 @@
         controller: DeclarationListController,
         controllerAs: 'vm',
         bindings: {
-            regionName: '<', // region key
-            regionId: '<' // region name
+            declarations: '<', // declarations to be displayed
         }
     };
 
@@ -23,7 +22,7 @@
 
 
     // injection in controller
-    DeclarationListController.$inject = ['Declaration','AlertService','$uibModal','Image','DataUtils'];
+    DeclarationListController.$inject = ['AlertService','$uibModal','Image','DataUtils'];
 
 
     /**
@@ -33,7 +32,7 @@
      *
      * @constructor
      */
-    function DeclarationListController(Declaration,AlertService,$uibModal,Image,DataUtils) {
+    function DeclarationListController(AlertService,$uibModal,Image,DataUtils) {
         var vm = this;
 
         /** Initialisation data controller. */
@@ -55,23 +54,10 @@
          * Init data in controller.
          */
         function initDataController() {
-                Declaration.getAllDeclarationsByRegion({
-                        IdRegion:vm.regionId
-                    }
-                    , onSuccess, onError);
-                function onSuccess(data, headers) {
-                    vm.declarations = data;
-                    console.log(vm.declarations);
                     angular.forEach(vm.declarations, function (declaration) {
                         console.log(declaration);
                         declaration.images = Image.getByDeclaration(declaration);
                     });
-
-                }
-                function onError(error) {
-                    AlertService.error(error.data.message);
-                }
-
         }
 
         /**
