@@ -5,15 +5,17 @@
         .module('petiteAnnonceKmerApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Declaration'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state','DeclarationUserService'];
 
-    function HomeController ($scope, Principal, LoginService, $state,Declaration) {
+    function HomeController ($scope, Principal, LoginService, $state,DeclarationUserService) {
         var vm = this;
 
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
+        vm.openDeclaration = openDeclaration;
+
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -28,6 +30,10 @@
         }
         function register () {
             $state.go('register');
+        }
+
+        function openDeclaration() {
+            DeclarationUserService.open();
         }
 
         vm.initMap = function() {

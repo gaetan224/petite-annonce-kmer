@@ -5,9 +5,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['$state','Principal', 'Auth', 'JhiLanguageService', '$translate'];
+    SettingsController.$inject = ['DeclarationUserService','$state','Principal', 'Auth', 'JhiLanguageService', '$translate'];
 
-    function SettingsController ($state,Principal, Auth, JhiLanguageService, $translate) {
+    function SettingsController (DeclarationUserService, $state,Principal, Auth, JhiLanguageService, $translate) {
         var vm = this;
 
         vm.error = null;
@@ -15,6 +15,7 @@
         vm.settingsAccount = null;
         vm.success = null;
         vm.status = false;
+        vm.openDeclaration = openDeclaration;
         vm.logout = logout;
 
         /**
@@ -56,6 +57,10 @@
         function logout() {
             Auth.logout();
             $state.go('home');
+        }
+
+        function openDeclaration() {
+            DeclarationUserService.open();
         }
 
     }

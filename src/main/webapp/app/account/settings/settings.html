@@ -61,7 +61,7 @@
                 <div uib-accordion-group class="panel panel-default" is-open="status.open">
                     <uib-accordion-heading>
                         <h4 class="panel-title">
-                            <a><span class="glyphicon glyphicon-folder-close"></span>Content</a>
+                            <a><span class="glyphicon glyphicon-folder-close"></span>{{'settings.menu.content' | translate}}</a>
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                         </h4>
                     </uib-accordion-heading>
@@ -70,57 +70,17 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">Articles</a>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a ui-sref="my-declarations">{{'settings.menu.myDeclarations' | translate}}</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.jquery2dotnet.com">News</a>
+                                        <span class="glyphicon glyphicon-edit text-success"></span><a href data-ng-click="vm.openDeclaration()">{{'settings.menu.addDeclaration' | translate}}</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Newsletters</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">Comments</a>
-                                        <span class="badge">42</span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </uib-accordion-body>
-                </div>
-                <div uib-accordion-group class="panel panel-default" is-open="status1.open">
-                    <uib-accordion-heading>
-                        <h4 class="panel-title">
-                            <a><span class="glyphicon glyphicon-th"></span>Modules</a>
-                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status1.open, 'glyphicon-chevron-right': !status1.open}"></i>
-                        </h4>
-                    </uib-accordion-heading>
-                    <uib-accordion-body >
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                        <span class="fa fa-bell text-info"></span><a ui-sref="declaration-user-new"> {{'settings.menu.alerts' | translate}}</a>
                                     </td>
                                 </tr>
                             </table>
@@ -130,7 +90,7 @@
                 <div uib-accordion-group class="panel panel-default" is-open="status3.open">
                     <uib-accordion-heading>
                         <h4 class="panel-title">
-                            <a><span class="glyphicon glyphicon-file"></span>Reports</a>
+                            <a><span class="glyphicon glyphicon-file"></span>{{'settings.menu.messages' | translate}}</a>
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status3.open, 'glyphicon-chevron-right': !status3.open}"></i>
                         </h4>
                     </uib-accordion-heading>

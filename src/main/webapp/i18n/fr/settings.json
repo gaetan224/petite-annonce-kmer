@@ -8,9 +8,10 @@
             "sessions":"Sessions Actives",
             "effacer":"Supprimer le compte",
             "logout":"Déconnexion",
-            "":"",
-            "":"",
-            "":""
+            "content":"Contenu",
+            "myDeclarations":"Mes annonces",
+            "addDeclaration":"Ajouter une annonce",
+            "alerts":"Mes alertes"
         },
 
         "title": "Profil de l'utilisateur [{{username}}]",

@@ -7,11 +7,11 @@
 
     angular
         .module('petiteAnnonceKmerApp')
-        .controller('DeclarationUserDialogController', DeclarationUserDialogController);
+        .controller('DeclarationUserController', DeclarationUserController);
 
-    DeclarationUserDialogController.$inject = ['$translate','$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DeclarationUser', 'User', 'Localisation', 'Image','Country','Region', 'Auth', 'LoginService', 'Principal'];
+    DeclarationUserController.$inject = ['$translate','$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DeclarationUser', 'User', 'Localisation', 'Image','Country','Region', 'Auth', 'LoginService', 'Principal'];
 
-    function DeclarationUserDialogController ($translate,$timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DeclarationUser, User, Localisation, Image,Country,Region, Auth, LoginService,Principal) {
+    function DeclarationUserController ($translate,$timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DeclarationUser, User, Localisation, Image,Country,Region, Auth, LoginService,Principal) {
         var vm = this;
 
         vm.declaration = entity;
