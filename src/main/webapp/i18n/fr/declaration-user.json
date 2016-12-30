@@ -15,7 +15,10 @@
         "success":"<strong> c'est presque terminer veuillez juste indiquez un mot de passe !  il vous sera util pour vous connecter</strong>",
         "password":"Mot de passe",
         "confirmpassword":"Confirmation du mot de passe",
-        "declarationSaved":" Votre annonce à été enregistré et sera mise en ligne dans les prochaines 6 heures"
+        "declarationSaved":" Votre annonce à été enregistré et sera mise en ligne dans les prochaines 6 heures",
+        "declarationDetail":{
+            "title":"Annonce detail"
+        }
     }
 
 }

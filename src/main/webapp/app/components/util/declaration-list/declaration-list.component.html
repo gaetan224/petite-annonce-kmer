@@ -23,13 +23,15 @@
         <div class="col-md-offset-1 col-md-10 col-md-offset-1">
 
             <a class="list-group-item media"
-               ng-repeat="declaration in vm.declarations track by declaration.id">
+               href
+               data-ng-click="vm.viewDeclaration(declaration)"
+               data-ng-repeat="declaration in vm.declarations track by declaration.id">
 
-                <div class="media-left" ng-if="declaration.images[0].content" ng-click="vm.openFile(declaration.images[0].contentContentType, declaration.images[0].content)">
+                <div class="media-left" data-ng-if="declaration.images[0].content" data-ng-click="vm.openFile(declaration.images[0].contentContentType, declaration.images[0].content)">
                     <img
                         class="media-object"
                         data-ng-src="{{'data:' + declaration.miniature.contentContentType + ';base64,' + declaration.miniature.content}}"
-                        ngf-size="{width: 150, height: 150, quality: 0.9}"/>
+                        data-ngf-size="{width: 150, height: 150, quality: 0.9}"/>
                 </div>
                 <div class="media-body">
                     <h3 class="media-heading">{{declaration.title}}</h3>

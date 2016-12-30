@@ -13,24 +13,26 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="icon" href="content/images/pak.png">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
 </head>
-<body ng-app="petiteAnnonceKmerApp" ng-strict-di>
+<body data-ng-app="petiteAnnonceKmerApp" data-ng-strict-di>
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <page-ribbon></page-ribbon>
-    <div ui-view="navbar" ng-cloak></div>
+    <div data-ui-view="navbar" ng-cloak></div>
     <div class="container">
-        <div class="well" ui-view="content">
+        <div class="well" data-ui-view="content">
             <!-- Angular views -->
         </div>
 
         <div class="footer" ng-cloak>
+            <span class="navbar-version">v{{VERSION}}</span>
             <p data-translate="footer">This is your footer</p>
         </div>
     </div>
@@ -148,6 +150,7 @@
     <script src="app/components/form/minbytes.directive.js"></script>
     <script src="app/components/form/maxbytes.directive.js"></script>
     <script src="app/components/declaration-user/declaration-user-service.js"></script>
+    <script src="app/components/declaration-user/declaration-user-detail.controller.js"></script>
     <script src="app/components/declaration-user/declaration-user.controller.js"></script>
     <script src="app/components/alert/alert-error.directive.js"></script>
     <script src="app/components/alert/alert.service.js"></script>

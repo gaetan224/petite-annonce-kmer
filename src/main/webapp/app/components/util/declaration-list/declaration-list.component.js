@@ -11,7 +11,7 @@
         controller: DeclarationListController,
         controllerAs: 'vm',
         bindings: {
-            declarations: '<', // declarations to be displayed
+            declarations: '<' // declarations to be displayed
         }
     };
 
@@ -22,7 +22,7 @@
 
 
     // injection in controller
-    DeclarationListController.$inject = ['AlertService','$uibModal','Image','DataUtils'];
+    DeclarationListController.$inject = ['DeclarationUserService','Image','DataUtils'];
 
 
     /**
@@ -32,7 +32,7 @@
      *
      * @constructor
      */
-    function DeclarationListController(AlertService,$uibModal,Image,DataUtils) {
+    function DeclarationListController(DeclarationUserService,Image,DataUtils) {
         var vm = this;
 
         /** Initialisation data controller. */
@@ -43,6 +43,7 @@
 
         /** onChanges bindings. */
         vm.$onChanges = onChanges;
+        vm.viewDeclaration = viewDeclaration;
 
         vm.settings = {
             width: 50,
@@ -68,15 +69,8 @@
         }
 
 
-        function viewDeclaration() {
-            $uibModal.open({
-                animation: true,
-                component: 'admissionRequestForm', // component support since UI Boostrap 2.1.0
-                size: 'lg',
-                resolve: {
-                    admissionRequest: vm.admissionRequest
-                }
-            });
+        function viewDeclaration(declaration) {
+            DeclarationUserService.openDetail(declaration);
         }
 
     }

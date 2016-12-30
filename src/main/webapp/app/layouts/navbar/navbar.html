@@ -1,28 +1,27 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
+            <button type="button" class="navbar-toggle" data-ng-click="vm.toggleNavbar()">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png"/>
-                <span data-translate="global.title">Petite Annonce Kmer</span> <span class="navbar-version">v{{VERSION}}</span>
+            <a class="navbar-brand logo" href data-ng-click="vm.collapseNavbar()">
+                <img class="logo-img" src="content/images/petite-annonce-kmer-logo.png"/>
             </a>
         </div>
-        <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
+        <div class="navbar-collapse" data-uib-collapse="vm.isNavbarCollapsed" data-ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active">
-                    <a ui-sref="home" ng-click="vm.collapseNavbar()">
+                <li data-ui-sref-active="active">
+                    <a data-ui-sref="home" data-ng-click="vm.collapseNavbar()">
                         <span class="glyphicon glyphicon-home"></span>
                         <span class="hidden-sm" data-translate="global.menu.home">Home</span>
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer" has-authority="ROLE_ADMIN">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
+                <li data-ng-class="{active: vm.$state.includes('entity')}" data-ng-switch-when="true" data-uib-dropdown class="dropdown pointer" data-has-authority="ROLE_ADMIN">
+                    <a class="dropdown-toggle" data-uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <span class="glyphicon glyphicon-th-list"></span>
                             <span class="hidden-sm" data-translate="global.menu.entities.main">
@@ -31,21 +30,21 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
-                            <a ui-sref="declaration" ng-click="vm.collapseNavbar()">
+                    <ul class="dropdown-menu" data-uib-dropdown-menu>
+                        <li data-ui-sref-active="active">
+                            <a data-ui-sref="declaration" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span data-translate="global.menu.entities.declaration">Declaration</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="image" ng-click="vm.collapseNavbar()">
+                        <li data-ui-sref-active="active">
+                            <a data-ui-sref="image" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span data-translate="global.menu.entities.image">Image</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="localisation" ng-click="vm.collapseNavbar()">
+                        <li data-ui-sref-active="active">
+                            <a data-ui-sref="localisation" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span data-translate="global.menu.entities.localisation">Localisation</span>
                             </a>
@@ -53,8 +52,8 @@
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                     </ul>
                 </li>
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
+                <li data-ng-class="{active: vm.$state.includes('account')}" data-uib-dropdown class="dropdown pointer">
+                    <a class="dropdown-toggle" data-uib-dropdown-toggle href="" id="account-menu">
                         <span>
                             <span class="glyphicon glyphicon-user"></span>
                             <span class="hidden-sm" data-translate="global.menu.account.main">
@@ -63,46 +62,46 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="settings" ng-click="vm.collapseNavbar()">
+                    <ul class="dropdown-menu" data-uib-dropdown-menu>
+                        <li data-ui-sref-active="active" data-ng-switch-when="true">
+                            <a data-ui-sref="settings" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-wrench"></span>&nbsp;
                                 <span data-translate="global.menu.account.settings">Settings</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="password" ng-click="vm.collapseNavbar()">
+                        <li data-ui-sref-active="active" data-ng-switch-when="true">
+                            <a data-ui-sref="password" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-lock"></span>&nbsp;
                                 <span data-translate="global.menu.account.password">Password</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="sessions" ng-click="vm.collapseNavbar()">
+                        <li data-ui-sref-active="active" data-ng-switch-when="true">
+                            <a data-ui-sref="sessions" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-cloud"></span>&nbsp;
                                 <span data-translate="global.menu.account.sessions">Sessions</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a href="" ng-click="vm.logout()" id="logout">
+                        <li data-ui-sref-active="active" data-ng-switch-when="true">
+                            <a href="" data-ng-click="vm.logout()" id="logout">
                                 <span class="glyphicon glyphicon-log-out"></span>&nbsp;
                                 <span data-translate="global.menu.account.logout">Sign out</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a href="" ng-click="vm.login()" id="login">
+                        <li data-ui-sref-active="active" data-ng-switch-when="false">
+                            <a href="" data-ng-click="vm.login()" id="login">
                                 <span class="glyphicon glyphicon-log-in"></span>&nbsp;
                                 <span data-translate="global.menu.account.login">Sign in</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a ui-sref="register" ng-click="vm.collapseNavbar()">
+                        <li data-ui-sref-active="active" data-ng-switch-when="false">
+                            <a data-ui-sref="register" data-ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
                                 <span data-translate="global.menu.account.register">Register</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
+                <li data-ng-class="{active: vm.$state.includes('admin')}"  data-ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
