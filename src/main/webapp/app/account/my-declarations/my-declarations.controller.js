@@ -1,33 +1,38 @@
+/**
+ * Created by admin on 29/12/2016.
+ */
 (function() {
     'use strict';
 
     angular
         .module('petiteAnnonceKmerApp')
-        .controller('DeclarationController', DeclarationController);
+        .controller('MyDeclarationsController', MyDeclarationsController);
 
-    DeclarationController.$inject = ['$scope', '$state', 'Declaration', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    MyDeclarationsController.$inject = ['AlertService','ParseLinks','Declaration', 'paginationConstants', 'pagingParams','$state'];
 
-    function DeclarationController ($scope, $state, Declaration, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function MyDeclarationsController (AlertService, ParseLinks,Declaration,paginationConstants,pagingParams,$state) {
         var vm = this;
+        vm.declarations = [];
+
+        vm.loadAll = loadAll;
+
 
         vm.loadPage = loadPage;
+        vm.transition = transition;
+
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
-        vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
-        loadAll();
+        vm.loadAll();
 
         function loadAll () {
-
-
-
             Declaration.query({
-                page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
-                sort: sort()
-            }
-            , onSuccess, onError);
+                    page: pagingParams.page - 1,
+                    size: vm.itemsPerPage,
+                    sort: sort()
+                }
+                , onSuccess, onError);
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {

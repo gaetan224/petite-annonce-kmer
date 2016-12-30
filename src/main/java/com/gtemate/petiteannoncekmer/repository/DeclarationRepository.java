@@ -15,7 +15,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface DeclarationRepository extends JpaRepository<Declaration,Long>,JpaSpecificationExecutor<Declaration> {
 
-    @Query("select declaration from Declaration declaration where declaration.owner.login = ?#{principal.username}")
+    @Query("select declaration from Declaration declaration where declaration.owner.login = ?#{principal.username} and" +
+        " declaration.isPublished = true")
     Page<Declaration> findByOwnerIsCurrentUser(Pageable pageable);
 
     @Query("select declaration from Declaration declaration where " +

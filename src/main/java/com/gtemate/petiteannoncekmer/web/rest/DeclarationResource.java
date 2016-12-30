@@ -97,9 +97,8 @@ public class DeclarationResource  {
      */
     @GetMapping("/declarations")
     @Timed
-    public ResponseEntity<List<Declaration>> getAllDeclarations(Pageable pageable,@RequestParam("IdRegion") String IdRegion )
+    public ResponseEntity<List<Declaration>> getAllDeclarations(Pageable pageable)
         throws URISyntaxException {
-        log.debug("REST request to get a page of Declarations {} ", IdRegion);
         Page<Declaration> page = null;
         if(userService.isCurrentUserAdmin()){
             page = declarationService.findAll(pageable);
@@ -128,7 +127,7 @@ public class DeclarationResource  {
         log.debug("REST request to get a page of Declarations {} ", IdRegion);
         Page<Declaration> page = declarationService.getAllDeclarationsByRegion(pageable,IdRegion);
 
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations-byregion");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

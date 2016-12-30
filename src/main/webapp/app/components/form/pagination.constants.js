@@ -4,6 +4,6 @@
     angular
         .module('petiteAnnonceKmerApp')
         .constant('paginationConstants', {
-            'itemsPerPage': 20
+            'itemsPerPage': 3
         });
 })();

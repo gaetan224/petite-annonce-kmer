@@ -55,7 +55,6 @@
          */
         function initDataController() {
                     angular.forEach(vm.declarations, function (declaration) {
-                        console.log(declaration);
                         declaration.images = Image.getByDeclaration(declaration);
                     });
         }
