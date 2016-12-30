@@ -33,6 +33,7 @@ import java.util.*;
 /**
  * REST controller for managing the current user's account.
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 @RestController
 @RequestMapping("/api")
 public class AccountResource {
@@ -215,11 +216,9 @@ public class AccountResource {
     @Timed
     public void invalidateSession(@PathVariable String series) throws UnsupportedEncodingException {
         String decodedSeries = URLDecoder.decode(series, "UTF-8");
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
-            persistentTokenRepository.findByUser(u).stream()
-                .filter(persistentToken -> StringUtils.equals(persistentToken.getSeries(), decodedSeries))
-                .findAny().ifPresent(t -> persistentTokenRepository.delete(decodedSeries));
-        });
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> persistentTokenRepository.findByUser(u).stream()
+            .filter(persistentToken -> StringUtils.equals(persistentToken.getSeries(), decodedSeries))
+            .findAny().ifPresent(t -> persistentTokenRepository.delete(decodedSeries)));
     }
 
     /**

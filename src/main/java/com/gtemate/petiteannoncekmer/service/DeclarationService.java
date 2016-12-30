@@ -106,7 +106,7 @@ public class DeclarationService extends BaseEntityService<Declaration> {
             // save  image
             image = imageService.createImageFromMultipartFile(multipartFile);
             // attach image to declaration
-            image.ifPresent(im -> declaration.addImages(im));
+            image.ifPresent(declaration::addImages);
         }
 
         localisationService.save(localisation);

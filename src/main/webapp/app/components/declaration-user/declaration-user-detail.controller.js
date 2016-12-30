@@ -10,14 +10,19 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationUserDetailController', DeclarationUserDetailController);
 
-    DeclarationUserDetailController.$inject = ['declaration','$uibModalInstance'];
+    DeclarationUserDetailController.$inject = ['declaration','$uibModalInstance','DataUtils'];
 
-    function DeclarationUserDetailController (declaration, $uibModalInstance) {
+    function DeclarationUserDetailController (declaration, $uibModalInstance,DataUtils) {
         var vm = this;
 
         vm.clear = clear;
+        vm.declaration = declaration;
 
-        console.log(declaration);
+        vm.openFile = DataUtils.openFile;
+        vm.byteSize = DataUtils.byteSize;
+
+        vm.noWrapSlides = false;
+        vm.isCollapsed = true;
 
         function clear () {
             $uibModalInstance.dismiss('cancel');

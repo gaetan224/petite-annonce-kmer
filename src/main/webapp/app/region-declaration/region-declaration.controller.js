@@ -24,7 +24,6 @@
         vm.loadAll();
 
         function loadAll() {
-            console.log("ddd");
             Declaration.getAllDeclarationsByRegion({
                     IdRegion:vm.regionId,
                         page: pagingParams.page - 1,

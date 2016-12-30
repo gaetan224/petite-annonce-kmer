@@ -530,3 +530,18 @@ label {
 .pophelp {
    width:300px;
 }
+
+.degrade-rouge{
+    background-image:
+        linear-gradient(
+            to right,
+            #ecdbff,
+            white 60%
+        );
+}
+
+
+.no-border{
+    border-style: none; !important;
+    background-color:transparent;
+}

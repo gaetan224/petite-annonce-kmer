@@ -45,10 +45,7 @@
         vm.$onChanges = onChanges;
         vm.viewDeclaration = viewDeclaration;
 
-        vm.settings = {
-            width: 50,
-            height: 50
-        };
+        vm.settings = {width: 150, height: 150, quality: 0.9};
 
 
         /**

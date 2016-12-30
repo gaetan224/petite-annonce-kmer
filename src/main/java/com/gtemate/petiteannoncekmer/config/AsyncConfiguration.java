@@ -15,6 +15,8 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
+
+@SuppressWarnings("CdiInjectionPointsInspection")
 @Configuration
 @EnableAsync
 @EnableScheduling

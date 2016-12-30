@@ -14,6 +14,7 @@ import javax.inject.Inject;
 /**
  * Created by admin on 10/12/2016.
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 @Service
 @Transactional
 public class CountryService extends BaseEntityService<Country> {

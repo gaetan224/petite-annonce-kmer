@@ -13,7 +13,7 @@
             parent: 'app',
             url: '/region-declaration/:regionName/:regionId?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'petiteAnnonceKmerApp.localisation.home.title'
             },
             views: {

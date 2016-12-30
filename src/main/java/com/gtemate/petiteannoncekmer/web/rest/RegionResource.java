@@ -42,7 +42,7 @@ public class RegionResource {
     public ResponseEntity<List<Region>> getAllRegion() {
         log.debug("REST request to get all Region");
 
-        return new ResponseEntity<List<Region>>(
+        return new ResponseEntity<>(
             regionService.findAll(),
             HttpStatus.OK);
     }
@@ -57,7 +57,7 @@ public class RegionResource {
     @Timed
     public ResponseEntity<List<Region>> getByCountry(@PathVariable Long countryId) {
         log.debug("REST request to get all Region for a countryId");
-        return new ResponseEntity<List<Region>>(
+        return new ResponseEntity<>(
             regionService.getByCountry(countryId),
             HttpStatus.OK);
     }
@@ -71,7 +71,7 @@ public class RegionResource {
     @Timed
     public ResponseEntity<Region> get(@PathVariable Long id) {
         log.debug("REST request to get all Region");
-        return new ResponseEntity<Region>(
+        return new ResponseEntity<>(
             regionService.findOne(id),
             HttpStatus.OK);
     }

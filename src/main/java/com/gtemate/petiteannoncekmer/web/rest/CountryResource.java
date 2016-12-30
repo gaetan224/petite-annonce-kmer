@@ -22,6 +22,7 @@ import java.util.List;
 /**
  * REST controller for managing country.
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 @RestController
 @RequestMapping("/api")
 public class CountryResource {
@@ -41,7 +42,7 @@ public class CountryResource {
     public ResponseEntity<List<Country>> getAllCountry() {
         log.debug("REST request to get all Country");
 
-        return new ResponseEntity<List<Country>>(
+        return new ResponseEntity<>(
             countryService.findAll(),
             HttpStatus.OK);
     }
@@ -55,7 +56,7 @@ public class CountryResource {
     @Timed
     public ResponseEntity<Country> get(@PathVariable Long id) {
         log.debug("REST request to get all Country");
-        return new ResponseEntity<Country>(
+        return new ResponseEntity<>(
             countryService.findOne(id),
             HttpStatus.OK);
     }

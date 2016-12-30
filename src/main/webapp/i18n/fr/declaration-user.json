@@ -17,7 +17,11 @@
         "confirmpassword":"Confirmation du mot de passe",
         "declarationSaved":" Votre annonce à été enregistré et sera mise en ligne dans les prochaines 6 heures",
         "declarationDetail":{
-            "title":"Annonce detail"
+        "price":"Prix",
+        "city":"Ville",
+        "description":"Description: ",
+        "phoneNumber":"Téléphone: ",
+        "email":"Email: "
         }
     }
 

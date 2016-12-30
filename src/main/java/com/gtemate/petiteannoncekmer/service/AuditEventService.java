@@ -18,6 +18,7 @@ import java.util.Optional;
  * This is the default implementation to support SpringBoot Actuator AuditEventRepository
  * </p>
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 @Service
 @Transactional
 public class AuditEventService {

@@ -12,6 +12,7 @@ import javax.annotation.PreDestroy;
 import javax.cache.CacheManager;
 import javax.inject.Inject;
 
+@SuppressWarnings("CdiInjectionPointsInspection")
 @Configuration
 @EnableCaching
 @AutoConfigureAfter(value = { MetricsConfiguration.class })

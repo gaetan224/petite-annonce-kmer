@@ -31,7 +31,7 @@ public class JCacheGaugeSet implements MetricSet {
     public Map<String, Metric> getMetrics() {
         Set<ObjectInstance> objectInstances = getCacheMBeans();
 
-        Map<String, Metric> gauges = new HashMap<String, Metric>();
+        Map<String, Metric> gauges = new HashMap<>();
 
         List<String> availableStatsNames = retrieveStatsNames();
 

@@ -28,6 +28,7 @@ import liquibase.integration.spring.SpringLiquibase;
  *         <li>In production, this can help your application run on platforms like Heroku, where it must start/restart very quickly</li>
  *     </ul>
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 public class AsyncSpringLiquibase extends SpringLiquibase {
 
     // named "logger" because there is already a field called "log" in "SpringLiquibase"
