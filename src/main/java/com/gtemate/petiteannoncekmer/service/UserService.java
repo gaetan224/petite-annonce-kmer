@@ -136,11 +136,12 @@ public class UserService extends BaseEntityService<User>{
         return user;
     }
 
-    public void updateUser(String firstName, String lastName, String email, String langKey) {
+    public void updateUser(String firstName, String lastName, String email,String phoneNumber, String langKey) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
+            user.setPhoneNumber(phoneNumber);
             user.setLangKey(langKey);
             log.debug("Changed Information for User: {}", user);
         });

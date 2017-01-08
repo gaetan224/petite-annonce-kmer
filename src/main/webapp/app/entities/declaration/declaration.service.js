@@ -31,6 +31,17 @@
                 isArray: true
             },
 
+            'countAllPerRegion': {
+                url:'api/declarations-byregion-count/:IdRegion',
+                method: 'GET',
+                transformResponse: function(data, headers){
+                    var response = {}
+                    response.data = data;
+                    response.headers = headers();
+                    return response;
+                }
+            },
+
             'update': { method:'PUT' }
         });
     }

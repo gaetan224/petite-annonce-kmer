@@ -1,6 +1,6 @@
 package com.gtemate.petiteannoncekmer.service;
 
-import com.gtemate.petiteannoncekmer.domain.Declaration;
+import com.gtemate.petiteannoncekmer.domain.*;
 import com.gtemate.petiteannoncekmer.domain.Image;
 import com.gtemate.petiteannoncekmer.domain.Localisation;
 import com.gtemate.petiteannoncekmer.domain.User;
@@ -9,13 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +59,7 @@ public class DeclarationService extends BaseEntityService<Declaration> {
      *
      *  @return the list of entities
      */
-    @Transactional(readOnly = true)
+
     public Page<Declaration> findByUserIsCurrentUser(Pageable pageable) {
         log.debug("Request to get all Declarations");
         Page<Declaration>  result = declarationRepository.findByOwnerIsCurrentUser(pageable);
@@ -67,21 +71,37 @@ public class DeclarationService extends BaseEntityService<Declaration> {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true)
+
     public Page<Declaration> findAll(Pageable pageable) {
         log.debug("Request to get all Declarations");
         Page<Declaration> result = declarationRepository.findAll(pageable);
         return result;
     }
 
-    @Transactional(readOnly = true)
-    public Page<Declaration> getAllDeclarationsByRegion(Pageable pageable,String IdRegion) {
+
+    /**
+     *  Get number per region.
+     *
+     *  @param IdRegion code of region
+     *  @return number of declaration
+     */
+    public Long countAllPerRegion(String IdRegion) {
         log.debug("Request to get all Declarations");
-        Page<Declaration> result = declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion);
+       Long result = declarationRepository.count((root, criteriaQuery, criteriaBuilder) ->
+           criteriaBuilder.equal(root.get(Declaration_.localisation)
+               .get(Localisation_.region)
+               .get(Region_.code),IdRegion));
         return result;
     }
 
-    @Transactional
+
+    public Page<Declaration> getAllDeclarationsByRegion(Pageable pageable,String IdRegion) {
+        log.debug("Request to get all Declarations By Region");
+        return declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion);
+    }
+
+
+
     public Declaration saveDeclarationUser(Declaration declaration,
                                     User user,
                                     Localisation localisation,

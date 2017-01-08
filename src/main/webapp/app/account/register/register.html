@@ -72,6 +72,32 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="phoneNumber" data-translate="global.form.phoneNumber">phoneNumber</label>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="{{'global.form.phoneNumber.placeholder' | translate}}"
+                           ng-model="vm.registerAccount.phoneNumber" ng-minlength=5 ng-maxlength="30" required maxlength="30">
+                    <div ng-show="form.phoneNumber.$dirty && form.phoneNumber.$invalid">
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.required" data-translate="global.messages.validate.phoneNumber.required">
+                            Your e-mail is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.email" data-translate="global.messages.validate.phoneNumber.invalid">
+                            Your e-mail is invalid.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.minlength" data-translate="global.messages.validate.phoneNumber.minlength">
+                            Your e-mail is required to be at least 5 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.maxlength" data-translate="global.messages.validate.phoneNumber.maxlength">
+                            Your e-mail cannot be longer than 100 characters.
+                        </p>
+                    </div>
+                </div>
+
+
                 <div class="form-group">
                     <label class="control-label" for="password" data-translate="global.form.newpassword">New password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"

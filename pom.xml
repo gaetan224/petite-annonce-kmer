@@ -68,6 +68,7 @@
         <!-- These remain empty unless the corresponding profile is active -->
         <profile.no-liquibase></profile.no-liquibase>
         <profile.swagger></profile.swagger>
+        <hibernate-jpamodelgen.version>1.2.0.Final</hibernate-jpamodelgen.version>
     </properties>
 
     <dependencies>
@@ -113,6 +114,14 @@
             <artifactId>metrics-servlet</artifactId>
             <version>${dropwizard-metrics.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>${hibernate-jpamodelgen.version}</version>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-servlets</artifactId>
@@ -298,6 +307,14 @@
             <artifactId>mapstruct-jdk8</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
@@ -446,15 +463,51 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <debug>true</debug>
+                    <debuglevel>lines,vars,source</debuglevel>
+                    <generatedSourcesDirectory>src/main/generated</generatedSourcesDirectory>
+                    <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>2.2.4</version>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${mapstruct.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <defaultOutputDirectory>src/main/generated</defaultOutputDirectory>
+                    <processors>
+                        <processor>org.mapstruct.ap.MappingProcessor</processor>
+                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                    </processors>
+                    <options>
+                        <mapstruct.suppressGeneratorTimestamp>true</mapstruct.suppressGeneratorTimestamp>
+                        <mapstruct.defaultComponentModel>spring</mapstruct.defaultComponentModel>
+                    </options>
+                </configuration>
+            </plugin>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -948,20 +1001,6 @@
                 <spring.profiles.active>dev,swagger</spring.profiles.active>
             </properties>
         </profile>
-        <profile>
-            <!--
-                Profile for applying IDE-specific configuration.
-                At the moment it only configures MapStruct, which you need when working
-                with DTOs.
-            -->
-            <id>IDE</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.mapstruct</groupId>
-                    <artifactId>mapstruct-processor</artifactId>
-                    <version>${mapstruct.version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
+
     </profiles>
 </project>

@@ -198,6 +198,32 @@
                         </p>
                     </div>
                 </div>
+
+
+                <div class="form-group">
+                    <label class="control-label" for="phoneNumber" data-translate="global.form.phoneNumber">phoneNumber</label>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="{{'global.form.phoneNumber.placeholder' | translate}}"
+                           ng-model="vm.settingsAccount.phoneNumber" ng-minlength=5 ng-maxlength="30" required maxlength="30">
+                    <div ng-show="form.phoneNumber.$dirty && form.phoneNumber.$invalid">
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.required" data-translate="global.messages.validate.phoneNumber.required">
+                            Your phoneNumber is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.email" data-translate="global.messages.validate.phoneNumber.invalid">
+                            Your phoneNumber is invalid.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.minlength" data-translate="global.messages.validate.phoneNumber.minlength">
+                            Your phoneNumber is required to be at least 5 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.phoneNumber.$error.maxlength" data-translate="global.messages.validate.phoneNumber.maxlength">
+                            Your phoneNumber cannot be longer than 30 characters.
+                        </p>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="langKey" data-translate="settings.form.language">Language</label>
                     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>

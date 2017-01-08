@@ -22,6 +22,7 @@ var handleErrors = require('./gulp/handle-errors'),
     util = require('./gulp/utils'),
     copy = require('./gulp/copy'),
     inject = require('./gulp/inject'),
+    injectExt = require('./gulp/inject-external'),
     build = require('./gulp/build');
 
 var config = require('./gulp/config');
@@ -72,6 +73,8 @@ gulp.task('inject', function() {
 gulp.task('inject:dep', ['inject:test', 'inject:vendor']);
 
 gulp.task('inject:app', inject.app);
+
+gulp.task('inject:appE', injectExt.app);
 
 gulp.task('inject:vendor', inject.vendor);
 
@@ -164,7 +167,7 @@ gulp.task('install', function () {
 gulp.task('serve', ['install'], serve);
 
 gulp.task('build', ['clean'], function (cb) {
-    runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', cb);
+    runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:appE', 'inject:troubleshoot', 'assets:prod', cb);
 });
 
 gulp.task('default', ['serve']);

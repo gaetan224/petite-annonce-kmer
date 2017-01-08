@@ -53,6 +53,7 @@ public class UserResourceIntTest {
         user.setEmail("test@test.com");
         user.setFirstName("test");
         user.setLastName("test");
+        user.setPhoneNumber("99999999");
         user.setLangKey("en");
         em.persist(user);
         em.flush();

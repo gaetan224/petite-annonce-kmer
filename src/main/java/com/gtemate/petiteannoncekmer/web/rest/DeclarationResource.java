@@ -4,13 +4,10 @@ import com.codahale.metrics.annotation.Timed;
 import com.gtemate.petiteannoncekmer.domain.Declaration;
 import com.gtemate.petiteannoncekmer.domain.Localisation;
 import com.gtemate.petiteannoncekmer.domain.User;
-import com.gtemate.petiteannoncekmer.security.AuthoritiesConstants;
 import com.gtemate.petiteannoncekmer.service.DeclarationService;
 import com.gtemate.petiteannoncekmer.service.UserService;
 import com.gtemate.petiteannoncekmer.web.rest.util.HeaderUtil;
 import com.gtemate.petiteannoncekmer.web.rest.util.PaginationUtil;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,11 +16,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -114,7 +111,7 @@ public class DeclarationResource  {
 
 
     /**
-     * GET  /declarations : get all the declarations.
+     * GET  /declarations : get all the declarations by region.
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of declarations in body
@@ -130,6 +127,27 @@ public class DeclarationResource  {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations-byregion");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /**
+     * GET  /declarations/:IdRegion : get number of declarations per region "IdRegion" region.
+     *
+     * @param IdRegion the code of the region
+     * @return the ResponseEntity with status 200 (OK) and with body number, or with status 404 (Not Found)
+     */
+    @GetMapping("/declarations-byregion-count/{IdRegion}")
+    @Timed
+    public ResponseEntity<?> countAllPerRegion(@PathVariable String IdRegion, HttpServletResponse response) {
+        log.debug("REST request to get Declarations count by region : {}", IdRegion);
+        Long countDeclarations = declarationService.countAllPerRegion(IdRegion);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Count", "" + countDeclarations);
+        headers.add("X-Region-Code", "" + IdRegion);
+        return new ResponseEntity<>(
+            "",
+            headers,
+            HttpStatus.OK);
+    }
+
 
     /**
      * GET  /declarations/:id : get the "id" declaration.
@@ -148,6 +166,7 @@ public class DeclarationResource  {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
 
     /**
      * DELETE  /declarations/:id : delete the "id" declaration.

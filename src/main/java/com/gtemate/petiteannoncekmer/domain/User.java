@@ -65,6 +65,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String langKey;
 
     @Size(min = 5, max = 30)
+    @NotNull
     @Column(name = "phone_number", length = 30)
     private String phoneNumber;
 
