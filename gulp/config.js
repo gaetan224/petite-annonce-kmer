@@ -9,6 +9,7 @@ module.exports = {
     tmp: 'target/tmp',
     revManifest: 'target/tmp/rev-manifest.json',
     port: 9000,
+    googlePlaceKey:'AIzaSyB1GGXx_zaVSrIZYREanb_ou3mdbaMM5mE',
     apiPort: 8080,
     liveReloadPort: 35729,
     uri: 'http://localhost:',

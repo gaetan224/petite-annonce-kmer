@@ -742,7 +742,7 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
-             </plugins>
+            </plugins>
         </pluginManagement>
     </build>
     <profiles>
@@ -853,6 +853,9 @@
                                     <arguments>build --no-notification</arguments>
                                 </configuration>
                             </execution>
+
+
+                            <!--
                             <execution>
                                 <id>gulp test</id>
                                 <goals>
@@ -860,9 +863,12 @@
                                 </goals>
                                 <phase>test</phase>
                                 <configuration>
-                                    <arguments>test --no-notification</arguments>
+
+                                    <arguments>test double hihpen no-notification</arguments>
                                 </configuration>
                             </execution>
+                            -->
+
                         </executions>
                     </plugin>
                     <plugin>

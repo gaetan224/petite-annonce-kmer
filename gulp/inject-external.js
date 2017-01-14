@@ -15,7 +15,7 @@ module.exports = {
 
 function app() {
     var stream = gulp.src(config.app + 'index.html')
-        .pipe(inject.after('<!-- bower:js -->', '\n\t<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>'))
+        .pipe(inject.after('<!-- bower:js -->', '\n\t<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key='+config.googlePlaceKey+'"></script>'))
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(gulp.dest(config.app));
 

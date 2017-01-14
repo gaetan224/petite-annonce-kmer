@@ -65,16 +65,10 @@
 
                 var data = [];
                 angular.forEach(results, function (value) {
-
-
                         data.push({
                             'hc-key':value.headers['x-region-code'],
                             'value':value.headers['x-total-count']
                         });
-
-                   // console.log();
-                    //console.log(value.headers['x-total-count']);
-
                 });
                 // Initiate the chart
                 $('#camerounmap').highcharts('Map',
