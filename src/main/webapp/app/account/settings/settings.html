@@ -27,12 +27,6 @@
                                     </td>
                                 </tr>
 
-
-                                <tr>
-                                    <td>
-                                        <a ui-sref="home" data-translate="settings.menu.messages">Notifications</a> <span class="label label-info">5</span>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td>
                                         <a ui-sref=".sessions" data-translate="settings.menu.sessions">Import/Export</a>
@@ -70,7 +64,8 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a ui-sref=".my-declarations">{{'settings.menu.myDeclarations' | translate}}</a>
+                                        <i class="fa fa-bars" aria-hidden="true"></i>
+                                        </span><a ui-sref=".my-declarations">{{'settings.menu.myDeclarations' | translate}}</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -99,22 +94,28 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <a >{{'settings.menu.newMessage' | translate}}</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-inbox" aria-hidden="true"></i>
+                                        <a >{{'settings.menu.receivedMessages' | translate}}</a>
+                                        <span class="label label-info">5</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a>{{'settings.menu.sentMessages' | translate}}</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                        <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                        <a >{{'settings.menu.draftMessages' | translate}}</a>
                                     </td>
                                 </tr>
                             </table>

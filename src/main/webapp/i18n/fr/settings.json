@@ -11,7 +11,11 @@
             "content":"Contenu",
             "myDeclarations":"Mes annonces",
             "addDeclaration":"Ajouter une annonce",
-            "alerts":"Mes alertes"
+            "alerts":"Mes alertes",
+            "draftMessages":"Brouillon",
+            "sentMessages":"Messages envoyés",
+            "receivedMessages":"Boite de réception",
+            "newMessage":"Nouveau message"
         },
 
         "title": "Profil de l'utilisateur [{{username}}]",
