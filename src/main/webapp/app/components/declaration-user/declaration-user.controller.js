@@ -12,7 +12,7 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationUserController', DeclarationUserController);
 
-    DeclarationUserController.$inject = ['$translate','$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DeclarationUser', 'User', 'Localisation', 'Image','Country','Region', 'Auth', 'LoginService', 'Principal'];
+    DeclarationUserController.$inject = ['$translate', '$scope', '$uibModalInstance', 'entity', 'DeclarationUser', 'User','Country','Region', 'Auth', 'LoginService', 'Principal'];
 
     function DeclarationUserController ($translate, $scope, $uibModalInstance, entity, DeclarationUser, User,Country,Region, Auth, LoginService,Principal) {
         var vm = this;
@@ -63,9 +63,9 @@
 
            User.loginExist({
                login:login
-           },function () {
+           },function (data) {
                vm.loginExist = true;
-           },function () {
+           },function (error) {
                vm.loginExist = false;
            });
        }
@@ -92,9 +92,9 @@
 
         vm.images = {};
 
-        vm.images.principal = {};
-        vm.images.image2 = {};
-        vm.images.image3 = {};
+        vm.images.principal = {}
+        vm.images.image2 = {}
+        vm.images.image3 = {}
         vm.hideUpload1 = false;
         vm.hideUpload2 = false;
         vm.hideUpload3 = false;
@@ -131,7 +131,7 @@
 
         }
 
-        function onSaveSuccess () {
+        function onSaveSuccess (data) {
             vm.generaleSave = true;
             if(vm.loginExist) {
                 LoginService.open();
@@ -153,7 +153,7 @@
         }
 
         function register () {
-            console.log("SAVE register");
+            console.log("SAVE register")
             if(!vm.isAuthenticated || !vm.loginExist) {
                 if (vm.registerAccount.password !== vm.confirmPassword) {
                     vm.doNotMatch = 'ERROR';
@@ -192,8 +192,8 @@
 
         function generalSave() {
             vm.isSave = true;
-            if(vm.isAuthenticated){
-                console.log("save auth");
+            if(vm.isAuthenticated || vm.loginExist){
+                console.log("save auth")
 
                 DeclarationUser.saveDeclarationUser(
                     vm.declaration,
