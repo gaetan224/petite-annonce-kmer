@@ -5,10 +5,13 @@
         .module('petiteAnnonceKmerApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance','isSaveDeclaration'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance,isSaveDeclaration) {
         var vm = this;
+
+        // flag test whether login is coming from new declaration
+        vm.isSaveDeclaration = isSaveDeclaration;
 
         vm.authenticationError = false;
         vm.cancel = cancel;
@@ -47,6 +50,12 @@
                 }
 
                 $rootScope.$broadcast('authenticationSuccess');
+
+                // event to test whether login is coming from new declaration
+                if(vm.isSaveDeclaration){
+                    console.log("onLoginSuccessSaveStartedDeclarationCreation");
+                    $rootScope.$broadcast('onLoginSuccessSaveStartedDeclarationCreation');
+                }
 
                 // previousState was set in the authExpiredInterceptor before being redirected to login modal.
                 // since login is successful, go to stored previousState and clear previousState

@@ -12,19 +12,16 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationUserController', DeclarationUserController);
 
-    DeclarationUserController.$inject = ['$translate', '$scope', '$uibModalInstance', 'entity', 'DeclarationUser', 'User','Country','Region', 'Auth', 'LoginService', 'Principal'];
+    DeclarationUserController.$inject = ['$scope', '$uibModalInstance', 'entity', 'DeclarationUser', 'User','Country','Region', 'Auth', 'LoginService', 'Principal'];
 
-    function DeclarationUserController ($translate, $scope, $uibModalInstance, entity, DeclarationUser, User,Country,Region, Auth, LoginService,Principal) {
+    function DeclarationUserController ($scope, $uibModalInstance, entity, DeclarationUser, User,Country,Region, Auth, LoginService,Principal) {
         var vm = this;
 
         vm.declaration = entity;
         vm.clear = clear;
-        vm.save = save;
         vm.onSaveSuccess = onSaveSuccess;
         vm.onSaveError = onSaveError;
         vm.generalSave = generalSave;
-        vm.register = register;
-        vm.loginExists = loginExists;
 
 
         // register field
@@ -35,16 +32,15 @@
 
         vm.registerAccount = {};
         vm.success = null;
-        vm.isSave = false;
-        vm.generaleSave = false;
+        vm.isSave = false;;
         vm.currentAccount = null;
         vm.loginExist = false;
 
 
         vm.isAuthenticated = Principal.isAuthenticated();
-       if(vm.isAuthenticated){
+       /*if(vm.isAuthenticated){
            Principal.identity().then(function(account) {
-               vm.registerAccount = account;
+               vm.currentAccount = account;
            });
        }else {
            // verify that the typed login exist
@@ -54,6 +50,44 @@
                }
            });
        }
+        function register () {
+        console.log("SAVE register")
+        if(!vm.isAuthenticated || !vm.loginExist) {
+        if (vm.registerAccount.password !== vm.confirmPassword) {
+        vm.doNotMatch = 'ERROR';
+        }
+        else {
+        vm.registerAccount.langKey = $translate.use();
+        vm.doNotMatch = null;
+        vm.error = null;
+        vm.errorUserExists = null;
+        vm.errorEmailExists = null;
+
+        Auth.createAccount(vm.registerAccount).then(function () {
+        vm.success = 'OK';
+
+        DeclarationUser.saveDeclarationUser(
+        vm.declaration,
+        vm.localisation,
+        vm.registerAccount,
+        [vm.images.principal, vm.images.image2, vm.images.image3]
+        ).then(onSaveSuccess)
+        .catch(onSaveError)
+
+        }).catch(function (response) {
+        vm.success = null;
+        if (response.status === 400 && response.data === 'login already in use') {
+        vm.errorUserExists = 'ERROR';
+        } else if (response.status === 400 && response.data === 'e-mail address already in use') {
+        vm.errorEmailExists = 'ERROR';
+        } else {
+        vm.error = 'ERROR';
+        }
+        });
+        }
+        }
+        }
+       */
 
         /**
          * verify if login exists
@@ -115,6 +149,7 @@
             vm.hideUpload3 = true;
         }
 
+     // cameroun cities by google places options
         vm.citiesOptions = {
             country: 'cm',
             types: '(cities)'
@@ -127,21 +162,14 @@
             $uibModalInstance.dismiss('cancel');
         }
 
-        function save () {
-
-        }
 
         function onSaveSuccess (data) {
-            vm.generaleSave = true;
-            if(vm.loginExist) {
-                LoginService.open();
-            }
+            vm.isSave = true;
         }
 
         function onSaveError () {
             console.log("saved Error");
             vm.isSave = false;
-            vm.generaleSave = false;
         }
 
         function loadRegion() {
@@ -152,58 +180,30 @@
             }
         }
 
-        function register () {
-            console.log("SAVE register")
-            if(!vm.isAuthenticated || !vm.loginExist) {
-                if (vm.registerAccount.password !== vm.confirmPassword) {
-                    vm.doNotMatch = 'ERROR';
-                }
-                else {
-                    vm.registerAccount.langKey = $translate.use();
-                    vm.doNotMatch = null;
-                    vm.error = null;
-                    vm.errorUserExists = null;
-                    vm.errorEmailExists = null;
 
-                    Auth.createAccount(vm.registerAccount).then(function () {
-                        vm.success = 'OK';
-
-                        DeclarationUser.saveDeclarationUser(
-                            vm.declaration,
-                            vm.localisation,
-                            vm.registerAccount,
-                            [vm.images.principal, vm.images.image2, vm.images.image3]
-                        ).then(onSaveSuccess)
-                            .catch(onSaveError)
-
-                    }).catch(function (response) {
-                        vm.success = null;
-                        if (response.status === 400 && response.data === 'login already in use') {
-                            vm.errorUserExists = 'ERROR';
-                        } else if (response.status === 400 && response.data === 'e-mail address already in use') {
-                            vm.errorEmailExists = 'ERROR';
-                        } else {
-                            vm.error = 'ERROR';
-                        }
-                    });
-                }
-            }
-        }
 
         function generalSave() {
-            vm.isSave = true;
-            if(vm.isAuthenticated || vm.loginExist){
-                console.log("save auth")
 
+            vm.isAuthenticated = Principal.isAuthenticated();
+            if(vm.isAuthenticated){
+                console.log("generalSave");
                 DeclarationUser.saveDeclarationUser(
                     vm.declaration,
                     vm.localisation,
-                    vm.registerAccount,
                     [vm.images.principal,vm.images.image2,vm.images.image3]
                 ).then(onSaveSuccess)
                     .catch(onSaveError)
 
+            }else{
+                LoginService.open(true);
             }
         }
+
+        /* if login success save the declaration ie onLoginSuccessSaveStartedDeclarationCreation*/
+        $scope.$on("onLoginSuccessSaveStartedDeclarationCreation",function() {
+            console.log("DDDD generalSave");
+            vm.generalSave();
+        });
+
     }
 })();

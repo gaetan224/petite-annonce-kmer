@@ -19,7 +19,7 @@
 
         return service;
 
-        function open () {
+        function open (isSaveDeclaration) {
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,
@@ -30,7 +30,8 @@
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('login');
                         return $translate.refresh();
-                    }]
+                    }],
+                    isSaveDeclaration:isSaveDeclaration
                 }
             });
             modalInstance.result.then(

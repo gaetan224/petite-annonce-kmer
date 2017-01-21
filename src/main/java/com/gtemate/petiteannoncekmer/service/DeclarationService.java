@@ -103,12 +103,13 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
 
     public Declaration saveDeclarationUser(Declaration declaration,
-                                    User user,
                                     Localisation localisation,
                                     MultipartFile[] images) {
 
-        User newUser = userService.getByLogin(user.getLogin()); // get declaration user
-        declaration.setOwner(newUser); // define declaration user
+        User currentUser = userService.getUserWithAuthorities(); // get declaration user
+        if(currentUser != null)
+        declaration.setOwner(currentUser); // define declaration user
+
         declaration.setLocalisation(localisation);  // set localisation
         declaration.setLastModifiedDate(ZonedDateTime.now());
         declaration.setIsPublished(false);

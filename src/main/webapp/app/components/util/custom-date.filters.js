@@ -49,10 +49,12 @@ function convertDate($translate,$filter) {
     return function(date) {
         var stringDate = '';
 
-        date = new Date(date);
-        if(date.getFullYear() == 1969)
+        if(date == null)
             return $translate.instant('NOTMENTIONNE');
-        date.isYesterDay();
+
+        date = new Date(date);
+
+
         var hour = n(date.getHours()) + ":"
             + n(date.getMinutes());
 
