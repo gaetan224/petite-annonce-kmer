@@ -5,6 +5,7 @@
             "button": "Enregistrement"
         },
         "messages": {
+            "devis":"FCFA",
             "validate": {
                 "login": {
                     "required": "Votre nom d'utilisateur est obligatoire.",
@@ -17,6 +18,9 @@
                     "minlength": "Votre numéro de téléphone est trp court caractère.",
                     "maxlength": "Votre numéro de téléphone est trop long .",
                     "pattern": "Votre numéro de téléphone est incorrect"
+                },
+                "price": {
+                    "pattern": "Le prix ne peut que contenir des chiffres"
                 }
             },
             "success": "<strong>Compte enregistré !</strong> Merci de vérifier votre email de confirmation.",

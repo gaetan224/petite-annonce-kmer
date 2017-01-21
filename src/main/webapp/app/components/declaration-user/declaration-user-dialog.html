@@ -1,173 +1,169 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.generalSave()" show-validation>
+<form name="editForm" role="form" novalidate data-ng-submit="vm.generalSave()" data-show-validation>
 
-
+<!-- title of popup --->
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
+                data-ng-click="vm.clear()">&times;</button>
         <h4 class="modal-title" id="myDeclarationLabel" data-translate="declarationUser.createOrEditLabel">Create or edit a Declaration</h4>
     </div>
 
     <div class="modal-body">
 
-        <div class="alert alert-success" ng-show="vm.generaleSave" data-translate="declarationUser.declarationSaved">
-            <strong>Settings saved!</strong>
+        <!-- message on enregistrement de l'annonce --->
+        <div class="alert alert-success" data-ng-show="vm.generaleSave" data-translate="declarationUser.declarationSaved">
+            <strong>declaration saved!</strong>
         </div>
 
 
-        <div class="well" ng-hide="vm.isSave">
+        <div class="well" data-ng-hide="vm.isSave">
 
+            <!-- title of declaration --->
             <div class="row">
             <div class="form-group col-md-7">
                 <label class="control-label" data-translate="declarationUser.title" for="field_title">Title</label>
                 <input type="text" class="form-control" name="title" id="field_title"
-                       ng-model="vm.declaration.title"
-                       required ng-minlength="5" />
-                <div ng-show="editForm.title.$invalid">
+                       data-ng-model="vm.declaration.title"
+                       required data-ng-minlength="5" maxlength="50"/>
+                <div data-ng-show="editForm.title.$invalid">
                     <p class="help-block"
-                       ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
+                       data-ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
                         This field is required.
                     </p>
                     <p class="help-block"
-                       ng-show="editForm.title.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
+                       data-ng-show="editForm.title.$error.minlength" data-translate="entity.validation.minlength" data-translate-value-min="5">
                         This field is required to be at least 5 characters.
                     </p>
                 </div>
             </div>
             </div>
+            <!--/ title of declaration --->
 
+            <!-- description  --->
             <div class="row">
             <div class="form-group col-md-7">
                 <label class="control-label" data-translate="declarationUser.description" for="field_description">Description</label>
                 <textarea class="form-control"
                           name="description"
                           id="field_description"
-                          ng-model="vm.declaration.description">
+                          data-ng-model="vm.declaration.description">
 
                 </textarea>
             </div>
             </div>
+            <!--/ description  --->
 
+            <!-- price  --->
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label class="control-label" data-translate="declarationUser.price" for="field_price">price</label>
                     <input type="tel"
                            class="form-control"
                            name="price"
                            id="field_price"
-                           ng-pattern="/^[0-9]*$/"
-                           ng-model="vm.declaration.price"
-                           required ng-minlength="2" />
-                    <div ng-show="editForm.title.$invalid">
+                           data-ng-pattern="/^[0-9]*$/"
+                           data-ng-model="vm.declaration.price"
+                           required data-ng-minlength="2" maxlength="10"/> <span data-translate="register.messages.devis" ></span>
+                    <div data-ng-show="editForm.price.$invalid">
                         <p class="help-block"
-                           ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
+                           data-ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
                             This field is required.
                         </p>
                         <p class="help-block"
-                           ng-show="editForm.price.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
+                           data-ng-show="editForm.price.$error.minlength" data-translate="entity.validation.minlength" data-translate-value-min="2">
                             This field is required to be at least 5 characters.
                         </p>
                         <p class="help-block"
-                           ng-show="editForm.price.$error.pattern" data-translate="register.messages.validate.phoneNumber.pattern">
+                           data-ng-show="editForm.price.$error.pattern" data-translate="register.messages.validate.price.pattern">
                             Your username can only contain lower-case letters and digits.
                         </p>
                     </div>
                 </div>
             </div>
+            <!--/ price  --->
 
+            <!-- the 3 photo of the declaration  -->
             <div class="row">
-            <div ngf-select="vm.select1($file)"
-                 ngf-drop=""
-                 ng-model="vm.images.principal"
-                 ngf-model-invalid="invalidFiles"
-                 ngf-model-options="modelOptionsObj" ngf-multiple="false"
-                 ngf-pattern="pattern"
-                 ngf-accept="'image/*'"
-                 ng-hide="vm.hideUpload1"
-                 class="drop-box col-md-4" ngf-drop-available="true">
+                <!-- photo 1  --->
+            <div data-ngf-select="vm.select1($file)"
+                 data-ngf-drop=""
+                 data-ng-model="vm.images.principal"
+                 data-ngf-model-invalid="invalidFiles"
+                 data-ngf-model-options="modelOptionsObj" data-ngf-multiple="false"
+                 data-ngf-pattern="pattern"
+                 data-ngf-accept="'image/*'"
+                 data-ng-hide="vm.hideUpload1"
+                 class="drop-box col-md-4" data-ngf-drop-available="true">
                 <span data-translate="declarationUser.image1">Select image 1</span>
             </div>
                 <img class="drop-box col-md-4"
-                     ngf-src="!vm.images.principal.$error && vm.images.principal"
-                     ngf-resize="{width: 150, height: 150, quality: 0.9}"
-                >
+                     data-ngf-src="!vm.images.principal.$error && vm.images.principal"
+                     data-ngf-resize="{width: 150, height: 150, quality: 0.9}">
+                <!-- /photo 1 --->
 
-                <div ngf-select="vm.select2($file)"
-                     ngf-drop=""
-                     ng-model="vm.images.image2"
-                     ngf-model-invalid="invalidFiles"
-                     ngf-model-options="modelOptionsObj" ngf-multiple="false"
-                     ngf-pattern="pattern"
-                     ngf-accept="'image/*'"
-                     ng-hide="vm.hideUpload2"
-                     class="drop-box col-md-4" ngf-drop-available="true">
+                <!-- photo 2 --->
+                <div data-ngf-select="vm.select2($file)"
+                     data-ngf-drop=""
+                     data-ng-model="vm.images.image2"
+                     data-ngf-model-invalid="invalidFiles"
+                     data-ngf-model-options="modelOptionsObj" data-ngf-multiple="false"
+                     data-ngf-pattern="pattern"
+                     data-ngf-accept="'image/*'"
+                     data-ng-hide="vm.hideUpload2"
+                     class="drop-box col-md-4" data-ngf-drop-available="true">
                     <span data-translate="declarationUser.image2">Select image 1</span>
-
                 </div>
                 <img class="drop-box col-md-4"
-                     ngf-src="!vm.images.image2.$error && vm.images.image2"
-                     ngf-resize="{width: 150, height: 150, quality: 0.9}"
-                >
+                     data-ngf-src="!vm.images.image2.$error && vm.images.image2"
+                     data-ngf-resize="{width: 150, height: 150, quality: 0.9}">
+                <!-- /photo 2 --->
 
-                <div ngf-select="vm.select3($file)"
-                     ngf-drop=""
-                     ng-model="vm.images.image3"
-                     ngf-model-invalid="invalidFiles"
-                     ngf-model-options="modelOptionsObj" ngf-multiple="false"
-                     ngf-pattern="pattern"
-                     ngf-accept="'image/*'"
-                     ng-hide="vm.hideUpload3"
-                     class="drop-box col-md-4" ngf-drop-available="true">
+                <!-- photo 3 --->
+                <div data-ngf-select="vm.select3($file)"
+                     data-ngf-drop=""
+                     data-ng-model="vm.images.image3"
+                     data-ngf-model-invalid="invalidFiles"
+                     data-ngf-model-options="modelOptionsObj" data-ngf-multiple="false"
+                     data-ngf-pattern="pattern"
+                     data-ngf-accept="'image/*'"
+                     data-ng-hide="vm.hideUpload3"
+                     class="drop-box col-md-4" data-ngf-drop-available="true">
                     <span data-translate="declarationUser.image3">Select image 1</span>
 
                 </div>
                 <img class="drop-box col-md-4"
-                     ngf-src="!vm.images.image3.$error && vm.images.image3"
-                     ngf-resize="{width: 150, height: 150, quality: 0.9}">
+                     data-ngf-src="!vm.images.image3.$error && vm.images.image3"
+                     data-ngf-resize="{width: 150, height: 150, quality: 0.9}">
+                <!--/ photo 3 -->
             </div>
+            <!--/ the 3 photo of the declaration  -->
+
         </div>
 
-        <div class="well" ng-hide="vm.isSave">
-            <div class="row">
-            <div class="form-group col-md-4" ng-show="false">
-                <label class="control-label" data-translate="petiteAnnonceKmerApp.localisation.country" for="field_country">Country</label>
-                <select class="form-control"
-                        id="field_country"
-                        name="country"
-                        ng-model="vm.localisation.country"
-                        ng-options="country as country.name for country in vm.countries track by country.id"
-                        ng-change="vm.loadRegion()">
+        <div class="well" data-ng-hide="vm.isSave">
 
-                    <option value=""></option>
-                </select>
-                <div ng-show="editForm.country.$invalid">
-                    <p class="help-block"
-                       ng-show="editForm.country.$error.required" data-translate="entity.validation.required">
-                        This field is required.
-                    </p>
-                </div>
-            </div>
-            </div>
-
+            <!-- region declaration  --->
             <div class="row">
             <div class="form-group col-md-4">
                 <label class="control-label" data-translate="declarationUser.region" for="field_region">Region</label>
                 <select class="form-control"
                         id="field_region"
                         name="region"
-                        ng-model="vm.localisation.region"
-                        ng-options="region as region.name for region in vm.countryRegion track by region.id">
+                        data-ng-model="vm.localisation.region"
+                        data-ng-options="region as region.name for region in vm.countryRegion track by region.id">
                     <option value=""></option>
                 </select>
-                <div ng-show="editForm.region.$invalid">
+                <div data-ng-show="editForm.region.$invalid">
                     <p class="help-block"
-                       ng-show="editForm.region.$error.required" data-translate="entity.validation.required">
+                       data-ng-show="editForm.region.$error.required" data-translate="entity.validation.required">
                         This field is required.
                     </p>
                 </div>
             </div>
             </div>
+            <!--/ region declaration  --->
 
+            <!-- cameroun cities by google places  --->
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label" data-translate="declarationUser.city" for="field_city">City
@@ -178,23 +174,25 @@
                             data-popover-placement="right"
                             data-uib-popover="{{ 'declarationUser.cityHelp' | translate }}"
                             data-popover-title="{{ 'global.form.help' | translate }}"
-                            popover-class="pophelp">
+                            data-popover-class="pophelp">
                         <i class="fa fa-question-circle"></i>
                     </button>
 
                     <input type="text" class="form-control" name="city" id="field_city"
-                           ng-autocomplete="vm.localisation.city" details="vm.citiesOptionsDetail" options="vm.citiesOptions"
-                           ng-model="vm.localisation.city"
+                           data-ng-autocomplete="vm.localisation.city" data-details="vm.citiesOptionsDetail" data-options="vm.citiesOptions"
+                           data-ng-model="vm.localisation.city"
                            required />
-                    <div ng-show="editForm.city.$invalid">
+                    <div data-ng-show="editForm.city.$invalid">
                         <p class="help-block"
-                           ng-show="editForm.city.$error.required" data-translate="entity.validation.required">
+                           data-ng-show="editForm.city.$error.required" data-translate="entity.validation.required">
                             This field is required.
                         </p>
                     </div>
                     </div>
             </div>
+            <!--/ cameroun cities by google places  --->
 
+            <!-- quater--->
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label" data-translate="declarationUser.streetName" for="field_streetName">street Name
@@ -205,149 +203,35 @@
                             data-popover-placement="right"
                             data-uib-popover="{{ 'declarationUser.streetNameHelp' | translate }}"
                             data-popover-title="{{ 'global.form.help' | translate }}"
-                            popover-class="pophelp">
+                            data-popover-class="pophelp">
                         <i class="fa fa-question-circle"></i>
                     </button>
 
                     <input type="text" class="form-control" name="streetName" id="field_streetName"
-                           ng-model="vm.localisation.streetName"
+                           data-ng-model="vm.localisation.streetName"
                            required />
-                    <div ng-show="editForm.streetName.$invalid">
+                    <div data-ng-show="editForm.streetName.$invalid">
                         <p class="help-block"
-                           ng-show="editForm.streetName.$error.required" data-translate="entity.validation.required">
+                           data-ng-show="editForm.streetName.$error.required" data-translate="entity.validation.required">
                             This field is required.
                         </p>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="well">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-
-                    <div class="alert alert-danger" ng-show="vm.error" data-translate="register.messages.error.fail">
-                        <strong>Registration failed!</strong> Please try again later.
-                    </div>
-
-                    <div class="alert alert-danger" ng-show="vm.errorUserExists" data-translate="register.messages.error.userexists">
-                        <strong>Login name already registered!</strong> Please choose another one.
-                    </div>
-
-                    <div class="alert alert-danger" ng-show="vm.errorEmailExists" data-translate="register.messages.error.emailexists">
-                        <strong>E-mail is already in use!</strong> Please choose another one.
-                    </div>
-
-                    <div class="alert alert-info" ng-show="!vm.generaleSave && vm.isSave" data-translate="declarationUser.success">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" ng-hide="vm.isSave">
-                <div class="form-group col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="email" data-translate="global.form.email">E-mail</label>
-                        <input type="email"
-                               class="form-control"
-                               id="email" name="email"
-                               ng-disabled="vm.isAuthenticated"
-                               placeholder="{{'global.form.email.placeholder' | translate}}"
-                               ng-model="vm.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
-                        <div ng-show="form.email.$dirty && form.email.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.email.$error.required" data-translate="global.messages.validate.email.required">
-                                Your e-mail is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.email.$error.email" data-translate="global.messages.validate.email.invalid">
-                                Your e-mail is invalid.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.email.$error.minlength" data-translate="global.messages.validate.email.minlength">
-                                Your e-mail is required to be at least 5 characters.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.email.$error.maxlength" data-translate="global.messages.validate.email.maxlength">
-                                Your e-mail cannot be longer than 100 characters.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" ng-hide="vm.isSave">
-                <div class="form-group col-md-4">
-                    <label class="control-label" for="login" data-translate="global.form.username">Username</label>
-                    <input type="text"
-                           class="form-control"
-                           id="login" name="login"
-                           ng-disabled="vm.isAuthenticated"
-                           placeholder="{{'global.form.username.placeholder' | translate}}"
-                           ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
-                    <div ng-show="form.login.$dirty && form.login.$invalid">
-                        <p class="help-block"
-                           ng-show="editForm.login.$error.required" data-translate="register.messages.validate.login.required">
-                            Your username is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.login.$error.minlength" data-translate="register.messages.validate.login.minlength">
-                            Your username is required to be at least 1 character.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.login.$error.maxlength" data-translate="register.messages.validate.login.maxlength">
-                            Your username cannot be longer than 50 characters.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.login.$error.pattern" data-translate="register.messages.validate.login.pattern">
-                            Your username can only contain lower-case letters and digits.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" ng-hide="vm.isSave">
-                <div class="form-group col-md-4">
-                    <label class="control-label" for="phoneNumber" data-translate="global.form.phoneNumber">phoneNumber</label>
-                    <input type="text"
-                           class="form-control"
-                           id="phoneNumber"
-                           name="phoneNumber"
-                           ng-disabled="vm.isAuthenticated"
-                           placeholder="{{'global.form.phoneNumber.placeholder' | translate}}"
-                           ng-model="vm.registerAccount.phoneNumber" ng-minlength=6 ng-maxlength=30 ng-pattern="/^[0-9]*$/" required>
-                    <div ng-show="form.phoneNumber.$dirty && form.phoneNumber.$invalid">
-                        <p class="help-block"
-                           ng-show="editForm.phoneNumber.$error.required" data-translate="register.messages.validate.phoneNumber.required">
-                            Your username is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.phoneNumber.$error.minlength" data-translate="register.messages.validate.phoneNumber.minlength">
-                            Your username is required to be at least 1 character.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.phoneNumber.$error.maxlength" data-translate="register.messages.validate.phoneNumber.maxlength">
-                            Your username cannot be longer than 50 characters.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.phoneNumber.$error.pattern" data-translate="register.messages.validate.phoneNumber.pattern">
-                            Your username can only contain lower-case letters and digits.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <!--/ quater--->
 
         </div>
 
     </div>
-        </div>
+
 
     <div class="modal-footer">
-        <button ng-hide="!vm.isSave" type="button" ng-click="vm.register()" ng-disabled="form.$invalid" class="btn btn-custom-primary" data-translate="register.form.button">Register</button>
+        <button data-ng-hide="!vm.isSave" type="button" data-ng-click="vm.register()" data-ng-disabled="form.$invalid" class="btn btn-custom-primary" data-translate="register.form.button">Register</button>
 
-        <button ng-hide="vm.isSave" type="button" class="btn btn-custom-cancel" data-dismiss="modal" ng-click="vm.clear()">
+        <button data-ng-hide="vm.isSave" type="button" class="btn btn-custom-cancel" data-dismiss="modal" data-ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button ng-hide="vm.isSave" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-custom-primary">
+        <button data-ng-hide="vm.isSave" type="submit" data-ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-custom-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>
