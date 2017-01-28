@@ -15,6 +15,17 @@ spring:
     profiles:
         active: dev
         include: swagger
+    mail:
+        host: mail.temate.fr
+        port: 587
+        username: gaetan@temate.fr  #Replace this field with your Outlook username.
+        password: ndademndadem               #Replace this field with your Outlook password.
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: mail.temate.fr
     devtools:
         restart:
             enabled: true
@@ -48,11 +59,6 @@ spring:
     cache:
         jcache:
             config: ehcache.xml
-    mail:
-        host: localhost
-        port: 25
-        username:
-        password:
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -77,7 +83,7 @@ jhipster:
             # security key (this key should be unique for your application, and kept secret)
             key: a1373c16631b0769fac88af0a186f43dcdfbcfa6
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: petiteAnnonceKmer@localhost
+        from: gaetan@temate.fr
         baseUrl: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true

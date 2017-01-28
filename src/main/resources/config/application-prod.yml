@@ -44,10 +44,17 @@ spring:
         jcache:
             config: ehcache.xml
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: mail.temate.fr
+        port: 587
+        username: gaetan@temate.fr  #Replace this field with your Outlook username.
+        password: ndademndadem               #Replace this field with your Outlook password.
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: mail.temate.fr
+
     thymeleaf:
         cache: true
 

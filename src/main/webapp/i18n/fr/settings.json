@@ -18,8 +18,9 @@
             "newMessage":"Nouveau message"
         },
 
-        "title": "Profil de l'utilisateur [{{username}}]",
+        "title": "Profil",
         "form": {
+            "login":"Login",
             "firstname": "Prénom",
             "firstname.placeholder": "Votre prénom",
             "lastname": "Nom",
