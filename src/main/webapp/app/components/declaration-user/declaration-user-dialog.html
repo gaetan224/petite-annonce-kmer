@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate data-ng-submit="vm.generalSave()" data-show-validation>
+<form name="editForm" role="form" novalidate data-ng-submit="vm.generalSave(vm.currentAccount.login)" data-show-validation>
 
 <!-- title of popup --->
     <div class="modal-header">
@@ -226,8 +226,6 @@
 
 
     <div class="modal-footer">
-        <button data-ng-hide="!vm.isSave" type="button" data-ng-click="vm.register()" data-ng-disabled="form.$invalid" class="btn btn-custom-primary" data-translate="register.form.button">Register</button>
-
         <button data-ng-hide="vm.isSave" type="button" class="btn btn-custom-cancel" data-dismiss="modal" data-ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>

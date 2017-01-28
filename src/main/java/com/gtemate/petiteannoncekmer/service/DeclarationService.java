@@ -62,8 +62,7 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
     public Page<Declaration> findByUserIsCurrentUser(Pageable pageable) {
         log.debug("Request to get all Declarations");
-        Page<Declaration>  result = declarationRepository.findByOwnerIsCurrentUser(pageable);
-        return result;
+        return declarationRepository.findByOwnerIsCurrentUser(pageable);
     }
     /**
      *  Get all the declarations.
@@ -74,8 +73,7 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
     public Page<Declaration> findAll(Pageable pageable) {
         log.debug("Request to get all Declarations");
-        Page<Declaration> result = declarationRepository.findAll(pageable);
-        return result;
+        return declarationRepository.findAll(pageable);
     }
 
 
@@ -88,9 +86,11 @@ public class DeclarationService extends BaseEntityService<Declaration> {
     public Long countAllPerRegion(String IdRegion) {
         log.debug("Request to get all Declarations");
        Long result = declarationRepository.count((root, criteriaQuery, criteriaBuilder) ->
-           criteriaBuilder.equal(root.get(Declaration_.localisation)
+               criteriaBuilder.and(
+           criteriaBuilder.equal(root.get(Declaration_.isPublished),true), // count only published declarations
+           criteriaBuilder.equal(root.get(Declaration_.localisation)  // and only declarations of the specified region
                .get(Localisation_.region)
-               .get(Region_.code),IdRegion));
+               .get(Region_.code),IdRegion)));
         return result;
     }
 
@@ -104,9 +104,10 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
     public Declaration saveDeclarationUser(Declaration declaration,
                                     Localisation localisation,
+                                    String login,
                                     MultipartFile[] images) {
 
-        User currentUser = userService.getUserWithAuthorities(); // get declaration user
+        User currentUser = userService.getByLogin(login); // get declaration user
         if(currentUser != null)
         declaration.setOwner(currentUser); // define declaration user
 

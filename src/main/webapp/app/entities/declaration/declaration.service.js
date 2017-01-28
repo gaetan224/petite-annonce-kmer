@@ -52,7 +52,7 @@
             saveDeclarationUser:saveDeclarationUser
         }
 
-        function saveDeclarationUser(declaration,localisation, images) {
+        function saveDeclarationUser(declaration,localisation,login, images) {
 
             return Upload.upload({
                 url: 'api/save-declarations-user',
@@ -63,7 +63,7 @@
                     localisation: new Blob(
                         [JSON.stringify(localisation)],
                         {type: 'application/json'}),
-
+                    login:login,
                     images:images
                 },
                 arrayKey: ''

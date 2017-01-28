@@ -26,7 +26,8 @@
 
         function login() {
             collapseNavbar();
-            LoginService.open();
+            // simple login not coming from declaration addition
+            LoginService.open(false,null,{});
         }
 
         function logout() {

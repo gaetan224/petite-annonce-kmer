@@ -24,6 +24,8 @@
                 }
             },
             "success": "<strong>Compte enregistré !</strong> Merci de vérifier votre email de confirmation.",
+            "declarationSaveSuccess": "Votre annonce à été enregistré et sera mise en ligne dans les prochains 6 heures après validation",
+            "declarationSaveFail": "Votre annonce à été n'a pas pu etre enregistré veillez réessayer plutard avec votre compte",
             "error": {
                 "fail": "<strong>Compte non créé !</strong> Merci d'essayer à nouveau plus tard.",
                 "userexists": "<strong>Ce compte utilisateur existe déjà !</strong> Veuillez en choisir un autre.",

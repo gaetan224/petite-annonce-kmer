@@ -61,7 +61,7 @@
         }
 
         function openDeclaration() {
-            DeclarationUserService.open();
+            DeclarationUserService.openNew();
         }
 
     }

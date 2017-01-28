@@ -193,11 +193,12 @@ public class DeclarationResource  {
     @PostMapping(value = "/save-declarations-user", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Declaration> saveDeclarationUser(@RequestPart("declaration") Declaration declaration,
                                                            @RequestPart(name = "localisation", required = false) Localisation localisation,
+                                                           @RequestPart(name = "login", required = false) String login,
                                                            @RequestPart(name = "images", required = false) MultipartFile[] images
     ) throws URISyntaxException {
 
         // call service to save Admission Request
-        Declaration result = declarationService.saveDeclarationUser(declaration, localisation,images);
+        Declaration result = declarationService.saveDeclarationUser(declaration, localisation,login,images);
 
         // return JSON response
         return ResponseEntity.created(new URI("/api/entities/" + result.getId()))

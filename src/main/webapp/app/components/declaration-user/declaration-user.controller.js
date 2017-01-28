@@ -12,9 +12,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationUserController', DeclarationUserController);
 
-    DeclarationUserController.$inject = ['$scope', '$uibModalInstance', 'entity', 'DeclarationUser', 'User','Country','Region', 'Auth', 'LoginService', 'Principal'];
+    DeclarationUserController.$inject = ['$scope', '$uibModalInstance', 'entity', 'DeclarationUser', 'User','Country','Region', 'LoginService', 'Principal'];
 
-    function DeclarationUserController ($scope, $uibModalInstance, entity, DeclarationUser, User,Country,Region, Auth, LoginService,Principal) {
+    function DeclarationUserController ($scope, $uibModalInstance, entity, DeclarationUser, User,Country,Region, LoginService,Principal) {
         var vm = this;
 
         vm.declaration = entity;
@@ -32,13 +32,13 @@
 
         vm.registerAccount = {};
         vm.success = null;
-        vm.isSave = false;;
-        vm.currentAccount = null;
+        vm.isSave = false;
+        vm.currentAccount = {};
         vm.loginExist = false;
 
 
         vm.isAuthenticated = Principal.isAuthenticated();
-       /*if(vm.isAuthenticated){
+       if(vm.isAuthenticated){
            Principal.identity().then(function(account) {
                vm.currentAccount = account;
            });
@@ -50,44 +50,7 @@
                }
            });
        }
-        function register () {
-        console.log("SAVE register")
-        if(!vm.isAuthenticated || !vm.loginExist) {
-        if (vm.registerAccount.password !== vm.confirmPassword) {
-        vm.doNotMatch = 'ERROR';
-        }
-        else {
-        vm.registerAccount.langKey = $translate.use();
-        vm.doNotMatch = null;
-        vm.error = null;
-        vm.errorUserExists = null;
-        vm.errorEmailExists = null;
 
-        Auth.createAccount(vm.registerAccount).then(function () {
-        vm.success = 'OK';
-
-        DeclarationUser.saveDeclarationUser(
-        vm.declaration,
-        vm.localisation,
-        vm.registerAccount,
-        [vm.images.principal, vm.images.image2, vm.images.image3]
-        ).then(onSaveSuccess)
-        .catch(onSaveError)
-
-        }).catch(function (response) {
-        vm.success = null;
-        if (response.status === 400 && response.data === 'login already in use') {
-        vm.errorUserExists = 'ERROR';
-        } else if (response.status === 400 && response.data === 'e-mail address already in use') {
-        vm.errorEmailExists = 'ERROR';
-        } else {
-        vm.error = 'ERROR';
-        }
-        });
-        }
-        }
-        }
-       */
 
         /**
          * verify if login exists
@@ -182,27 +145,33 @@
 
 
 
-        function generalSave() {
-
+        function generalSave(login) {
+            console.log("generalSave "+login);
             vm.isAuthenticated = Principal.isAuthenticated();
+
             if(vm.isAuthenticated){
-                console.log("generalSave");
                 DeclarationUser.saveDeclarationUser(
                     vm.declaration,
                     vm.localisation,
+                    login,
                     [vm.images.principal,vm.images.image2,vm.images.image3]
                 ).then(onSaveSuccess)
                     .catch(onSaveError)
 
             }else{
-                LoginService.open(true);
+                var  declarationParams = {
+                    data: vm.declaration,
+                    localisation: vm.localisation,
+                    images:[vm.images.principal,vm.images.image2,vm.images.image3]
+                }
+                LoginService.open(true,$uibModalInstance,declarationParams);
             }
         }
-
         /* if login success save the declaration ie onLoginSuccessSaveStartedDeclarationCreation*/
-        $scope.$on("onLoginSuccessSaveStartedDeclarationCreation",function() {
-            console.log("DDDD generalSave");
-            vm.generalSave();
+        $scope.$on("onLoginSuccessSaveStartedDeclarationCreation",function(event, args) {
+            var login = args.login;
+            console.log("$on "+login);
+            vm.generalSave(login);
         });
 
     }

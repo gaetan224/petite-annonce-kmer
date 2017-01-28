@@ -5,9 +5,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('DeclarationController', DeclarationController);
 
-    DeclarationController.$inject = ['$scope', '$state', 'Declaration', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    DeclarationController.$inject = [ '$state', 'Declaration', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function DeclarationController ($scope, $state, Declaration, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function DeclarationController ($state, Declaration, ParseLinks, AlertService, paginationConstants, pagingParams) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -19,9 +19,6 @@
         loadAll();
 
         function loadAll () {
-
-
-
             Declaration.query({
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,

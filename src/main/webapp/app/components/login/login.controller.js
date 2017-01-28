@@ -5,9 +5,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance','isSaveDeclaration'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance','isSaveDeclaration','declarationUibModalInstance','declaration'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance,isSaveDeclaration) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance,isSaveDeclaration,declarationUibModalInstance,declaration) {
         var vm = this;
 
         // flag test whether login is coming from new declaration
@@ -54,7 +54,10 @@
                 // event to test whether login is coming from new declaration
                 if(vm.isSaveDeclaration){
                     console.log("onLoginSuccessSaveStartedDeclarationCreation");
-                    $rootScope.$broadcast('onLoginSuccessSaveStartedDeclarationCreation');
+                    $rootScope.$broadcast('onLoginSuccessSaveStartedDeclarationCreation',
+                        {
+                        login:vm.username
+                        } );
                 }
 
                 // previousState was set in the authExpiredInterceptor before being redirected to login modal.
@@ -72,6 +75,20 @@
         function register () {
             $uibModalInstance.dismiss('cancel');
             $state.go('register');
+            if(vm.isSaveDeclaration) {
+
+                vm.declarationUibModalInstance = declarationUibModalInstance;
+
+                // if login is coming from declaratoin creation
+                //save declaration if account creation successful
+                vm.declaration = declaration;
+
+                vm.declarationUibModalInstance.dismiss('cancel');
+                var declarationParams  = { declaration:vm.declaration };
+                $state.go('register',declarationParams);
+            }else{
+                $state.go('register');
+            }
         }
 
         function requestResetPassword () {

@@ -17,19 +17,17 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller advice to translate the server side exceptions to client-friendly json structures.
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionTranslator {
 
     @ExceptionHandler(ConcurrencyFailureException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ResponseBody
     public ErrorVM processConcurencyError(ConcurrencyFailureException ex) {
         return new ErrorVM(ErrorConstants.ERR_CONCURRENCY_FAILURE);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
     public ErrorVM processValidationError(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
@@ -39,14 +37,12 @@ public class ExceptionTranslator {
 
     @ExceptionHandler(CustomParameterizedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
     public ParameterizedErrorVM processParameterizedValidationError(CustomParameterizedException ex) {
         return ex.getErrorVM();
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ResponseBody
     public ErrorVM processAccessDeniedException(AccessDeniedException e) {
         return new ErrorVM(ErrorConstants.ERR_ACCESS_DENIED, e.getMessage());
     }
@@ -62,7 +58,6 @@ public class ExceptionTranslator {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    @ResponseBody
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ErrorVM processMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
         return new ErrorVM(ErrorConstants.ERR_METHOD_NOT_SUPPORTED, exception.getMessage());

@@ -33,7 +33,7 @@
         }
 
         function openDeclaration() {
-            DeclarationUserService.open();
+            DeclarationUserService.openNew();
         }
 
         vm.initMap = function() {

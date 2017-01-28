@@ -1,4 +1,5 @@
 /**
+ * list controler of declarations
  * Created by admin on 04/12/2016.
  */
 
@@ -26,9 +27,7 @@
 
 
     /**
-     * Controller which handle initial admission request:
-     *  - display request
-     *  - display a form to select BRC
+     * Controller which handle list of declarations:
      *
      * @constructor
      */

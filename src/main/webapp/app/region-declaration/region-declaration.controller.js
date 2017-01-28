@@ -50,6 +50,7 @@
             vm.queryCount = vm.totalItems;
             vm.declarations = data;
             vm.page = pagingParams.page;
+            console.log(vm.queryCount);
         }
 
         function onError(error) {

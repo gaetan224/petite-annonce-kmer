@@ -1,4 +1,5 @@
 /**
+ * the service for managing one declaration
  * Created by admin on 29/12/2016.
  */
 
@@ -14,7 +15,7 @@
 
     function DeclarationUserService ($uibModal) {
         var service = {
-            open: open,
+            openNew: openNew,
             openDetail: openDetail
         };
 
@@ -25,7 +26,7 @@
 
         return service;
 
-        function open () {
+        function openNew () {
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,

@@ -22,6 +22,10 @@
                     controllerAs: 'vm'
                 }
             },
+
+            params: {
+                'declaration': null
+            },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('register');

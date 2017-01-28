@@ -7,8 +7,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href data-ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/petite-annonce-kmer-logo.png"/>
+            <a class="navbar-brand logo" data-ui-sref="home" href data-ng-click="vm.collapseNavbar()">
+                <img class="logo-img" src="../../../content/images/petite-annonce-kmer-logo.png"/>
             </a>
         </div>
         <div class="navbar-collapse" data-uib-collapse="vm.isNavbarCollapsed" data-ng-switch="vm.isAuthenticated()">
@@ -101,16 +101,16 @@
                         </li>
                     </ul>
                 </li>
-                <li data-ng-class="{active: vm.$state.includes('admin')}"  data-ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
+                <li data-ng-class="{active: vm.$state.includes('admin')}"  data-ng-switch-when="true" data-has-authority="ROLE_ADMIN" data-uib-dropdown class="dropdown pointer">
+                    <a class="dropdown-toggle" data-uib-dropdown-toggle href="" id="admin-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
                             <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
+                    <ul class="dropdown-menu" data-uib-dropdown-menu>
+                        <li data-ui-sref-active="active">
                             <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-user"></span>&nbsp;
                                 <span data-translate="global.menu.admin.userManagement">User management</span>
