@@ -118,10 +118,10 @@ public class DeclarationResource  {
      */
     @GetMapping("/declarations-byregion")
     @Timed
-    public ResponseEntity<List<Declaration>> getAllDeclarationsByRegion(Pageable pageable,@RequestParam("IdRegion") String IdRegion )
+    public ResponseEntity<List<Declaration>> getAllDeclarationsByRegion(Pageable pageable,@RequestParam("IdRegion") String IdRegion,@RequestParam("search") String search  )
         throws URISyntaxException {
         log.debug("REST request to get a page of Declarations {} ", IdRegion);
-        Page<Declaration> page = declarationService.getAllDeclarationsByRegion(pageable,IdRegion);
+        Page<Declaration> page = declarationService.getAllDeclarationsByRegion(pageable,IdRegion,search);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations-byregion");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

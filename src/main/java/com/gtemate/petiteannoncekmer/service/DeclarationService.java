@@ -95,9 +95,9 @@ public class DeclarationService extends BaseEntityService<Declaration> {
     }
 
 
-    public Page<Declaration> getAllDeclarationsByRegion(Pageable pageable,String IdRegion) {
+    public Page<Declaration> getAllDeclarationsByRegion(Pageable pageable,String IdRegion,String search) {
         log.debug("Request to get all Declarations By Region");
-        return declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion);
+        return declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion,search);
     }
 
 

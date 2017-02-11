@@ -5,38 +5,50 @@
     <div class="row">
 
         <div class="form-group col-md-6">
-            <input class="form-control" data-ng-minlength="5" maxlength="50"
-                   type="text" placeholder="{{'region.search.placeholder' | translate }}" required>
-        </div>
-
-        <div class="form-group col-md-2">
-            <button type="button" class="btn btn-custom-primary" data-translate="region.search.button">Search</button>
+            <input class="form-control"
+                   maxlength="200"
+                   type="text"
+                   data-ng-model="vm.currentSearch"
+                   placeholder="{{'region.search.placeholder' | translate }}">
         </div>
 
         <div class="form-group col-md-4">
-            <label class="control-label" data-translate="declarationUser.region" for="field_region">Region</label>
             <select class="form-control"
                     id="field_region"
                     name="region"
                     data-ng-model="vm.localisation.region"
+                    data-ng-change="vm.onChangeSelect()"
                     data-ng-options="region as region.name for region in vm.countryRegion track by region.code">
-                <option value=""></option>
             </select>
-            <div data-ng-show="editForm.region.$invalid">
-                <p class="help-block"
-                   data-ng-show="editForm.region.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <button type="button"
+                    class="btn btn-custom-primary"
+                    data-ng-click="vm.loadAll()"
+                    data-translate="region.search.button">Search</button>
         </div>
     </div>
     <!--/ region declaration  --->
 
-    <declaration-list declarations="vm.declarations" ></declaration-list>
-    <uib-pagination ng-show="false" class="pagination-sm"
+    <div class="row">
+        <div class="col-md-offset-1 col-md-11">
+                <input type="checkbox" class="stv-checkbox-switch" name="reload" id="stvSwitch" data-ng-model="vm.isReload"/>
+                <label class="control-label" for="stvSwitch" data-translate="region.reload">reload</label>
+        </div>
+    </div>
+
+
+    <br/>
+    <data-declaration-list declarations="vm.declarations" ></data-declaration-list>
+    <uib-pagination ng-show="vm.declarations.length>0" class="pagination-sm"
                     total-items="vm.totalItems"
                     items-per-page="vm.itemsPerPage"
                     ng-model="vm.page"
                     ng-change="vm.transition()"
                     force-ellipses="true"></uib-pagination>
+
+    <div data-ng-show="vm.declarations.length<=0"
+         data-translate="region.nodelcaration"
+         class="nodelcaration"></div>
 </div>

@@ -542,9 +542,6 @@ label {
     border-style: none !important;
     background-color:transparent;
 }
-
-
-
 .navbar-default {
     background: radial-gradient(circle at bottom left,#8e44ad,#8c6c3f,#627aba);
     border-color: #e7e7e7;
@@ -552,3 +549,60 @@ label {
 
 
 
+
+
+
+
+
+
+
+
+input.stv-checkbox-switch {
+    position: absolute;
+    left: -99999px;
+    top: -99999px;
+}
+input.stv-checkbox-switch + label {
+    position: relative;
+    float: left;
+    line-height: 1.6em;
+    height: 1.6em;
+    padding-left: 3.5em;
+    margin: 0.2em 0;
+    cursor: pointer;
+}
+input.stv-checkbox-switch + label::before, input.stv-checkbox-switch + label::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    line-height: 1em;
+    -webkit-transition: all 0.1s cubic-bezier(0.72, 0.21, 0.95, 0.64);
+    transition: all 0.1s cubic-bezier(0.72, 0.21, 0.95, 0.64);
+}
+input.stv-checkbox-switch + label::before {
+    width: 3em;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 1em;
+    box-shadow: inset 0.13em 0.13em 0.2em rgba(0, 0, 0, 0.3);
+}
+input.stv-checkbox-switch + label::after {
+    width: 1.4em;
+    top: 0.1em;
+    bottom: 0.1em;
+    margin-left: 0.1em;
+    border-radius: 50%;
+    background-color: #fff;
+}
+input.stv-checkbox-switch:checked + label::before {
+    background: #8e44ad;
+}
+input.stv-checkbox-switch:checked + label::after {
+    margin-left: 1.5em;
+}
+
+
+.nodelcaration{
+    text-align: center;
+}

@@ -5,13 +5,13 @@
         .module('petiteAnnonceKmerApp')
         .controller('RegionDeclarationController', RegionDeclarationController);
 
-    RegionDeclarationController.$inject = ['AlertService','Declaration','region', 'ParseLinks','paginationConstants', 'pagingParams','$state','Country','Region'];
+    RegionDeclarationController.$inject = ['AlertService','Declaration','region', 'ParseLinks','paginationConstants', 'pagingParams','$state','Country','Region','$scope'];
 
-    function RegionDeclarationController (AlertService, Declaration, region, ParseLinks,paginationConstants, pagingParams,$state,Country,Region) {
+    function RegionDeclarationController (AlertService, Declaration, region, ParseLinks,paginationConstants, pagingParams,$state,Country,Region, $scope) {
         var vm = this;
-        vm.regionId = region.regionId;
-        vm.regionName = region.regionName;
         vm.declarations = [];
+        vm.isReload = false;
+        vm.currentSearch = "";
         vm.loadAll = loadAll;
 
         vm.loadPage = loadPage;
@@ -19,10 +19,17 @@
 
         vm.loadRegion = loadRegion;
         vm.localisation = {};
+        vm.localisation.region = {
+            "name" : region.regionName,
+            "code" : region.regionId
+        };
+
+        vm.regionName = vm.localisation.region.name;
 
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.onChangeSelect = onChangeSelect;
 
         vm.loadAll();
 
@@ -36,17 +43,25 @@
             vm.loadRegion();
         });
 
+        /**
+         * load all declarations for a region
+         */
         function loadAll() {
             Declaration.getAllDeclarationsByRegion({
-                    IdRegion:vm.regionId,
+                        IdRegion:vm.localisation.region.code,
                         page: pagingParams.page - 1,
                         size: vm.itemsPerPage,
-                        sort: sort()
+                        sort: sort(),
+                        search: vm.currentSearch
                 }
                 , onSuccess, onError);
         }
 
 
+        /**
+         * sort declaration list
+         * @returns {[*]}
+         */
         function sort() {
             var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
             if (vm.predicate !== 'id') {
@@ -55,24 +70,17 @@
             return result;
         }
 
-
         function onSuccess(data, headers) {
             vm.links = ParseLinks.parse(headers('link'));
             vm.totalItems = headers('X-Total-Count');
             vm.queryCount = vm.totalItems;
             vm.declarations = data;
             vm.page = pagingParams.page;
-
-            vm.localisation.region = {
-                "name" : vm.regionName,
-                "code" : vm.regionId
-            }
         }
 
         function onError(error) {
             AlertService.error(error.data.message);
         }
-
 
         function loadPage(page) {
             vm.page = page;
@@ -83,12 +91,11 @@
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                regionId: vm.regionId,
-                regionName: vm.regionName,
+                regionId: vm.localisation.region.code,
+                regionName: vm.localisation.region.name,
                 search: vm.currentSearch
             });
         }
-
 
         function loadRegion() {
             if(vm.localisation.country) {
@@ -97,6 +104,20 @@
                 )
             }
         }
+
+        /**
+         * on select region display declaration of that region if reload is active
+         */
+        function onChangeSelect() {
+            if(vm.isReload){
+                vm.loadAll();
+                vm.regionName = vm.localisation.region.name;
+            }
+        }
+
+        $scope.$watch('vm.currentSearch', function(value) {
+            vm.onChangeSelect();
+        }, true);
 
     }
 })();
