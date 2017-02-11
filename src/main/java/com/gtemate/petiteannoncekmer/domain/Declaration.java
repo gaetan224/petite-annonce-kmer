@@ -3,16 +3,13 @@ package com.gtemate.petiteannoncekmer.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A Declaration.
@@ -69,9 +66,9 @@ public class Declaration extends BaseEntity{
     @PreUpdate
     public void updatePublishDate(){
         if(isPublished){
-            lastModifiedDate = ZonedDateTime.now();
             publishedDate = ZonedDateTime.now();
         }
+        lastModifiedDate = ZonedDateTime.now();
     }
 
 
