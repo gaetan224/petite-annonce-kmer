@@ -78,14 +78,11 @@
 
          Country.query(function (data) {
              vm.countries = data;
-             vm.localisation.country =vm.countries[0];
+             vm.localisation.country =vm.countries[0]; //Cameroun is the first country
              vm.loadRegion();
         });
         vm.countryRegion = {};
         vm.localisation = {};
-
-
-
 
         vm.images = {};
 

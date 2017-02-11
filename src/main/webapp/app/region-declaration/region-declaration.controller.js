@@ -5,9 +5,9 @@
         .module('petiteAnnonceKmerApp')
         .controller('RegionDeclarationController', RegionDeclarationController);
 
-    RegionDeclarationController.$inject = ['AlertService','Declaration','region', 'ParseLinks','paginationConstants', 'pagingParams','$state'];
+    RegionDeclarationController.$inject = ['AlertService','Declaration','region', 'ParseLinks','paginationConstants', 'pagingParams','$state','Country','Region'];
 
-    function RegionDeclarationController (AlertService, Declaration, region, ParseLinks,paginationConstants, pagingParams,$state) {
+    function RegionDeclarationController (AlertService, Declaration, region, ParseLinks,paginationConstants, pagingParams,$state,Country,Region) {
         var vm = this;
         vm.regionId = region.regionId;
         vm.regionName = region.regionName;
@@ -17,11 +17,24 @@
         vm.loadPage = loadPage;
         vm.transition = transition;
 
+        vm.loadRegion = loadRegion;
+        vm.localisation = {};
+
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
         vm.loadAll();
+
+        /**
+         * get all countries and select the first (Cameroun)
+         */
+
+        Country.query(function (data) {
+            vm.countries = data;
+            vm.localisation.country =vm.countries[0]; //Cameroun is the first country
+            vm.loadRegion();
+        });
 
         function loadAll() {
             Declaration.getAllDeclarationsByRegion({
@@ -31,7 +44,6 @@
                         sort: sort()
                 }
                 , onSuccess, onError);
-
         }
 
 
@@ -50,7 +62,11 @@
             vm.queryCount = vm.totalItems;
             vm.declarations = data;
             vm.page = pagingParams.page;
-            console.log(vm.queryCount);
+
+            vm.localisation.region = {
+                "name" : vm.regionName,
+                "code" : vm.regionId
+            }
         }
 
         function onError(error) {
@@ -72,5 +88,15 @@
                 search: vm.currentSearch
             });
         }
+
+
+        function loadRegion() {
+            if(vm.localisation.country) {
+                vm.countryRegion = Region.getByCountry(
+                    {countryId: vm.localisation.country.id}
+                )
+            }
+        }
+
     }
 })();

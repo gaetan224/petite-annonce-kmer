@@ -3,7 +3,6 @@ package com.gtemate.petiteannoncekmer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.gtemate.petiteannoncekmer.domain.Declaration;
 import com.gtemate.petiteannoncekmer.domain.Localisation;
-import com.gtemate.petiteannoncekmer.domain.User;
 import com.gtemate.petiteannoncekmer.service.DeclarationService;
 import com.gtemate.petiteannoncekmer.service.UserService;
 import com.gtemate.petiteannoncekmer.web.rest.util.HeaderUtil;
