@@ -210,6 +210,10 @@ public class Declaration extends BaseEntity{
         return this;
     }
 
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
     public Image getMiniature() {
         return miniature;
     }

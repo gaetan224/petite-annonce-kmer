@@ -1,6 +1,7 @@
 package com.gtemate.petiteannoncekmer.service;
 
 import com.gtemate.petiteannoncekmer.config.JHipsterProperties;
+import com.gtemate.petiteannoncekmer.domain.Declaration;
 import com.gtemate.petiteannoncekmer.domain.User;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -32,6 +33,7 @@ public class MailService {
     private static final String USER = "user";
 
     private static final String BASE_URL = "baseUrl";
+    private static final String DECLARATION = "declaration";
 
     @Inject
     private JHipsterProperties jHipsterProperties;
@@ -99,5 +101,18 @@ public class MailService {
         String content = templateEngine.process("passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendDeclarationIsPublishedMail(Declaration declaration) {
+        log.debug("Sending sending mail to notify user '{}' that declaration '{}' is now online ", declaration.getOwner().getEmail(),declaration);
+        Locale locale = Locale.forLanguageTag(declaration.getOwner().getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, declaration.getOwner());
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable(DECLARATION, declaration);
+        String content = templateEngine.process("declarationIsPublishedMail", context);
+        String subject = messageSource.getMessage("email.declaration.ispublished.title", null, locale);
+        sendEmail(declaration.getOwner().getEmail(), subject, content, false, true);
     }
 }

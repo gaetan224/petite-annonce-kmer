@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.gtemate.petiteannoncekmer.domain.Declaration;
 import com.gtemate.petiteannoncekmer.domain.Localisation;
 import com.gtemate.petiteannoncekmer.service.DeclarationService;
+import com.gtemate.petiteannoncekmer.service.MailService;
 import com.gtemate.petiteannoncekmer.service.UserService;
 import com.gtemate.petiteannoncekmer.web.rest.util.HeaderUtil;
 import com.gtemate.petiteannoncekmer.web.rest.util.PaginationUtil;
@@ -42,6 +43,9 @@ public class DeclarationResource  {
     @Inject
     private UserService userService;
 
+    @Inject
+    private MailService mailService;
+
     /**
      * POST  /declarations : Create a new declaration.
      *
@@ -79,6 +83,9 @@ public class DeclarationResource  {
             return createDeclaration(declaration);
         }
         Declaration result = declarationService.save(declaration);
+        if(declaration.getPublished()) {
+            mailService.sendDeclarationIsPublishedMail(declaration);
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("declaration", declaration.getId().toString()))
             .body(result);
