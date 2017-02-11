@@ -24,19 +24,23 @@
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+   <div class="main">
     <data-page-ribbon></data-page-ribbon>
     <div data-ui-view="navbar" ng-cloak></div>
     <div class="container">
         <div class="well" data-ui-view="content">
             <!-- Angular views -->
         </div>
-
-        <div class="footer" ng-cloak>
-            <span class="navbar-version">v{{VERSION}}</span>
-            <p data-translate="footer">This is your footer</p>
-        </div>
     </div>
-
+    <div class="footer" ng-cloak>
+        <span class="navbar-version pull-right">
+            PetiteAnnonceKmer v{{VERSION}}<br/>
+            by
+            <a target="_blank" href="https://fr.linkedin.com/in/gaetantemate">GT</a>
+        </span>
+        <p>&copy;PetiteAnnonceKmer {{CURRENT_YEAR}} </p>
+    </div>
+   </div>
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
     <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
