@@ -100,7 +100,8 @@ gulp.task('ngconstant:dev', function () {
         name: 'petiteAnnonceKmerApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: true
+            DEBUG_INFO_ENABLED: true,
+            CURRENT_YEAR: new Date().getFullYear()
         },
         template: config.constantTemplate,
         stream: true

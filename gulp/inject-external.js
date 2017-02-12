@@ -14,13 +14,10 @@ module.exports = {
 
 
 function app() {
-    var stream = gulp.src(config.app + 'index.html')
-        .pipe(inject.after('<!-- bower:js -->', '\n\t<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key='+config.googlePlaceKey+'"></script>'))
-        .pipe(inject.before('bower_components/bootstrap/dist/css/bootstrap.css', '/'))
-        .pipe(inject.before('bower_components/components-font-awesome/css/font-awesome.css', '/'))
-        .pipe(inject.before('bower_components/angular-loading-bar/build/loading-bar.css', '/'))
-        .pipe(plumber({errorHandler: handleErrors}))
-        .pipe(gulp.dest(config.app));
+    var stream = null;//gulp.src(config.app + 'index.html')
+        //.pipe(inject.after('</script>-->', '\n\t<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key='+config.googlePlaceKey+'"></script>'))
+        //.pipe(plumber({errorHandler: handleErrors}))
+        //.pipe(gulp.dest(config.app));
 
     return stream;
 }

@@ -41,7 +41,7 @@ function languages() {
 }
 
 function fonts() {
-    return es.merge(gulp.src(config.bower + 'bootstrap/fonts/*.*')
+    return es.merge(gulp.src([config.bower + 'bootstrap/fonts/*.*',config.bower + 'components-font-awesome/fonts/*.*'])
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist + 'content/fonts/'))
         .pipe(rev())

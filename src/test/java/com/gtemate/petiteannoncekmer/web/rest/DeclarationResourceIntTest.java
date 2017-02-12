@@ -3,6 +3,7 @@ package com.gtemate.petiteannoncekmer.web.rest;
 import com.gtemate.petiteannoncekmer.PetiteAnnonceKmerApp;
 
 import com.gtemate.petiteannoncekmer.domain.Declaration;
+import com.gtemate.petiteannoncekmer.domain.User;
 import com.gtemate.petiteannoncekmer.repository.DeclarationRepository;
 import com.gtemate.petiteannoncekmer.repository.UserRepository;
 import com.gtemate.petiteannoncekmer.service.DeclarationService;
@@ -37,6 +38,8 @@ import java.util.List;
 import static com.gtemate.petiteannoncekmer.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -112,9 +115,11 @@ public class DeclarationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        doNothing().when(mockMailService).sendDeclarationIsPublishedMail((Declaration) anyObject());
         DeclarationResource declarationResource = new DeclarationResource();
         ReflectionTestUtils.setField(declarationResource, "declarationService", declarationService);
         ReflectionTestUtils.setField(declarationResource, "userService", userService);
+        ReflectionTestUtils.setField(declarationResource, "mailService", mockMailService);
         this.restDeclarationMockMvc = MockMvcBuilders.standaloneSetup(declarationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
