@@ -28,6 +28,9 @@ public class ImageService extends BaseEntityService<Image> {
 
     private final Logger log = LoggerFactory.getLogger(ImageService.class);
 
+    // the dimension of the thumbanil
+    public final static int THUMBNAIL_DIMENSION = 150;
+
     @Inject
     private ImageRepository imageRepository;
 
@@ -66,13 +69,13 @@ public class ImageService extends BaseEntityService<Image> {
             FileOutputStream fos = new FileOutputStream(tempFile);
             fos.write(image.get().getContent());
 
-            Thumbnails.of(tempFile).size(150,150).toFile(tempFile);
+            Thumbnails.of(tempFile).size(THUMBNAIL_DIMENSION,THUMBNAIL_DIMENSION).toFile(tempFile);
             res = new Image();
             byte[] array = Files.readAllBytes(tempFile.toPath());
             image.get().setContent(array);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when creating thumbnail: {}: {}",res , e);
         }
         return image.get();
     }
@@ -97,12 +100,12 @@ public class ImageService extends BaseEntityService<Image> {
 
             image.setContent(multipartFile.getBytes());
         } catch (IOException e) {
-            log.warn("Error when get content for file: {}: {}", image.getFileName(), e);
+            log.warn("Error when get content for image: {}: {}", image.getFileName(), e);
         }
 
         // save Image
         Image newImage = imageRepository.save(image);
-        log.info("Save file into database: {} - {}", newImage.getId(), newImage.getFileName());
+        log.info("Save image into database: {} - {}", newImage.getId(), newImage.getFileName());
 
         return Optional.of(newImage);
     }

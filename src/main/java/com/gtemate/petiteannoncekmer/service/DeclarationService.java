@@ -94,14 +94,27 @@ public class DeclarationService extends BaseEntityService<Declaration> {
         return result;
     }
 
-
+    /**
+     * get declaration of a particular region
+     * @param pageable pageable object
+     * @param IdRegion id of region
+     * @param search search keyword
+     * @return
+     */
     public Page<Declaration> getAllDeclarationsByRegion(Pageable pageable,String IdRegion,String search) {
         log.debug("Request to get all Declarations By Region");
         return declarationRepository.findAllDeclarationsByRegion(pageable,IdRegion,search);
     }
 
 
-
+    /**
+     *  save a declaration entered by the user
+     * @param declaration the declaration
+     * @param localisation the associated localisation
+     * @param login the login
+     * @param images the images
+     * @return
+     */
     public Declaration saveDeclarationUser(Declaration declaration,
                                     Localisation localisation,
                                     String login,
@@ -133,7 +146,6 @@ public class DeclarationService extends BaseEntityService<Declaration> {
 
         localisationService.save(localisation);
         declarationRepository.save(declaration);
-
         return declaration;
     }
 }

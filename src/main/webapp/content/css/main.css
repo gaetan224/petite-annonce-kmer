@@ -9,13 +9,6 @@ body {
     padding-bottom: 6rem;
     min-height: 100%;
 }
-
-
-
-
-
-
-
 html {
     height: 100%;
     box-sizing: border-box;
@@ -536,9 +529,6 @@ label {
     margin: 10px;
 }
 
-.pac-container {
-    z-index: 9999;
-}
 
 .help-btn {
     background: transparent;

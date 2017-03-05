@@ -112,7 +112,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         context.setVariable(DECLARATION, declaration);
         String content = templateEngine.process("declarationIsPublishedMail", context);
-        String subject = messageSource.getMessage("email.declaration.ispublished.title", null, locale);
+        String subject = messageSource.getMessage("email.declaration.ispublished.title", new Object[]{declaration.getTitle()}, locale);
         sendEmail(declaration.getOwner().getEmail(), subject, content, false, true);
     }
 }

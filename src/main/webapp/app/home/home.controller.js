@@ -116,11 +116,11 @@
                             allowPointSelect: true,
                             states: {
                                 hover: {
-                                    color: '#BADA55',
+                                    color: '#8e44ad',
                                     borderColor: 'black'
                                 },
                                 select: {
-                                    color: '#BADA55',
+                                    color: '#8e44ad',
                                     borderColor: 'black'
                                 }
                             },

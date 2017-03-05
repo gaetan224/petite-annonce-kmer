@@ -85,7 +85,7 @@ jhipster:
             key: a1373c16631b0769fac88af0a186f43dcdfbcfa6
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: petiteAnnonceKmer@localhost
-        baseUrl: http://my-server-url-to-change # Modify according to your server's URL
+        baseUrl: http://temate.fr # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:
