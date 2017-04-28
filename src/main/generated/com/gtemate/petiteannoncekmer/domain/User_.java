@@ -23,6 +23,7 @@ public abstract class User_ extends com.gtemate.petiteannoncekmer.domain.Abstrac
 	public static volatile SingularAttribute<User, String> password;
 	public static volatile SingularAttribute<User, String> phoneNumber;
 	public static volatile SingularAttribute<User, String> langKey;
+	public static volatile SingularAttribute<User, String> imageUrl;
 	public static volatile SingularAttribute<User, Long> id;
 	public static volatile SingularAttribute<User, String> email;
 	public static volatile SingularAttribute<User, Boolean> activated;
