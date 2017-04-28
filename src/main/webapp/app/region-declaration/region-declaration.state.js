@@ -58,6 +58,28 @@
                     return $translate.refresh();
                 }]
             }
+        }).state('declaration-detail-region', {
+            parent: 'region-declaration',
+            url: '/declaration-detail-region/:declarationId',
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/components/declaration-user/declaration-user-detail.html',
+                    controller: 'DeclarationUserDetailController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'md',
+                    resolve: {
+                        declaration: ['Declaration', function(Declaration) {
+                            return Declaration.get({id : $stateParams.declarationId}).$promise;
+                        }]
+                    }
+                }).result.then(function() {
+                    $state.go('^', {}, { reload: false });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
         });
 
     }

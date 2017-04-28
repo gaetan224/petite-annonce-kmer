@@ -33,7 +33,7 @@ import java.util.Stack;
  */
 @RestController
 @RequestMapping("/api")
-public class DeclarationResource  {
+public class DeclarationResource {
 
     private final Logger log = LoggerFactory.getLogger(DeclarationResource.class);
 
@@ -83,7 +83,7 @@ public class DeclarationResource  {
             return createDeclaration(declaration);
         }
         Declaration result = declarationService.save(declaration);
-        if(declaration.getPublished()) {
+        if (declaration.getPublished()) {
             mailService.sendDeclarationIsPublishedMail(declaration);
         }
         return ResponseEntity.ok()
@@ -103,9 +103,9 @@ public class DeclarationResource  {
     public ResponseEntity<List<Declaration>> getAllDeclarations(Pageable pageable)
         throws URISyntaxException {
         Page<Declaration> page = null;
-        if(userService.isCurrentUserAdmin()){
+        if (userService.isCurrentUserAdmin()) {
             page = declarationService.findAll(pageable);
-        }else{
+        } else {
             page = declarationService.findByUserIsCurrentUser(pageable);
         }
 
@@ -113,7 +113,6 @@ public class DeclarationResource  {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
 
 
     /**
@@ -125,10 +124,10 @@ public class DeclarationResource  {
      */
     @GetMapping("/declarations-byregion")
     @Timed
-    public ResponseEntity<List<Declaration>> getAllDeclarationsByRegion(Pageable pageable,@RequestParam("IdRegion") String IdRegion,@RequestParam("search") String search  )
+    public ResponseEntity<List<Declaration>> getAllDeclarationsByRegion(Pageable pageable, @RequestParam("IdRegion") String IdRegion, @RequestParam("search") String search)
         throws URISyntaxException {
         log.debug("REST request to get a page of Declarations {} ", IdRegion);
-        Page<Declaration> page = declarationService.getAllDeclarationsByRegion(pageable,IdRegion,search);
+        Page<Declaration> page = declarationService.getAllDeclarationsByRegion(pageable, IdRegion, search);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/declarations-byregion");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -166,50 +165,54 @@ public class DeclarationResource  {
     public ResponseEntity<Declaration> getDeclaration(@PathVariable Long id) {
         log.debug("REST request to get Declaration : {}", id);
         Declaration declaration = declarationService.findOne(id);
-        return Optional.ofNullable(declaration)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (declaration != null) {
+            ResponseEntity<Declaration> responseEntity = new ResponseEntity<>(declaration, HttpStatus.OK);
+            if (declaration.getPublished()) {
+                return responseEntity;
+            } else {
+                if (userService.isCurrentUserAdmin()) {
+                    return responseEntity;
+                }
+            }
+        }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+        /**
+         * DELETE  /declarations/:id : delete the "id" declaration.
+         *
+         * @param id the id of the declaration to delete
+         * @return the ResponseEntity with status 200 (OK)
+         */
+        @DeleteMapping("/declarations/{id}")
+        @Timed
+        public ResponseEntity<Void> deleteDeclaration (@PathVariable Long id){
+            log.debug("REST request to delete Declaration : {}", id);
+            declarationService.delete(id);
+            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("declaration", id.toString())).build();
+        }
 
 
-    /**
-     * DELETE  /declarations/:id : delete the "id" declaration.
-     *
-     * @param id the id of the declaration to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/declarations/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteDeclaration(@PathVariable Long id) {
-        log.debug("REST request to delete Declaration : {}", id);
-        declarationService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("declaration", id.toString())).build();
-    }
-
-
-    /**
-     * REST methods to save declarations-user with uploaded files.
-     * @param declaration
-     * @param localisation
-     * @param images
-     * @return
-     */
-    @PostMapping(value = "/save-declarations-user", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Declaration> saveDeclarationUser(@RequestPart("declaration") Declaration declaration,
-                                                           @RequestPart(name = "localisation", required = false) Localisation localisation,
-                                                           @RequestPart(name = "login", required = false) String login,
-                                                           @RequestPart(name = "images", required = false) MultipartFile[] images
+        /**
+         * REST methods to save declarations-user with uploaded files.
+         * @param declaration
+         * @param localisation
+         * @param images
+         * @return
+         */
+        @PostMapping(value = "/save-declarations-user", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+        public ResponseEntity<Declaration> saveDeclarationUser (@RequestPart("declaration") Declaration declaration,
+            @RequestPart(name = "localisation", required = false) Localisation localisation,
+            @RequestPart(name = "login", required = false) String login,
+            @RequestPart(name = "images", required = false) MultipartFile[]images
     ) throws URISyntaxException {
 
-        // call service to save Admission Request
-        Declaration result = declarationService.saveDeclarationUser(declaration, localisation,login,images);
+            // call service to save Admission Request
+            Declaration result = declarationService.saveDeclarationUser(declaration, localisation, login, images);
 
-        // return JSON response
-        return ResponseEntity.created(new URI("/api/entities/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("entity", result.getId().toString())).body(result);
+            // return JSON response
+            return ResponseEntity.created(new URI("/api/entities/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("entity", result.getId().toString())).body(result);
+        }
+
+
     }
-
-
-}

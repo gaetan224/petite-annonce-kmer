@@ -23,7 +23,7 @@
 
 
     // injection in controller
-    DeclarationListController.$inject = ['DeclarationUserService','Image','DataUtils'];
+    DeclarationListController.$inject = ['DeclarationUserService','$state','Image','DataUtils'];
 
 
     /**
@@ -31,7 +31,7 @@
      *
      * @constructor
      */
-    function DeclarationListController(DeclarationUserService,Image,DataUtils) {
+    function DeclarationListController(DeclarationUserService,$state,Image,DataUtils) {
         var vm = this;
 
         /** Initialisation data controller. */
@@ -65,8 +65,11 @@
         }
 
 
-        function viewDeclaration(declaration) {
-            DeclarationUserService.openDetail(declaration);
+        function viewDeclaration(declarationId) {
+            //DeclarationUserService.openDetail(declarationId);
+            $state.go('declaration-detail-region',
+                {declarationId: declarationId}
+            );
         }
 
     }

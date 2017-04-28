@@ -24,10 +24,10 @@
 
             <a class="list-group-item media"
                href
-               data-ng-click="vm.viewDeclaration(declaration)"
+               data-ng-click="vm.viewDeclaration(declaration.id)"
                data-ng-repeat="declaration in vm.declarations track by declaration.id">
 
-                <div class="media-left" data-ng-if="declaration.images[0].content">
+                <div class="media-left" data-ng-if="declaration.miniature.content">
                     <img
                         class="media-object"
                         data-ng-src="{{'data:' + declaration.miniature.contentContentType + ';base64,' + declaration.miniature.content}}"

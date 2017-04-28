@@ -119,6 +119,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/declarations-byregion-count/**").permitAll()
             .antMatchers("/api/declaration-images/**").permitAll()
             .antMatchers("/api/profile-info").permitAll()
+            .antMatchers("/api/declarations/**").permitAll()
             .antMatchers("/api/country").permitAll()
             .antMatchers("/api/region/**").permitAll()
             .antMatchers("/api/images/**").hasAuthority(AuthoritiesConstants.ADMIN)
