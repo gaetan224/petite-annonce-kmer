@@ -15,8 +15,7 @@
 
     function DeclarationUserService ($uibModal) {
         var service = {
-            openNew: openNew,
-            openDetail: openDetail
+            openNew: openNew
         };
 
         var modalInstance = null;
@@ -52,31 +51,6 @@
                             publishedDate: null,
                             id: null
                         };
-                    }
-                }
-            });
-            modalInstance.result.then(
-                resetModal,
-                resetModal
-            );
-        }
-
-        function openDetail (declaration) {
-            if (modalInstance !== null) return;
-            modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'app/components/declaration-user/declaration-user-detail.html',
-                controller: 'DeclarationUserDetailController',
-                controllerAs: 'vm',
-                size: 'md',
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('declaration-user');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }],
-                    declaration:function () {
-                        return declaration;
                     }
                 }
             });

@@ -37,7 +37,6 @@
         }
 
         vm.declaration.images = Image.getByDeclaration(declaration);
-        console.log(vm.declaration.images);
 
         function clear () {
             $uibModalInstance.dismiss('cancel');

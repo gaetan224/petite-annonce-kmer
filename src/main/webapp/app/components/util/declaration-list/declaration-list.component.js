@@ -23,7 +23,7 @@
 
 
     // injection in controller
-    DeclarationListController.$inject = ['DeclarationUserService','$state','Image','DataUtils'];
+    DeclarationListController.$inject = ['$state','Image','DataUtils'];
 
 
     /**
@@ -31,38 +31,16 @@
      *
      * @constructor
      */
-    function DeclarationListController(DeclarationUserService,$state,Image,DataUtils) {
+    function DeclarationListController($state,Image,DataUtils) {
         var vm = this;
-
-        /** Initialisation data controller. */
-        vm.initDataController = initDataController;
 
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
 
-        /** onChanges bindings. */
-        vm.$onChanges = onChanges;
         vm.viewDeclaration = viewDeclaration;
 
         vm.settings = {width: 150, height: 150, quality: 0.9};
 
-
-        /**
-         * Init data in controller.
-         */
-        function initDataController() {
-                    angular.forEach(vm.declarations, function (declaration) {
-                        declaration.images = Image.getByDeclaration(declaration);
-                    });
-        }
-
-        /**
-         * Performs when bindings changes.
-         * Change read only flag.
-         */
-        function onChanges() {
-            vm.initDataController();
-        }
 
 
         function viewDeclaration(declarationId) {
